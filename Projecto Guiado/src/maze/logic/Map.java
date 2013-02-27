@@ -2,6 +2,8 @@ package maze.logic;
 
 import java.util.Random;
 
+import maze.cli.Interface;
+
 public class Map {
 
 	public static char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
@@ -65,5 +67,34 @@ public class Map {
 			if(args[local][8] == 'X')
 				args[local][8] = ' ';
 		}
+	}
+	
+	public static int game_logic()
+	{
+		int verify=0;
+	
+		
+		Hero h = new Hero(Map.mapa);
+		Sword e= new Sword(Map.mapa);
+		Dragon d = new Dragon(Map.mapa);
+		randomizeMap(mapa);
+		
+		while(Hero.isAlive() == true){
+
+			verify = h.moveHero(Map.mapa,Interface.cmdLine());
+
+			if(verify == 1){
+				return 1;
+			}
+			if(verify == 2){
+				Hero.setAlive(false);
+				return 2;
+			}
+			
+			if(Dragon.isKilled() == false)
+				d.moveDragon(Map.mapa);
+		}
+	
+			return 0;
 	}
 }

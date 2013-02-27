@@ -26,9 +26,6 @@ public class Interface {
 		char keybind;
 		String key;
 
-		Map.randomizeMap(Map.mapa);
-
-
 		readK = new Scanner(System.in);
 		System.out.println("Prima uma tecla:");
 		key= readK.next();
@@ -38,32 +35,24 @@ public class Interface {
 	}
 	
 	public static void main(String[]args){
-		Hero h = new Hero(Map.mapa);
-		Sword e= new Sword(Map.mapa);
-		Dragon d = new Dragon(Map.mapa);
-		int verify = 0;
 		
+		int verify=0;
 		printMapa(Map.mapa);
-
-		while(Hero.isAlive() == true){
-
-			verify = h.moveHero(Map.mapa,Interface.cmdLine());
-			printMapa(Map.mapa);
-
-			if(verify == 1){
-				printMapa(Map.mapa);
-				System.out.println("Venceu!!");
-				break;
-			}
-			if(verify == 2){
-				printMapa(Map.mapa);
-				Hero.setAlive(false);
-				System.out.println("Perdeste!! O teu Herói morreu");
-				break;
-			}
+		
+		
 			
-			if(Dragon.isKilled() == false)
-				d.moveDragon(Map.mapa);
-		}
+			verify=Map.game_logic();
+			
+			if(verify== 1){
+				System.out.println("Venceu!!");
+			}
+				
+			if(verify== 2){
+				System.out.println("Perdeste!! O teu Herói morreu");
+			}
+			printMapa(Map.mapa);	
+		
+		
+		
 	}
 }
