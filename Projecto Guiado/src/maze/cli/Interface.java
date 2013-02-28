@@ -38,9 +38,9 @@ public class Interface {
 		
 		int verify=0;
 		printMapa(Map.mapa);
+		Map.create_objects();
 		
-		
-			
+			while(verify==0)
 			verify=Map.game_logic();
 			
 			if(verify== 1){

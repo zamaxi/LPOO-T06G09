@@ -6,6 +6,20 @@ import maze.cli.Interface;
 
 public class Map {
 
+	private  boolean create_objects = false;
+	
+	public boolean isCreate_objects() {
+		return create_objects;
+	}
+
+
+
+	public void setCreate_objects(boolean create_objects) {
+		this.create_objects = create_objects;
+	}
+
+
+
 	public static char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
 		{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 		{'X',' ','X','X',' ','X',' ','X',' ','X'},
@@ -69,20 +83,24 @@ public class Map {
 		}
 	}
 	
-	public static int game_logic()
+
+	
+	public int game_logic()
 	{
 		int verify=0;
-	
 		
-		Hero h = new Hero(Map.mapa);
-		Sword e= new Sword(Map.mapa);
-		Dragon d = new Dragon(Map.mapa);
-		randomizeMap(mapa);
+		if(isCreate_objects() == false){
+			Hero h = new Hero(Map.mapa);
+			Sword e= new Sword(Map.mapa);
+			Dragon d = new Dragon(Map.mapa);
+			randomizeMap(mapa);
+			setCreate_objects(true);
+		}
 		
+
 		while(Hero.isAlive() == true){
 
 			verify = h.moveHero(Map.mapa,Interface.cmdLine());
-
 			if(verify == 1){
 				return 1;
 			}
