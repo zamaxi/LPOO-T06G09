@@ -3,6 +3,8 @@ package maze.logic;
 import java.util.Random;
 
 public class Hero{
+	
+	
 	public Hero(char[][] args)
 	{
 		Random randomGenerator = new Random();

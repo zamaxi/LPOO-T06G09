@@ -6,17 +6,7 @@ import maze.cli.Interface;
 
 public class Map {
 
-	private  boolean create_objects = false;
-	
-	public boolean isCreate_objects() {
-		return create_objects;
-	}
-
-
-
-	public void setCreate_objects(boolean create_objects) {
-		this.create_objects = create_objects;
-	}
+	private static boolean create_objects = false;
 
 
 
@@ -85,34 +75,32 @@ public class Map {
 	
 
 	
-	public int game_logic()
+	public static int game_logic()
 	{
 		int verify=0;
 		
-		if(isCreate_objects() == false){
+		if(create_objects == false){
 			Hero h = new Hero(Map.mapa);
 			Sword e= new Sword(Map.mapa);
 			Dragon d = new Dragon(Map.mapa);
 			randomizeMap(mapa);
-			setCreate_objects(true);
-		}
-		
-
-		while(Hero.isAlive() == true){
-
-			verify = h.moveHero(Map.mapa,Interface.cmdLine());
-			if(verify == 1){
-				return 1;
-			}
-			if(verify == 2){
-				Hero.setAlive(false);
-				return 2;
-			}
+			create_objects=true;
 			
-			if(Dragon.isKilled() == false)
-				d.moveDragon(Map.mapa);
-		}
-	
+			while(Hero.isAlive() == true){
+
+				verify = h.moveHero(Map.mapa,Interface.cmdLine());
+				if(verify == 1){
+					return 1;
+				}
+				if(verify == 2){
+					Hero.setAlive(false);
+					return 2;
+				}
+				
+				if(Dragon.isKilled() == false)
+					d.moveDragon(Map.mapa);
+			}
+		}	
 			return 0;
 	}
 }
