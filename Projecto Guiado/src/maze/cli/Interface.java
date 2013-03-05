@@ -45,18 +45,15 @@ public class Interface {
 
 	public static void select()
 	{
-		int keybind;
-		String key;
+		int key;
 		readK = new Scanner(System.in);
 		System.out.println("Qual o modo de jogo que quer jogar?\n 1- Dragao parado\n 2-Dragao com movimento aleatorio\n 3-Dragao com movimento aleatorio intrecalado com dormir");
-		key= readK.next();
-		keybind = key.charAt(0); 
-		setModo_de_jogo(keybind);
+		key= readK.nextInt();
+		setModo_de_jogo(key);
 		
 		System.out.println("Quantos dragoes quer em jogo?\n");
-		key= readK.next();
-		keybind = key.charAt(0); 
-		setN_dragoes(keybind);
+		key= readK.nextInt();
+		setN_dragoes(key);
 	}
 	
 	

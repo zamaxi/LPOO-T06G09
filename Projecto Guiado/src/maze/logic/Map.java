@@ -1,6 +1,7 @@
 package maze.logic;
 
 import java.util.Random;
+import java.util.Vector;
 
 import maze.cli.Interface;
 
@@ -77,12 +78,22 @@ public class Map {
 		Interface.select();
 		Hero h = new Hero(Map.mapa);
 		Sword e= new Sword(Map.mapa);
+		Vector<Dragon> v = new Vector<Dragon>();
+		for(int i=1; i < Interface.getN_dragoes();i++)
+		{
+			Dragon d = new Dragon(Map.mapa);
+			v.addElement(d);
+		}
+		
+		Dragon d = new Dragon(Map.mapa);
 		randomizeMap(mapa);
 
 		while(Hero.isAlive() == true){
 			
-			if(Dragon.isKilled() == false)
-				d.moveDragon(Map.mapa);
+			if(Dragon.isKilled() == false){
+				for(int i =0; i < v.size();i++)
+					v.get(i).moveDragon(mapa);
+			}
 
 			verify = h.moveHero(Map.mapa,Interface.cmdLine());
 			if(verify == 1){
