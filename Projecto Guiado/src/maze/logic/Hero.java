@@ -6,6 +6,16 @@ public class Hero{
 	
 	private static int x,y;
 
+/*	public Hero(char[][] args) {
+		super(args);
+		// TODO Auto-generated constructor stub
+		
+		if (armed == false)
+			args[y][x]='H';
+		else
+			args[y][x]='A';
+	}
+	*/
 	public Hero(char[][] args)
 	{
 		Random randomGenerator = new Random();
@@ -13,7 +23,7 @@ public class Hero{
 		y=0;
 		x=0;
 		
-		while(args[y][x] == args[0][0])
+		while(args[y][x] != ' ')
 		{
 			int movex = randomGenerator.nextInt(8)+1;
 			int movey = randomGenerator.nextInt(8)+1;
@@ -21,11 +31,11 @@ public class Hero{
 			y= movey;
 		}
 		
-		if (armed == false)
+		/*if (armed == false)*/
 			args[y][x]='H';
-		else
+		/*else
 			args[y][x]='A';
-		
+		*/
 	}
 	
 	private static boolean Alive = true;
@@ -78,6 +88,13 @@ public class Hero{
 				args[y+1][x] = ' ';
 			}
 
+			if(args[y+1][x] == 'd'){
+				if(isArmed() == true){
+					args[y+1][x] = ' ';
+					Dragon.setKilled(true);
+				}
+			}
+			
 			if(args[y+1][x] == 'D'){
 				if(isArmed() == true){
 					args[y+1][x] = ' ';
@@ -87,7 +104,7 @@ public class Hero{
 				else result =2;
 			}
 
-			if((args[y+1][x] == 'S' || args[y+1][x] == 'S') && isArmed() ==true){
+			if(args[y+1][x] == 'S' && isArmed() ==true){
 				result= 1;
 				return result;
 			}
@@ -96,11 +113,6 @@ public class Hero{
 				args[y][x] = ' ';
 				args[y+1][x] = getHero();
 				y++;
-			}
-			if(args[y+1][x] == 'd'){
-				if(isArmed()==false)
-					return result;
-				else Dragon.setKilled(true);
 			}
 			
 		}
@@ -111,7 +123,14 @@ public class Hero{
 				setHero(isArmed());
 				args[y-1][x] = ' ';
 			}
-
+			
+			if(args[y-1][x] == 'd'){
+				if(isArmed() == true){
+					args[y-1][x] = ' ';
+					Dragon.setKilled(true);
+				}
+			}
+			
 			if(args[y-1][x] == 'D'){
 				if(isArmed() == true){
 					args[y-1][x] = ' ';
@@ -120,7 +139,7 @@ public class Hero{
 				else result =2;
 			}
 
-			if((args[y-1][x] == 'S' || args[y-1][x] == 'S') && isArmed() ==true){
+			if(args[y-1][x] == 'S' && isArmed() ==true){
 				result =1;
 				return result;
 			}
@@ -129,11 +148,6 @@ public class Hero{
 				args[y][x] = ' ';
 				args[y-1][x] = getHero();
 				y--;
-			}
-			if(args[y-1][x] == 'd'){
-				if(isArmed()==false)
-					return result;
-				else Dragon.setKilled(true);
 			}
 		}
 
@@ -144,6 +158,13 @@ public class Hero{
 				args[y][x+1] = ' ';
 			}
 
+			if(args[y][x+1] == 'd'){
+				if(isArmed() == true){
+					args[y][x+1] = ' ';
+					Dragon.setKilled(true);
+				}
+			}
+			
 			if(args[y][x+1] == 'D'){
 				if(isArmed() == true){
 					args[y][x+1] = ' ';
@@ -153,7 +174,7 @@ public class Hero{
 				else result =2;
 			}
 
-			if((args[y][x+1] == 'S' || args[y][x+1] == 'S') && isArmed() ==true){
+			if(args[y][x+1] == 'S' && isArmed() ==true){
 				result=1;
 				return result;
 			}
@@ -164,11 +185,6 @@ public class Hero{
 				x++;
 			}
 			
-			if(args[y][x+1] == 'd'){
-				if(isArmed()==false)
-					return result;
-				else Dragon.setKilled(true);
-			}
 		}
 
 		if(keybind == 'a'){
@@ -178,6 +194,13 @@ public class Hero{
 				args[y][x-1] = ' ';
 			}
 
+			if(args[y][x-1] == 'd'){
+				if(isArmed() == true){
+					args[y][x-1] = ' ';
+					Dragon.setKilled(true);
+				}
+			}
+			
 			if(args[y][x-1] == 'D'){
 				if(isArmed() == true){
 					args[y][x-1] = ' ';
@@ -186,7 +209,7 @@ public class Hero{
 				else result =2;
 			}
 
-			if((args[y][x-1] == 'S' || args[y][x-1] == 'S')  && isArmed() ==true){ 
+			if(args[y][x-1] == 'S'  && isArmed() ==true){ 
 				result=1;
 				return result;
 			}
@@ -197,14 +220,6 @@ public class Hero{
 				x--;
 			}
 			
-			if(args[y][x-1] == 'd'){
-				if(isArmed()==true)
-					{
-						args[y][x-1] = ' ';
-						Dragon.setKilled(true);
-					}
-				else return result; 
-			}
 		}
 		return result;
 	}

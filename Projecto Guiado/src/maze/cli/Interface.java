@@ -47,7 +47,7 @@ public class Interface {
 	{
 		int key;
 		readK = new Scanner(System.in);
-		System.out.println("Qual o modo de jogo que quer jogar?\n 1- Dragao parado\n 2-Dragao com movimento aleatorio\n 3-Dragao com movimento aleatorio intrecalado com dormir");
+		System.out.println("Qual o modo de jogo que quer jogar?\n 1-Dragao parado\n 2-Dragao com movimento aleatorio\n 3-Dragao com movimento aleatorio intrecalado com dormir");
 		key= readK.nextInt();
 		setModo_de_jogo(key);
 		

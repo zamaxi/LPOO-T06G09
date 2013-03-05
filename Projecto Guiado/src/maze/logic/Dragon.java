@@ -1,11 +1,17 @@
 package maze.logic;
 
 import java.util.Random;
+import java.util.Vector;
 
-public class Dragon{
-	private char Dragon /*= 'D'*/;
-	
+public class Dragon extends Element{
+	private char Dragon;
+	private static boolean Killed = false;
 	private boolean sleep = false;
+	
+	public Dragon(char[][] args) {
+		super(args);
+		args[y][x]='D';
+	}
 	
 	public boolean isSleep() {
 		return sleep;
@@ -19,11 +25,13 @@ public class Dragon{
 		return Dragon;
 	}
 
+	
+	
 	public void setDragon(char dragon) {
 		Dragon = dragon;
 	}
 
-	private static boolean Killed = false;
+	
 
 	public static boolean isKilled() {
 		return Killed;
@@ -33,26 +41,9 @@ public class Dragon{
 		Killed = killed;
 	}
 
-	private static int x,y;
 
-	public Dragon(char[][] args){
-		Random randomGenerator = new Random();
 
-		y=0;
-		x=0;
-
-		while(args[y][x] == args[0][0])
-		{
-			int movex = randomGenerator.nextInt(8)+1;
-			int movey = randomGenerator.nextInt(8)+1;
-			x= movex;
-			y= movey;
-		}
-
-		args[y][x]='D';
-		
-	}
-
+	
 	public void moveDragon(char[][] args)
 	{
 		Random randomGenerator = new Random();

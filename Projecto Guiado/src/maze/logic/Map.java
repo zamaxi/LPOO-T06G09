@@ -18,6 +18,23 @@ public class Map {
 		{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
 		{'X','X','X','X','X','X','X','X','X','X'}};
 
+	private static Vector<Dragon> dragons = new Vector<Dragon>();
+	
+	public static Vector<Dragon> getDragons() {
+		return dragons;
+	}
+
+	public static void setDragons(Vector<Dragon> dragons) {
+		Map.dragons = dragons;
+	}
+
+	public static void drawDragon(int NumeroDragoes){
+		for(int i = 0 ; i < NumeroDragoes ; i++)  {
+			Dragon d = new Dragon(Map.mapa);
+			dragons.add(d);
+			//dragons.get(i).moveDragon(mapa);
+		}
+	}
 
 	public static void randomizeMap(char [][] args)
 	{
@@ -79,20 +96,24 @@ public class Map {
 		Hero h = new Hero(Map.mapa);
 		Sword e= new Sword(Map.mapa);
 		Vector<Dragon> v = new Vector<Dragon>();
+		
 		for(int i=1; i < Interface.getN_dragoes();i++)
 		{
 			Dragon d = new Dragon(Map.mapa);
-			v.addElement(d);
+			v.add(d);
 		}
 		
 		Dragon d = new Dragon(Map.mapa);
+		v.add(d);
+		setDragons(v);
 		randomizeMap(mapa);
 
 		while(Hero.isAlive() == true){
 			
 			if(Dragon.isKilled() == false){
-				for(int i =0; i < v.size();i++)
-					v.get(i).moveDragon(mapa);
+				for(int i =0; i < dragons.size();i++)
+					getDragons().get(i).moveDragon(mapa);
+
 			}
 
 			verify = h.moveHero(Map.mapa,Interface.cmdLine());
