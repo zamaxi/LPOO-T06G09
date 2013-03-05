@@ -19,9 +19,11 @@ public class Interface {
 		}
 	}
 
+	static int g = Map.game_logic();
 
 	public static char cmdLine()
 	{
+		printMapa(Map.mapa);
 
 		char keybind;
 		String key;
@@ -37,10 +39,12 @@ public class Interface {
 	public static void main(String[]args){
 		
 		int verify=0;
-		printMapa(Map.mapa);
 		
-			while(verify==0)
-			verify=Map.game_logic();
+			while(verify==0){
+				verify=g;
+				//printMapa(Map.mapa);
+			}
+			
 			
 			if(verify== 1){
 				System.out.println("Venceu!!");

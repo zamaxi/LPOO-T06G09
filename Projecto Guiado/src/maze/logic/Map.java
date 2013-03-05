@@ -6,10 +6,6 @@ import maze.cli.Interface;
 
 public class Map {
 
-	private static boolean create_objects = false;
-
-
-
 	public static char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
 		{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 		{'X',' ','X','X',' ','X',' ','X',' ','X'},
@@ -72,35 +68,33 @@ public class Map {
 				args[local][8] = ' ';
 		}
 	}
-	
 
-	
+
+
 	public static int game_logic()
 	{
 		int verify=0;
-		
-		if(create_objects == false){
-			Hero h = new Hero(Map.mapa);
-			Sword e= new Sword(Map.mapa);
-			Dragon d = new Dragon(Map.mapa);
-			randomizeMap(mapa);
-			create_objects=true;
-			
-			while(Hero.isAlive() == true){
+		Hero h = new Hero(Map.mapa);
+		Sword e= new Sword(Map.mapa);
+		Dragon d = new Dragon(Map.mapa);
+		randomizeMap(mapa);
 
-				verify = h.moveHero(Map.mapa,Interface.cmdLine());
-				if(verify == 1){
-					return 1;
-				}
-				if(verify == 2){
-					Hero.setAlive(false);
-					return 2;
-				}
-				
-				if(Dragon.isKilled() == false)
-					d.moveDragon(Map.mapa);
+		while(Hero.isAlive() == true){
+			
+			if(Dragon.isKilled() == false)
+				d.moveDragon(Map.mapa);
+
+			verify = h.moveHero(Map.mapa,Interface.cmdLine());
+			if(verify == 1){
+				return 1;
 			}
-		}	
-			return 0;
+			if(verify == 2){
+				Hero.setAlive(false);
+				return 2;
+			}
+
+			
+		}
+		return 0;
 	}
 }
