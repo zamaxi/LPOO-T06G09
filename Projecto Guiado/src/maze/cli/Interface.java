@@ -53,7 +53,7 @@ public class Interface {
 			if(verify== 2){
 				System.out.println("Perdeste!! O teu Herói morreu");
 			}
-			printMapa(Map.mapa);	
+		//	printMapa(Map.mapa);	
 		
 		
 		

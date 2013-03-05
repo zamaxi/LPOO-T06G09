@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class Hero{
 	
-	
+	private static int x,y;
+
 	public Hero(char[][] args)
 	{
 		Random randomGenerator = new Random();
@@ -63,8 +64,11 @@ public class Hero{
 		this.armed = armed;
 	}
 	
-	private static int x,y;
-
+	public void nn (int x, int y, char z, char a)
+	{
+		
+	}
+	
 	public int moveHero(char [][] args, char keybind){
 		int result=0;
 		/* 0- Continua a Mover
@@ -98,6 +102,12 @@ public class Hero{
 				args[y+1][x] = getHero();
 				y++;
 			}
+			if(args[y+1][x] == 'd'){
+				if(isArmed()==false)
+					return result;
+				else args[y-1][x] = ' ';
+			}
+			
 		}
 
 		if(keybind == 'w'){
@@ -125,6 +135,11 @@ public class Hero{
 				args[y-1][x] = getHero();
 				y--;
 			}
+			if(args[y-1][x] == 'd'){
+				if(isArmed()==false)
+					return result;
+				else args[y-1][x] = ' ';
+			}
 		}
 
 		if(keybind == 'd'){
@@ -139,6 +154,7 @@ public class Hero{
 					args[y][x+1] = ' ';
 					Dragon.setKilled(true);
 				}
+				
 				else result =2;
 			}
 
@@ -151,6 +167,12 @@ public class Hero{
 				args[y][x] = ' ';
 				args[y][x+1] = getHero();
 				x++;
+			}
+			
+			if(args[y][x+1] == 'd'){
+				if(isArmed()==false)
+					return result;
+				else args[y][x+1] = ' ';
 			}
 		}
 
@@ -178,6 +200,12 @@ public class Hero{
 				args[y][x] = ' ';
 				args[y][x-1] = getHero();
 				x--;
+			}
+			
+			if(args[y][x-1] == 'd'){
+				if(isArmed()==false)
+					return result;
+				else args[y][x-1] = ' ';
 			}
 		}
 		return result;

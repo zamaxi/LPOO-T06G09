@@ -4,6 +4,16 @@ import java.util.Random;
 
 public class Dragon{
 	private char Dragon = 'D';
+	
+	private boolean sleep = false;
+	
+	public boolean isSleep() {
+		return sleep;
+	}
+
+	public void setSleep(boolean sleep) {
+		this.sleep = sleep;
+	}
 
 	public char getDragon() {
 		return Dragon;
@@ -51,13 +61,20 @@ public class Dragon{
 		 * 2- direita
 		 * 3- esquerda
 		 * 4- mantem
+		 * 5- dragao a dormir
 		 */
 		int move;
 		boolean moved=false;
 
 		while(moved == false)
 		{
-			move = randomGenerator.nextInt(5);
+			if(isSleep() == true)
+			{
+				setSleep(false);
+				break;
+			}
+			
+			move = randomGenerator.nextInt(6);
 			if(move == 0)
 			{
 				if(args[y-1][x] == ' ')
@@ -137,6 +154,13 @@ public class Dragon{
 			if(move == 4)
 			{
 				moved=true;
+			}
+			
+			if(move == 5)
+			{
+				args[y][x]='d';
+				moved=true;
+				setSleep(true);
 			}
 		}
 
