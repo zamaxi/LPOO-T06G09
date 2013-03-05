@@ -74,9 +74,9 @@ public class Map {
 	public static int game_logic()
 	{
 		int verify=0;
+		Interface.select();
 		Hero h = new Hero(Map.mapa);
 		Sword e= new Sword(Map.mapa);
-		Dragon d = new Dragon(Map.mapa);
 		randomizeMap(mapa);
 
 		while(Hero.isAlive() == true){

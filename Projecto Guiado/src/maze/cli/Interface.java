@@ -2,15 +2,37 @@ package maze.cli;
 
 import java.util.Scanner;
 
-import maze.logic.Dragon;
-import maze.logic.Hero;
-import maze.logic.Sword;
+
 import maze.logic.Map;
 
 public class Interface {
 
 	private static Scanner readK;
+	private static  int n_dragoes;
+	private static  int modo_de_jogo;
+	
+	public static int getModo_de_jogo() {
+		return modo_de_jogo;
+	}
 
+
+	public static void setModo_de_jogo(int modo_de_jogo) {
+		Interface.modo_de_jogo = modo_de_jogo;
+	}
+
+
+	public static int getN_dragoes() {
+		return n_dragoes;
+	}
+
+
+	public static void setN_dragoes(int n_dragoes) {
+		Interface.n_dragoes = n_dragoes;
+	}
+
+	
+	
+	
 	public static void printMapa(char[][] args)
 	{
 		for(int i=0;i<10;i++)
@@ -21,8 +43,26 @@ public class Interface {
 
 	static int g = Map.game_logic();
 
+	public static void select()
+	{
+		int keybind;
+		String key;
+		readK = new Scanner(System.in);
+		System.out.println("Qual o modo de jogo que quer jogar?\n 1- Dragao parado\n 2-Dragao com movimento aleatorio\n 3-Dragao com movimento aleatorio intrecalado com dormir");
+		key= readK.next();
+		keybind = key.charAt(0); 
+		setModo_de_jogo(keybind);
+		
+		System.out.println("Quantos dragoes quer em jogo?\n");
+		key= readK.next();
+		keybind = key.charAt(0); 
+		setN_dragoes(keybind);
+	}
+	
+	
 	public static char cmdLine()
 	{
+		
 		printMapa(Map.mapa);
 
 		char keybind;

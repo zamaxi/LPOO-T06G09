@@ -64,11 +64,6 @@ public class Hero{
 		this.armed = armed;
 	}
 	
-	public void nn (int x, int y, char z, char a)
-	{
-		
-	}
-	
 	public int moveHero(char [][] args, char keybind){
 		int result=0;
 		/* 0- Continua a Mover
@@ -105,7 +100,7 @@ public class Hero{
 			if(args[y+1][x] == 'd'){
 				if(isArmed()==false)
 					return result;
-				else args[y-1][x] = ' ';
+				else Dragon.setKilled(true);
 			}
 			
 		}
@@ -138,7 +133,7 @@ public class Hero{
 			if(args[y-1][x] == 'd'){
 				if(isArmed()==false)
 					return result;
-				else args[y-1][x] = ' ';
+				else Dragon.setKilled(true);
 			}
 		}
 
@@ -172,7 +167,7 @@ public class Hero{
 			if(args[y][x+1] == 'd'){
 				if(isArmed()==false)
 					return result;
-				else args[y][x+1] = ' ';
+				else Dragon.setKilled(true);
 			}
 		}
 
@@ -203,9 +198,12 @@ public class Hero{
 			}
 			
 			if(args[y][x-1] == 'd'){
-				if(isArmed()==false)
-					return result;
-				else args[y][x-1] = ' ';
+				if(isArmed()==true)
+					{
+						args[y][x-1] = ' ';
+						Dragon.setKilled(true);
+					}
+				else return result; 
 			}
 		}
 		return result;

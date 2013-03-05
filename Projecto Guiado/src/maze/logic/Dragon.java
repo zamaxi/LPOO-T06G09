@@ -3,7 +3,7 @@ package maze.logic;
 import java.util.Random;
 
 public class Dragon{
-	private char Dragon = 'D';
+	private char Dragon /*= 'D'*/;
 	
 	private boolean sleep = false;
 	
@@ -50,6 +50,7 @@ public class Dragon{
 		}
 
 		args[y][x]='D';
+		
 	}
 
 	public void moveDragon(char[][] args)
@@ -70,7 +71,14 @@ public class Dragon{
 		{
 			if(isSleep() == true)
 			{
+				args[y][x]='d';
 				setSleep(false);
+				break;
+			}
+			
+			if(isKilled() == true)
+			{
+				args[y][x] = ' ';
 				break;
 			}
 			
@@ -158,7 +166,6 @@ public class Dragon{
 			
 			if(move == 5)
 			{
-				args[y][x]='d';
 				moved=true;
 				setSleep(true);
 			}
