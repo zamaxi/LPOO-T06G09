@@ -53,15 +53,15 @@ public class Hero{
 			Hero = 'A';
 	}
 
-	private boolean armed = false;
+	private static boolean armed = false;
 
-	public boolean isArmed() {
+	public static boolean isArmed() {
 		return armed;
 	}
 
 
-	public void setArmed(boolean armed) {
-		this.armed = armed;
+	public static void setArmed(boolean arm) {
+		armed = arm;
 	}
 	
 	public int moveHero(char [][] args, char keybind){
