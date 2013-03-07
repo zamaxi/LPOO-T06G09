@@ -1,43 +1,23 @@
 package maze.logic;
 
-import java.util.Random;
 
-public class Hero{
-	
-	private static int x,y;
+public class Hero extends Element{
 
-/*	public Hero(char[][] args) {
+public static int a;
+public static int b;
+
+public Hero(char[][] args) {
 		super(args);
 		// TODO Auto-generated constructor stub
-		
+		a=y;
+		b=x;
 		if (armed == false)
 			args[y][x]='H';
 		else
 			args[y][x]='A';
 	}
-	*/
-	public Hero(char[][] args)
-	{
-		Random randomGenerator = new Random();
-
-		y=0;
-		x=0;
-		
-		while(args[y][x] != ' ')
-		{
-			int movex = randomGenerator.nextInt(8)+1;
-			int movey = randomGenerator.nextInt(8)+1;
-			x= movex;
-			y= movey;
-		}
-		
-		/*if (armed == false)*/
-			args[y][x]='H';
-		/*else
-			args[y][x]='A';
-		*/
-	}
 	
+
 	private static boolean Alive = true;
 	
 	public static boolean isAlive() {

@@ -1,7 +1,9 @@
 package maze.logic;
 
 import java.util.Random;
-import java.util.Vector;
+
+import maze.cli.Interface;
+
 
 public class Dragon extends Element{
 	private char Dragon;
@@ -42,7 +44,6 @@ public class Dragon extends Element{
 	}
 
 
-
 	
 	public void moveDragon(char[][] args)
 	{
@@ -62,6 +63,7 @@ public class Dragon extends Element{
 		{
 			if(isSleep() == true)
 			{
+				
 				args[y][x]='d';
 				setSleep(false);
 				break;
@@ -154,11 +156,13 @@ public class Dragon extends Element{
 			{
 				moved=true;
 			}
-			
+			if(Interface.getModo_de_jogo()==3){
 			if(move == 5)
 			{
 				moved=true;
-				setSleep(true);
+				
+					setSleep(true);
+			}
 			}
 		}
 

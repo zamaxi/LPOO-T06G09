@@ -111,8 +111,12 @@ public class Map {
 		while(Hero.isAlive() == true){
 			
 			if(Dragon.isKilled() == false){
-				for(int i =0; i < dragons.size();i++)
-					getDragons().get(i).moveDragon(mapa);
+				for(int i =0; i < dragons.size();i++){
+					if(Interface.getModo_de_jogo()==1)
+						break;
+					else getDragons().get(i).moveDragon(mapa);
+				}
+					
 
 			}
 
