@@ -57,6 +57,7 @@ public class Dragon extends Element{
 		 * 5- dragao a dormir
 		 */
 		int move;
+		int sword =0;
 		boolean moved=false;
 
 		while(moved == false)
@@ -81,9 +82,13 @@ public class Dragon extends Element{
 				if(args[y-1][x] == ' ')
 				{
 					args[y-1][x] = 'D';
-					args[y][x]=' ';	
+					if(sword==1)
+						args[y][x]= 'E';
+					else 
+						args[y][x]=' ';
 					y= y-1;
 					moved = true;
+					sword=0;
 				}
 
 				if(args[y-1][x] == 'E')
@@ -91,6 +96,7 @@ public class Dragon extends Element{
 					args[y-1][x] = 'F';
 					args[y][x]=' ';
 					y= y-1;
+					sword =1;
 					moved = true;
 				}
 			}
@@ -101,8 +107,13 @@ public class Dragon extends Element{
 				{	
 					args[y+1][x] = 'D';
 					args[y][x]=' ';
+					if(sword==1)
+						args[y][x]= 'E';
+					else 
+						args[y][x]=' ';
 					y= y+1;
 					moved = true;
+					sword=0;
 				}
 
 				if(args[y+1][x] == 'E')
@@ -110,6 +121,7 @@ public class Dragon extends Element{
 					args[y+1][x] = 'F';
 					args[y][x]=' ';
 					y= y+1;
+					sword=1;
 					moved = true;
 				}
 			}
@@ -119,9 +131,13 @@ public class Dragon extends Element{
 				if(args[y][x-1] == ' ')
 				{	
 					args[y][x-1] = 'D';
-					args[y][x]=' ';	
+					if(sword==1)
+						args[y][x]= 'E';
+					else 
+						args[y][x]=' ';
 					x= x-1;
 					moved = true;
+					sword=0;
 				}
 
 				if(args[y][x-1] == 'E')
@@ -129,6 +145,7 @@ public class Dragon extends Element{
 					args[y][x-1] = 'F';
 					args[y][x]=' ';
 					x= x-1;
+					sword=1;
 					moved = true;
 				}
 			}
@@ -138,9 +155,13 @@ public class Dragon extends Element{
 				if(args[y][x+1] == ' ')
 				{
 					args[y][x+1] = 'D';
-					args[y][x]=' ';
+					if(sword==1)
+						args[y][x]= 'E';
+					else 
+						args[y][x]=' ';
 					x= x+1;
 					moved = true;
+					sword=0;
 				}
 
 				if(args[y][x+1] == 'E')
@@ -148,6 +169,7 @@ public class Dragon extends Element{
 					args[y][x+1] = 'F';
 					args[y][x]=' ';
 					x= x+1;
+					sword=1;
 					moved = true;
 				}
 			}
@@ -156,6 +178,7 @@ public class Dragon extends Element{
 			{
 				moved=true;
 			}
+		
 			if(Interface.getModo_de_jogo()==3){
 			if(move == 5)
 			{
