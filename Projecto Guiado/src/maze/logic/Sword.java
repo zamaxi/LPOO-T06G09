@@ -8,7 +8,7 @@ public class Sword extends Element {
 		// TODO Auto-generated constructor stub
 		c = x;
 		d = y;
-		args[y][x]='E';
+		args[d][c]='E';
 	}
 
 

@@ -12,9 +12,9 @@ public Hero(char[][] args) {
 		a=y;
 		b=x;
 		if (armed == false)
-			args[y][x]='H';
+			args[a][b]='H';
 		else
-			args[y][x]='A';
+			args[a][b]='A';
 	}
 	
 
@@ -60,147 +60,150 @@ public Hero(char[][] args) {
 		 * 1- Venceu
 		 * 2- Morreu
 		 */
-
+		
 		if(keybind == 's'){
-			if(args[y+1][x] == 'E'){
+			if(args[a+1][b] == 'E'){
 				setArmed(true);
 				setHero(isArmed());
-				args[y+1][x] = ' ';
+				args[a+1][b] = ' ';
 			}
 
-			if(args[y+1][x] == 'd'){
+			if(args[a+1][b] == 'd'){
 				if(isArmed() == true){
-					args[y+1][x] = ' ';
+					args[a+1][b] = ' ';
 					Dragon.setKilled(true);
 				}
 			}
 			
-			if(args[y+1][x] == 'D'){
+			if(args[a+1][b] == 'D'){
 				if(isArmed() == true){
-					args[y+1][x] = ' ';
+					args[a+1][b] = ' ';
 					Dragon.setKilled(true);
 				}
 
 				else result =2;
 			}
 
-			if(args[y+1][x] == 'S' && isArmed() ==true){
+			if(args[a+1][b] == 'S' && isArmed() ==true){
 				result= 1;
 				return result;
 			}
 
-			if(args[y+1][x] == ' '){
-				args[y][x] = ' ';
-				args[y+1][x] = getHero();
-				y++;
+			if(args[a+1][b] == ' '){
+				args[a][b] = ' ';
+				args[a+1][b] = getHero();
+				a++;
 			}
 			
 		}
 
 		if(keybind == 'w'){
-			if(args[y-1][x] == 'E'){
+			if(args[a-1][b] == 'E'){
 				setArmed(true);
 				setHero(isArmed());
-				args[y-1][x] = ' ';
+				args[a-1][b] = ' ';
 			}
 			
-			if(args[y-1][x] == 'd'){
+			if(args[a-1][b] == 'd'){
 				if(isArmed() == true){
-					args[y-1][x] = ' ';
+					args[a-1][b] = ' ';
 					Dragon.setKilled(true);
 				}
 			}
 			
-			if(args[y-1][x] == 'D'){
+			if(args[a-1][b] == 'D'){
 				if(isArmed() == true){
-					args[y-1][x] = ' ';
+					args[a-1][b] = ' ';
 					Dragon.setKilled(true);
 				}
 				else result =2;
 			}
 
-			if(args[y-1][x] == 'S' && isArmed() ==true){
+			if(args[a-1][b] == 'S' && isArmed() ==true){
 				result =1;
 				return result;
 			}
 
-			if(args[y-1][x] == ' '){
-				args[y][x] = ' ';
-				args[y-1][x] = getHero();
-				y--;
+			if(args[a-1][b] == ' '){
+				args[a][b] = ' ';
+				args[a-1][b] = getHero();
+				a--;
 			}
 		}
 
 		if(keybind == 'd'){
-			if(args[y][x+1] == 'E'){
+			if(args[a][b+1] == 'E'){
 				setArmed(true);
 				setHero(isArmed());
-				args[y][x+1] = ' ';
+				args[a][b+1] = ' ';
 			}
 
-			if(args[y][x+1] == 'd'){
+			if(args[a][b+1] == 'd'){
 				if(isArmed() == true){
-					args[y][x+1] = ' ';
+					args[a][b+1] = ' ';
 					Dragon.setKilled(true);
 				}
 			}
 			
-			if(args[y][x+1] == 'D'){
+			if(args[a][b+1] == 'D'){
 				if(isArmed() == true){
-					args[y][x+1] = ' ';
+					args[a][b+1] = ' ';
 					Dragon.setKilled(true);
 				}
 				
 				else result =2;
 			}
 
-			if(args[y][x+1] == 'S' && isArmed() ==true){
+			if(args[a][b+1] == 'S' && isArmed() ==true){
 				result=1;
 				return result;
 			}
 
-			if(args[y][x+1] == ' '){
-				args[y][x] = ' ';
-				args[y][x+1] = getHero();
-				x++;
+			if(args[a][b+1] == ' '){
+				args[a][b] = ' ';
+				args[a][b+1] = getHero();
+				b++;
 			}
 			
 		}
 
 		if(keybind == 'a'){
-			if(args[y][x-1] == 'E'){
+			if(args[a][b-1] == 'E'){
 				setArmed(true);
 				setHero(isArmed());
-				args[y][x-1] = ' ';
+				args[a][b-1] = ' ';
 			}
 
-			if(args[y][x-1] == 'd'){
+			if(args[a][b-1] == 'd'){
 				if(isArmed() == true){
-					args[y][x-1] = ' ';
+					args[a][b-1] = ' ';
 					Dragon.setKilled(true);
 				}
 			}
 			
-			if(args[y][x-1] == 'D'){
+			if(args[a][b-1] == 'D'){
 				if(isArmed() == true){
-					args[y][x-1] = ' ';
+					args[a][b-1] = ' ';
 					Dragon.setKilled(true);
 				}
 				else result =2;
 			}
 
-			if(args[y][x-1] == 'S'  && isArmed() ==true){ 
+			if(args[a][b-1] == 'S'  && isArmed() ==true){ 
 				result=1;
 				return result;
 			}
 
-			if(args[y][x-1] == ' '){
-				args[y][x] = ' ';
-				args[y][x-1] = getHero();
-				x--;
+			if(args[a][b-1] == ' '){
+				args[a][b] = ' ';
+				args[a][b-1] = getHero();
+				b--;
 			}
 			
 		}
+		
+		if(keybind == 'q')
+			result = 3;
 		return result;
 	}
 
