@@ -18,10 +18,10 @@ public class Eagle{
 	public void setLevantaVoo(boolean levantaVoo) {
 		this.levantaVoo = levantaVoo;
 	}
-	
+
 	boolean awake;
 	private char eagle = 'V';
-	
+
 	public char getEagle() {
 		return eagle;
 	}
@@ -30,64 +30,190 @@ public class Eagle{
 		this.eagle = eagle;
 	}
 
+	static char path = 0;
+	int xinicial, yinicial;
+	static boolean found = false;
+	static boolean gotSword = false;
+	public void move_Eagle(char args[][], int xespada, int yespada) {
 
-	public void move_Eagle(char args[][], int xespada, int yespada)
-	{
-		char path = 0;
-		boolean found;
-		
-		if(counter == 0){
-		y = Hero.a;
-		x = Hero.b;
+
+		if (counter == 0) {
+			y = Hero.a;
+			x = Hero.b;
+			yinicial = y;
+			xinicial = x;
+		}
+
+		if (found == false) {
+			if (yespada > y && xespada > x) {
+
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y + 1][x + 1];
+				args[y + 1][x + 1] = getEagle();
+				y++;
+				x++;
+				counter++;
+				return;
+
+			}
+			if (yespada < y && xespada < x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y - 1][x - 1];
+				args[y - 1][x - 1] = getEagle();
+				y--;
+				x--;
+				counter++;
+				return;
+			}
+
+			if (yespada == y && xespada > x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y][x + 1];
+				args[y][x + 1] = getEagle();
+				x++;
+				counter++;
+				return;
+			}
+			if (yespada > y && xespada == x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y + 1][x];
+				args[y + 1][x] = getEagle();
+				y++;
+				counter++;
+				return;
+			}
+			if (yespada < y && xespada == x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y - 1][x];
+				args[y - 1][x] = getEagle();
+				y--;
+				counter++;
+				return;
+			}
+			if (yespada == y && xespada < x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y][x - 1];
+				args[y][x - 1] = getEagle();
+				x--;
+				counter++;
+				return;
+			}
+			if (yespada > y && xespada < x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y + 1][x - 1];
+				args[y + 1][x - 1] = getEagle();
+				y++;
+				x--;
+				counter++;
+				return;
+			}
+			if (yespada < y && xespada > x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y - 1][x + 1];
+				args[y - 1][x + 1] = getEagle();
+				x++;
+				y--;
+				counter++;
+				return;
+			}
+			if (yespada == y && xespada == x)
+				found = true;
 		}
 		
 		
-			if(yespada > y && xespada > x){
-				
-				if(counter != 0)
-					args[y][x]=path;
-				path = args[y+1][x+1];
-				args[y+1][x+1] = getEagle();
+		
+		if (found == true) {
+			if (yinicial > y && xinicial > x) {
+
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y + 1][x + 1];
+				args[y + 1][x + 1] = getEagle();
 				y++;
 				x++;
-				
+				counter++;
+				return;
+
 			}
-			if(yespada < y && xespada < x){
-				args[y-1][x-1] = getEagle();
+			if (yinicial < y && xinicial < x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y - 1][x - 1];
+				args[y - 1][x - 1] = getEagle();
 				y--;
 				x--;
+				counter++;
+				return;
 			}
-	
-			if(yespada == y && xespada > x){
-				args[y][x+1] = getEagle();
+
+			if (yinicial == y && xinicial > x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y][x + 1];
+				args[y][x + 1] = getEagle();
 				x++;
+				counter++;
+				return;
 			}
-			if(yespada > y && xespada == x){
-				args[y+1][x] = getEagle();
+			if (yinicial > y && xinicial == x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y + 1][x];
+				args[y + 1][x] = getEagle();
 				y++;
+				counter++;
+				return;
 			}
-			if(yespada < y && xespada == x){
-				args[y-1][x] = getEagle();
+			if (yinicial < y && xinicial == x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y - 1][x];
+				args[y - 1][x] = getEagle();
 				y--;
+				counter++;
+				return;
 			}
-			if(yespada == y && xespada < x){
-				args[y][x-1] = getEagle();
+			if (yinicial == y && xinicial < x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y][x - 1];
+				args[y][x - 1] = getEagle();
 				x--;
+				counter++;
+				return;
 			}
-			if(yespada > y && xespada < x){
-				args[y+1][x-1] = getEagle();
+			if (yinicial > y && xinicial < x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y + 1][x - 1];
+				args[y + 1][x - 1] = getEagle();
 				y++;
 				x--;
+				counter++;
+				return;
 			}
-			if(yespada < y && xespada > x){
-				args[y-1][x+1] = getEagle();
+			if (yinicial < y && xinicial > x) {
+				if (counter != 0)
+					args[y][x] = path;
+				path = args[y - 1][x + 1];
+				args[y - 1][x + 1] = getEagle();
 				x++;
 				y--;
+				counter++;
+				return;
 			}
-			if(yespada == y && xespada == x)
-				found = true;
 			
-			
-		counter++;
+			if (yinicial == y && xinicial == x)
+				gotSword = true;
+		}
+
 	}
 }

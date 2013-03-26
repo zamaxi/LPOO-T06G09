@@ -60,14 +60,20 @@ public Hero(char[][] args) {
 		 * 1- Venceu
 		 * 2- Morreu
 		 */
-		
 		if(keybind == 's'){
 			if(args[a+1][b] == 'E'){
 				setArmed(true);
 				setHero(isArmed());
 				args[a+1][b] = ' ';
 			}
-
+			
+			if(Eagle.gotSword == true)
+				if(args[a+1][b] == 'V'){
+					setArmed(true);
+					setHero(isArmed());
+					args[a+1][b] = ' ';
+				}
+			
 			if(args[a+1][b] == 'd'){
 				if(isArmed() == true){
 					args[a+1][b] = ' ';
@@ -104,6 +110,13 @@ public Hero(char[][] args) {
 				args[a-1][b] = ' ';
 			}
 			
+			if(Eagle.gotSword == true)
+				if(args[a-1][b] == 'V'){
+				setArmed(true);
+				setHero(isArmed());
+				args[a-1][b] = ' ';
+			}
+			
 			if(args[a-1][b] == 'd'){
 				if(isArmed() == true){
 					args[a-1][b] = ' ';
@@ -133,6 +146,13 @@ public Hero(char[][] args) {
 
 		if(keybind == 'd'){
 			if(args[a][b+1] == 'E'){
+				setArmed(true);
+				setHero(isArmed());
+				args[a][b+1] = ' ';
+			}
+			
+			if(Eagle.gotSword == true)
+				if(args[a][b+1] == 'V'){
 				setArmed(true);
 				setHero(isArmed());
 				args[a][b+1] = ' ';
@@ -174,6 +194,13 @@ public Hero(char[][] args) {
 				args[a][b-1] = ' ';
 			}
 
+			if(Eagle.gotSword == true)
+				if(args[a][b-1] == 'V'){
+				setArmed(true);
+				setHero(isArmed());
+				args[a][b-1] = ' ';
+			}
+			
 			if(args[a][b-1] == 'd'){
 				if(isArmed() == true){
 					args[a][b-1] = ' ';

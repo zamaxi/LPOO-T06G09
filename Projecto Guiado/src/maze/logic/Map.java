@@ -114,6 +114,9 @@ public class Map {
 			
 			if(z.isLevantaVoo() == true ){
 				z.move_Eagle(mapa, Sword.c, Sword.d);
+				
+				if(Eagle.found == true)
+					e.recoil(mapa);
 			}
 			verify = h.moveHero(Map.mapa, Interface.cmdLine());
 			
