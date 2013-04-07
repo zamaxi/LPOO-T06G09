@@ -1,33 +1,75 @@
 package maze.test;
-import maze.logic.*;
 
 import static org.junit.Assert.*;
 
+import maze.cli.Interface;
+import maze.logic.*;
+
 public class Test {
 
+	public char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
+		{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+		{'X',' ','X','X',' ','X',' ','X',' ','X'},
+		{'X',' ','X','X',' ','X',' ','X',' ','X'},
+		{'X',' ','X','X',' ','X',' ','X',' ','X'},
+		{'X',' ',' ',' ',' ',' ',' ','X',' ','X'},
+		{'X',' ','X','X',' ','X',' ','X',' ','X'},
+		{'X',' ','X','X',' ','X',' ','X',' ','X'},
+		{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
+		{'X','X','X','X','X','X','X','X','X','X'}};
+
+	Hero h = new Hero(mapa);
+
 	@org.junit.Test
-	public void moveHero(){
-		assertEquals(0, Map.game_logic());
+	public void testMoveHero() {
+		assertEquals(0, h.moveHero(mapa, 's'));
+	}
+
+	@org.junit.Test
+	public void armedHero(){
+		mapa[(h.a+1)][h.b] = 'E';
+		h.moveHero(mapa, 's');
+		assertEquals(true, h.isArmed());
 	}
 	
-	public void getSword(){
-		assertEquals(true, Hero.isArmed());
+	@org.junit.Test
+	public void loseGame(){
+		mapa[(h.a+1)][h.b] = 'D';
+		h.setArmed(false);
+		assertEquals(2, h.moveHero(mapa, 's'));
 	}
 	
-	public void lose(){
-		assertEquals(2, Map.game_logic());
-	}
-	
+	@org.junit.Test
 	public void killDragon(){
-		assertEquals(true, Dragon.isKilled());
+		mapa[(h.a+1)][h.b] = 'D';
+		h.setArmed(true);
+		assertEquals(0, h.moveHero(mapa, 's'));
 	}
 	
-	
-	
-	public void win() {
-		assertEquals(1, Map.game_logic());
+	@org.junit.Test
+	public void winGame(){
+		mapa[(h.a+1)][h.b] = 'S';
+		h.setArmed(true);
+		assertEquals(1, h.moveHero(mapa, 's'));
 	}
 	
+	@org.junit.Test
+	public void reachEndButNotWinGame(){
+		mapa[(h.a+1)][h.b] = 'S';
+		h.setArmed(false);
+		assertEquals(0, h.moveHero(mapa, 's'));
+	}
 	
+	@org.junit.Test
+	public void notMoveHero(){
+		mapa[(h.a+1)][h.b] = 'X';
+		h.setArmed(false);
+		h.moveHero(mapa, 's');
+		boolean test = true;
+		if(mapa[(h.a+1)][h.b] == 'X')
+			test = false;
+		
+		assertEquals(false, test);
+	}
 
 }
