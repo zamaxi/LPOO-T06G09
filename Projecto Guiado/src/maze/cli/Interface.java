@@ -45,6 +45,12 @@ public class Interface {
 
 	public static void select()
 	{
+		System.out.println("Defina o tamanho do mapa!");
+		Scanner scan = new Scanner (System.in);
+		String number = scan.nextLine();
+		int size = Integer.parseInt(number);
+		Map.mapa = Map.CreateMap(size);
+		
 		int key;
 		readK = new Scanner(System.in);
 		System.out.println("Qual o modo de jogo que quer jogar?\n 1-Dragao parado\n 2-Dragao com movimento aleatorio\n 3-Dragao com movimento aleatorio intrecalado com dormir");
