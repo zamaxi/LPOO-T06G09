@@ -18,7 +18,7 @@ public class Wall {
     private Image image;
 
     public Wall() {
-        ImageIcon ii = new ImageIcon(this.getClass().getResource(craft));
+        ImageIcon ii = new ImageIcon("craft.png");
         image = ii.getImage();
         x = 0;
         y = 0;

@@ -19,8 +19,8 @@ public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
     private Wall craft;
-
     private Parede parede;
+  
     public Board() {
 
         addKeyListener(new TAdapter());
@@ -39,7 +39,7 @@ public class Board extends JPanel implements ActionListener {
         super.paint(g);
 
         Graphics2D g2d = (Graphics2D)g;
-      //  g2d.drawImage(parede.getImage(), parede.getX(), parede.getY(), this);
+        g2d.drawImage(parede.getImage(), parede.getX(), parede.getY(), this);
         g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
        
       /*  for(int i= 0; i < 10; i++){
