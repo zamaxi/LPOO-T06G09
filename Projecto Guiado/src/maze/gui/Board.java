@@ -3,12 +3,14 @@ package maze.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,6 +22,7 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     private Wall craft;
     private Parede parede;
+    Image ie;
   
     public Board() {
 
@@ -34,23 +37,36 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
     }
 
+	public char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
+			{'X','X','X','X','X','X','X','X','X','X'}};
+
 
     public void paint(Graphics g) {
         super.paint(g);
-
+        ImageIcon ii = new ImageIcon("parede.png");
+        ie = ii.getImage();
         Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(parede.getImage(), parede.getX(), parede.getY(), this);
         g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
-       
-      /*  for(int i= 0; i < 10; i++){
-        	for(int k=0; k <10; k++){
-        		if(Map.mapa[i][k] == 'X'){
-        		//	g2d.drawImage(parede.getImage(), parede.getX(), parede.getY(), this);
-        		//	parede.setX(parede.getX()+30);
+        int  x=0,y=0;
+      
+        for(int i= 0; i < mapa.length; i++){
+        	x=0;
+        	for(int k=0; k <mapa.length; k++){
+        		if(mapa[i][k] == 'X'){
+        		g2d.drawImage(ie, x, y, null);
         		}
+        		x+=30;
         	}
-        	//parede.setY(parede.getY()+30);
-        }*/
+        	y+=30;
+        }
 
         Toolkit.getDefaultToolkit().sync();
         g.dispose();

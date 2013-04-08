@@ -9,6 +9,8 @@ public class Parede {
 
     private String parede = "parede.png";
 
+    
+    
     private int dx;
     private int dy;
     private int x;

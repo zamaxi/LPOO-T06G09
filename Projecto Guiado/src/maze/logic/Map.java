@@ -8,7 +8,17 @@ import maze.cli.Interface;
 
 public class Map {
 
-	public static char[][] mapa;
+	public static char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ','X',' ','X',' ','X'},
+			{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
+			{'X','X','X','X','X','X','X','X','X','X'}};
+
 	
 	public static char [][] CreateMap(int tamanho){
 
