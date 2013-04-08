@@ -35,7 +35,7 @@ public class Interface {
 	
 	public static void printMapa(char[][] args)
 	{
-		for(int i=0;i<10;i++)
+		for(int i=0;i<args.length;i++)
 		{
 			System.out.println(args[i]);
 		}

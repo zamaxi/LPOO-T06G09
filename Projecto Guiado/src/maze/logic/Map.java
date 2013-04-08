@@ -8,18 +8,9 @@ import maze.cli.Interface;
 
 public class Map {
 
-	public static char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
-			{'X','X','X','X','X','X','X','X','X','X'}};
+	public static char[][] mapa;
 
-	
+
 	public static char [][] CreateMap(int tamanho){
 
 		if(tamanho%2==0)
@@ -34,7 +25,7 @@ public class Map {
 				{
 					mapa[i][j] = 'V';
 				}
-				
+
 				if(i%2==0||j%2==0)
 				{
 					mapa[i][j] = 'X';
@@ -50,7 +41,7 @@ public class Map {
 			mapa[i][0]='P';
 			mapa[i][tamanho-1]='P';
 		}
-		
+
 		int x=0,y=0, lc , sx=0,sy=0, bx=0,by=0;
 		Random r1 = new Random();
 		Random r2 = new Random();
@@ -119,98 +110,101 @@ public class Map {
 				break;
 			}
 			}
+			
+			
+
 		}
-		
+
 
 		Stack <Celula> naovisitados = new Stack();
 		Celula f =new Celula (bx,by);
-		
+
 		naovisitados.push(f);
-		
+
 		do
 		{
 			bx=naovisitados.peek().x;
 			by=naovisitados.peek().y;
-			
+
 			if(naovisitados.peek().CelulasNV(mapa)==true)
 			{
 				Random r3 = new Random();
 				int dir = r3.nextInt(4);
-				
+
 				boolean encontrou = false;
-				
+
 				while(encontrou==false)
 				{
-				switch(dir)
-				{
-				case 0 ://direita
-				{
-					if(bx+2<mapa.length)
+					switch(dir)
 					{
-						if(mapa[by][bx+2]=='V')
-						{
-							Celula ed = new Celula(bx+2,by);
-							naovisitados.push(ed);
-							mapa[by][bx+1]=' ';
-							mapa[by][bx+2]=' ';
-						}
-					}
-					encontrou=true;
-				}
-				case 1 ://esquerda
-				{
-					if(bx-2>0)
+					case 0 ://direita
 					{
-						if(mapa[by][bx-2]=='V')
+						if(bx+2<mapa.length)
 						{
-							Celula ed = new Celula(bx-2,by);
-							naovisitados.push(ed);
-							mapa[by][bx-1]=' ';
-							mapa[by][bx-2]=' ';
+							if(mapa[by][bx+2]=='V')
+							{
+								Celula ed = new Celula(bx+2,by);
+								naovisitados.push(ed);
+								mapa[by][bx+1]=' ';
+								mapa[by][bx+2]=' ';
+							}
 						}
+						encontrou=true;
 					}
-					encontrou=true;
-				}
-				case 2 ://baixo
-				{
-					if(by+2<mapa.length)
+					case 1 ://esquerda
 					{
-						if(mapa[by+2][bx]=='V')
+						if(bx-2>0)
 						{
-							Celula ed = new Celula(bx,by+2);
-							naovisitados.push(ed);
-							mapa[by+1][bx]=' ';
-							mapa[by+2][bx]=' ';
+							if(mapa[by][bx-2]=='V')
+							{
+								Celula ed = new Celula(bx-2,by);
+								naovisitados.push(ed);
+								mapa[by][bx-1]=' ';
+								mapa[by][bx-2]=' ';
+							}
 						}
+						encontrou=true;
 					}
-					encontrou=true;
-				}
-				case 3 : //cima
-				{
-					if(by-2>0)
+					case 2 ://baixo
 					{
-						if(mapa[by-2][bx]=='V')
+						if(by+2<mapa.length)
 						{
-							Celula ed = new Celula(bx,by-2);
-							naovisitados.push(ed);
-							mapa[by-1][bx]=' ';
-							mapa[by-2][bx]=' ';
+							if(mapa[by+2][bx]=='V')
+							{
+								Celula ed = new Celula(bx,by+2);
+								naovisitados.push(ed);
+								mapa[by+1][bx]=' ';
+								mapa[by+2][bx]=' ';
+							}
 						}
+						encontrou=true;
 					}
-					encontrou=true;	
-				}
-				}
+					case 3 : //cima
+					{
+						if(by-2>0)
+						{
+							if(mapa[by-2][bx]=='V')
+							{
+								Celula ed = new Celula(bx,by-2);
+								naovisitados.push(ed);
+								mapa[by-1][bx]=' ';
+								mapa[by-2][bx]=' ';
+							}
+						}
+						encontrou=true;	
+					}
+					}
 				}
 			}
-			
+
 			else
 				naovisitados.pop();
-			
-			
+
+
 		}while(naovisitados.isEmpty()==false);
-		
-		
-		
+
+
+
 		int nmrX = (int) Math.abs (tamanho*tamanho*0.03);
 		for(int i = 0; i < nmrX ; i++)
 		{
@@ -222,7 +216,7 @@ public class Map {
 				mapa[y][x]=' ';
 			else i--;
 		}
-		
+
 		for(int i = 0; i <= tamanho-1 ; i++ )
 		{
 			mapa[0][i]='X';
@@ -230,7 +224,7 @@ public class Map {
 			mapa[i][0]='X';
 			mapa[i][tamanho-1]='X';
 		}
-		
+
 		return mapa;
 	}
 
@@ -263,7 +257,7 @@ public class Map {
 		int local;
 		if (aresta == 0) {
 
-			local = randomGenerator.nextInt(7) + 1;
+			local = randomGenerator.nextInt(args.length) + 1;
 			args[0][local] = 'S';
 
 			if (args[1][local] == 'X')
@@ -272,7 +266,7 @@ public class Map {
 		}
 
 		if (aresta == 1) {
-			local = randomGenerator.nextInt(7) + 1;
+			local = randomGenerator.nextInt(args.length) + 1;
 			args[9][local] = 'S';
 
 			if (args[8][local] == 'X')
@@ -281,7 +275,7 @@ public class Map {
 		}
 
 		if (aresta == 2) {
-			local = randomGenerator.nextInt(7) + 1;
+			local = randomGenerator.nextInt(args.length) + 1;
 			args[local][0] = 'S';
 
 			if (args[local][1] == 'X')
@@ -289,7 +283,7 @@ public class Map {
 
 		}
 		if (aresta == 3) {
-			local = randomGenerator.nextInt(7) + 1;
+			local = randomGenerator.nextInt(args.length) + 1;
 			args[local][9] = 'S';
 
 			if (args[local][8] == 'X')
@@ -313,7 +307,6 @@ public class Map {
 		Dragon d = new Dragon(Map.mapa);
 		v.add(d);
 		setDragons(v);
-		randomizeMap(mapa);
 
 		while (Hero.isAlive() == true) {
 
@@ -326,15 +319,15 @@ public class Map {
 				}
 
 			}
-			
+
 			if(z.isLevantaVoo() == true ){
 				z.move_Eagle(mapa, Sword.c, Sword.d);
-				
+
 				if(Eagle.found == true)
 					e.recoil(mapa);
 			}
 			verify = h.moveHero(Map.mapa, Interface.cmdLine());
-			
+
 			if (verify == 1) {
 				return 1;
 			}
@@ -344,7 +337,7 @@ public class Map {
 			}
 			if (verify == 3)
 				z.setLevantaVoo(true);
-			
+
 		}
 		return 0;
 	}
