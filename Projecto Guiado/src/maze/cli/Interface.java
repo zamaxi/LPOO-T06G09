@@ -41,15 +41,9 @@ public class Interface {
 		}
 	}
 
-	static int g = Map.game_logic();
-
-	public static void select()
-	{
-		System.out.println("Defina o tamanho do mapa!");
-		Scanner scan = new Scanner (System.in);
-		String number = scan.nextLine();
-		int size = Integer.parseInt(number);
-		Map.mapa = Map.CreateMap(size);
+	public static void main(String[]args){
+		
+		
 		
 		int key;
 		readK = new Scanner(System.in);
@@ -60,31 +54,34 @@ public class Interface {
 		System.out.println("Quantos dragoes quer em jogo?\n");
 		key= readK.nextInt();
 		setN_dragoes(key);
-	}
-	
-	
-	public static char cmdLine()
-	{
+		
+		System.out.println("Defina o tamanho do mapa!");
+		Scanner scan = new Scanner (System.in);
+		String number = scan.nextLine();
+		int size = Integer.parseInt(number);
+		Map.mapa = Map.CreateMap(size);
 		
 		printMapa(Map.mapa);
-
+		
+		System.out.println("Prima uma tecla:");
 		char keybind;
-		String key;
+		String keym;
 
 		readK = new Scanner(System.in);
-		System.out.println("Prima uma tecla:");
-		key= readK.next();
-		keybind = key.charAt(0);
+		keym= readK.next();
+		keybind = keym.charAt(0);
 		
-		return keybind;
-	}
-	
-	public static void main(String[]args){
+		Map.game_logic(keybind);
 		
 		int verify=0;
-		
 			while(verify==0){
-				verify=g;
+				printMapa(Map.mapa);
+				System.out.println("Prima uma tecla:");
+
+				readK = new Scanner(System.in);
+				keym= readK.next();
+				keybind = keym.charAt(0);
+				verify=Map.game_logic(keybind);
 				//printMapa(Map.mapa);
 			}
 			

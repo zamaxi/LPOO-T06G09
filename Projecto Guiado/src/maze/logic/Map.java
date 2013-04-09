@@ -1,14 +1,28 @@
 package maze.logic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
 
 import maze.cli.Interface;
+import maze.logic.Celula;
 
 public class Map {
 
 	public static char[][] mapa;
+	static Hero h;
+	static Sword e;
+	static Eagle z;
+	static Dragon d;
+	static Vector<Dragon> v = new Vector<Dragon>();
+
+	
+	
+	
+	
+	
 
 
 	public static char [][] CreateMap(int tamanho){
@@ -116,8 +130,8 @@ public class Map {
 		}
 
 
-		Stack <Celula> naovisitados = new Stack();
-		Celula f =new Celula (bx,by);
+		Stack <Celula> naovisitados = new Stack<Celula>();
+		Celula f = new Celula (bx,by);
 
 		naovisitados.push(f);
 
@@ -224,10 +238,26 @@ public class Map {
 			mapa[i][0]='X';
 			mapa[i][tamanho-1]='X';
 		}
+		
+		h = new Hero(mapa);
+		e = new Sword(mapa);
+		z = new Eagle(mapa);
+		
+		for (int i = 1; i < Interface.getN_dragoes(); i++) {
+			d = new Dragon(mapa);
+			v.add(d);
+		}
+		
+		d = new Dragon(mapa);
+		v.add(d);
+		setDragons(v);
 
 		return mapa;
 	}
-
+	
+	
+	
+	
 	private static Vector<Dragon> dragons = new Vector<Dragon>();
 
 	public static Vector<Dragon> getDragons() {
@@ -242,6 +272,7 @@ public class Map {
 		for (int i = 0; i < NumeroDragoes; i++) {
 			Dragon d = new Dragon(Map.mapa);
 			dragons.add(d);
+			
 			// dragons.get(i).moveDragon(mapa);
 		}
 	}
@@ -251,7 +282,7 @@ public class Map {
 		 * 0-aresta superior 1-aresta inferior 2-aresta esquerda 3 aresta
 		 * direita
 		 */
-
+		
 		Random randomGenerator = new Random();
 		int aresta = randomGenerator.nextInt(4);
 		int local;
@@ -291,24 +322,11 @@ public class Map {
 		}
 	}
 
-	public static int game_logic() {
+	public static int game_logic(char key) {
 		int verify = 0;
-		Interface.select();
-		Hero h = new Hero(Map.mapa);
-		Sword e = new Sword(Map.mapa);
-		Eagle z = new Eagle(Map.mapa);
-		Vector<Dragon> v = new Vector<Dragon>();
+		
 
-		for (int i = 1; i < Interface.getN_dragoes(); i++) {
-			Dragon d = new Dragon(Map.mapa);
-			v.add(d);
-		}
-
-		Dragon d = new Dragon(Map.mapa);
-		v.add(d);
-		setDragons(v);
-
-		while (Hero.isAlive() == true) {
+		if (Hero.isAlive() == true) {
 
 			if (Dragon.isKilled() == false) {
 				for (int i = 0; i < dragons.size(); i++) {
@@ -326,7 +344,7 @@ public class Map {
 				if(Eagle.found == true)
 					e.recoil(mapa);
 			}
-			verify = h.moveHero(Map.mapa, Interface.cmdLine());
+			verify = h.moveHero(Map.mapa, key);
 
 			if (verify == 1) {
 				return 1;
