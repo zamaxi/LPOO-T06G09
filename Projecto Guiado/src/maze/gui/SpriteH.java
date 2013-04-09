@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-public class Wall {
+public class SpriteH {
 
     private String craft = "craft.png";
 
@@ -17,8 +17,8 @@ public class Wall {
 	private int y;
     private Image image;
 
-    public Wall() {
-        ImageIcon ii = new ImageIcon("craft.png");
+    public SpriteH() {
+        ImageIcon ii = new ImageIcon("megaman.png");
         image = ii.getImage();
         x = 0;
         y = 0;
@@ -51,25 +51,30 @@ public class Wall {
         return image;
     }
 
-    public void keyPressed(KeyEvent e) {
+    public Object keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
             dx = -30;
+            return 'a';
         }
 
         if (key == KeyEvent.VK_RIGHT) {
             dx = 30;
+            return 'd';
         }
 
         if (key == KeyEvent.VK_UP) {
             dy = -30;
+            return 'w';
         }
 
         if (key == KeyEvent.VK_DOWN) {
             dy = 30;
+            return 's';
         }
+        return null;
     }
 
     public void keyReleased(KeyEvent e) {

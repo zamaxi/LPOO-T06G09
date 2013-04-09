@@ -11,7 +11,7 @@ public class RType extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 330);
         setLocationRelativeTo(null);
-        setTitle("R - Type");
+        setTitle("MegaMan vs Shrek");
         setResizable(false);
         setVisible(true);
     }

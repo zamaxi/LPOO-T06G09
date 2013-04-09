@@ -20,9 +20,8 @@ import maze.logic.Map;
 public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
-    private Wall craft;
-    private Parede parede;
-    Image ie;
+    private SpriteH craft;
+    Image wall, hero, dragon, sword;
   
     public Board() {
 
@@ -31,18 +30,18 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.WHITE);
         setDoubleBuffered(true);
 
-        craft = new Wall();
+        craft = new SpriteH();
 
         timer = new Timer(100, this);
         timer.start();
     }
 
 	public char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ','E',' ',' ',' ',' ','X'},
 			{'X',' ','X','X',' ','X',' ','X',' ','X'},
 			{'X',' ','X','X',' ','X',' ','X',' ','X'},
 			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ','X',' ','X'},
+			{'X',' ',' ',' ',' ',' ','D','X',' ','X'},
 			{'X',' ','X','X',' ','X',' ','X',' ','X'},
 			{'X',' ','X','X',' ','X',' ','X',' ','X'},
 			{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
@@ -51,8 +50,13 @@ public class Board extends JPanel implements ActionListener {
 
     public void paint(Graphics g) {
         super.paint(g);
-        ImageIcon ii = new ImageIcon("parede.png");
-        ie = ii.getImage();
+        ImageIcon i1 = new ImageIcon("wall.png");
+        ImageIcon i2 = new ImageIcon("dragon.png");
+        ImageIcon i3 = new ImageIcon("sword.png");
+        wall = i1.getImage();
+        dragon = i2.getImage();
+        sword = i3.getImage();
+        
         Graphics2D g2d = (Graphics2D)g;
         g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
         int  x=0,y=0;
@@ -60,9 +64,12 @@ public class Board extends JPanel implements ActionListener {
         for(int i= 0; i < mapa.length; i++){
         	x=0;
         	for(int k=0; k <mapa.length; k++){
-        		if(mapa[i][k] == 'X'){
-        		g2d.drawImage(ie, x, y, null);
-        		}
+        		if(mapa[i][k] == 'X')
+        		g2d.drawImage(wall, x, y, null);
+        		if(mapa[i][k] == 'E')
+            		g2d.drawImage(sword, x, y, null);
+        		if(mapa[i][k] == 'D')
+            		g2d.drawImage(dragon, x, y, null);
         		x+=30;
         	}
         	y+=30;
