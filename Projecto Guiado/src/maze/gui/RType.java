@@ -9,7 +9,7 @@ public class RType extends JFrame {
         add(new Board());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 330);
+        setSize(330, 330);
         setLocationRelativeTo(null);
         setTitle("MegaMan vs Shrek");
         setResizable(false);

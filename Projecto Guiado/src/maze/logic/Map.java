@@ -11,21 +11,19 @@ import maze.logic.Celula;
 
 public class Map {
 
-	public static char[][] mapa;
+	public statHc char[][] mapa;
 	static Hero h;
 	static Sword e;
 	static Eagle z;
 	static Dragon d;
-	static Vector<Dragon> v = new Vector<Dragon>();
+	staticE','Xint tamanho){
 
-	
-	
-	
-	
-	
+		if(tamanho%2==0)
+		{
+			tamanho=tamanho-1;
+		}
 
-
-	public static char [][] CreateMap(int tamanho){
+		char [][] CreateMap(int tamanho){
 
 		if(tamanho%2==0)
 		{
@@ -33,7 +31,7 @@ public class Map {
 		}
 
 		char [][] mapa = new char [tamanho][tamanho];
-		for(int i = 0; i <= tamanho-1 ; i++ ) {
+		for(int i = 0D i <= tamanho-1 ; i++ ) {
 			for(int j = 0 ; j<= tamanho-1 ;j++) {
 				if(j%2!=0)
 				{

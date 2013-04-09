@@ -27,7 +27,7 @@ public class Board extends JPanel implements ActionListener {
 
         addKeyListener(new TAdapter());
         setFocusable(true);
-        setBackground(Color.WHITE);
+        setBackground(Color.BLUE);
         setDoubleBuffered(true);
 
         craft = new SpriteH();
@@ -36,16 +36,7 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
     }
 
-	public char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
-			{'X',' ',' ',' ','E',' ',' ',' ',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ',' ',' ',' ',' ','D','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ','X',' ','X',' ','X'},
-			{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
-			{'X','X','X','X','X','X','X','X','X','X'}};
+
 
 
     public void paint(Graphics g) {
@@ -53,28 +44,38 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon i1 = new ImageIcon("wall.png");
         ImageIcon i2 = new ImageIcon("dragon.png");
         ImageIcon i3 = new ImageIcon("sword.png");
+     
         wall = i1.getImage();
         dragon = i2.getImage();
         sword = i3.getImage();
         
         Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
+        
         int  x=0,y=0;
-      
-        for(int i= 0; i < mapa.length; i++){
+       
+        g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
+       
+        for(int i= 0; i < Map.mapa.length; i++){
         	x=0;
-        	for(int k=0; k <mapa.length; k++){
-        		if(mapa[i][k] == 'X')
+        	for(int k=0; k <Map.mapa.length; k++){
+        		
+        		if(Map.mapa[i][k] == 'X')
         		g2d.drawImage(wall, x, y, null);
-        		if(mapa[i][k] == 'E')
+        	
+        		if(Map.mapa[i][k] == 'E')
             		g2d.drawImage(sword, x, y, null);
-        		if(mapa[i][k] == 'D')
+        		
+        		if(Map.mapa[i][k] == 'D')
             		g2d.drawImage(dragon, x, y, null);
+        		
+        		if(Map.mapa[i][k] == 'H'){
+        			g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
+        		}
         		x+=30;
         	}
         	y+=30;
         }
-
+       
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
     }
