@@ -11,19 +11,21 @@ import maze.logic.Celula;
 
 public class Map {
 
-	public statHc char[][] mapa;
+	public static char[][] mapa;
 	static Hero h;
 	static Sword e;
 	static Eagle z;
 	static Dragon d;
-	staticE','Xint tamanho){
+	static Vector<Dragon> v = new Vector<Dragon>();
 
-		if(tamanho%2==0)
-		{
-			tamanho=tamanho-1;
-		}
+	
+	
+	
+	
+	
 
-		char [][] CreateMap(int tamanho){
+
+	public static char [][] CreateMap(int tamanho){
 
 		if(tamanho%2==0)
 		{
@@ -31,7 +33,7 @@ public class Map {
 		}
 
 		char [][] mapa = new char [tamanho][tamanho];
-		for(int i = 0D i <= tamanho-1 ; i++ ) {
+		for(int i = 0; i <= tamanho-1 ; i++ ) {
 			for(int j = 0 ; j<= tamanho-1 ;j++) {
 				if(j%2!=0)
 				{
@@ -237,6 +239,8 @@ public class Map {
 			mapa[i][tamanho-1]='X';
 		}
 		
+		randomizeMap(mapa);
+		
 		h = new Hero(mapa);
 		e = new Sword(mapa);
 		z = new Eagle(mapa);
@@ -296,10 +300,10 @@ public class Map {
 
 		if (aresta == 1) {
 			local = randomGenerator.nextInt(args.length) + 1;
-			args[9][local] = 'S';
+			args[(args.length-1)][local] = 'S';
 
-			if (args[8][local] == 'X')
-				args[8][local] = ' ';
+			if (args[(args.length-2)][local] == 'X')
+				args[(args.length-2)][local] = ' ';
 
 		}
 
@@ -313,10 +317,10 @@ public class Map {
 		}
 		if (aresta == 3) {
 			local = randomGenerator.nextInt(args.length) + 1;
-			args[local][9] = 'S';
+			args[local][(args.length-1)] = 'S';
 
-			if (args[local][8] == 'X')
-				args[local][8] = ' ';
+			if (args[local][(args.length-2)] == 'X')
+				args[local][(args.length-2)] = ' ';
 		}
 	}
 
