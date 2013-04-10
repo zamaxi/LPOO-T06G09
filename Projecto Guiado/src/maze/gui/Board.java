@@ -20,17 +20,20 @@ import maze.logic.Map;
 public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
-    private SpriteH craft;
+
     Image wall, hero, dragon, sword;
+    
+
+  
   
     public Board() {
 
-        addKeyListener(new TAdapter());
+        addKeyListener(new TAdapter());	
         setFocusable(true);
-        setBackground(Color.BLUE);
+        setBackground(Color.WHITE);
         setDoubleBuffered(true);
 
-        craft = new SpriteH();
+      
 
         timer = new Timer(100, this);
         timer.start();
@@ -44,16 +47,18 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon i1 = new ImageIcon("wall.png");
         ImageIcon i2 = new ImageIcon("dragon.png");
         ImageIcon i3 = new ImageIcon("sword.png");
-     
+        ImageIcon i4 = new ImageIcon("megaman.png");
+        
         wall = i1.getImage();
         dragon = i2.getImage();
         sword = i3.getImage();
+        hero = i4.getImage();
         
         Graphics2D g2d = (Graphics2D)g;
         
         int  x=0,y=0;
        
-        g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
+      //  g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
        
         for(int i= 0; i < Map.mapa.length; i++){
         	x=0;
@@ -69,33 +74,91 @@ public class Board extends JPanel implements ActionListener {
             		g2d.drawImage(dragon, x, y, null);
         		
         		if(Map.mapa[i][k] == 'H'){
-        			g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
+        			g2d.drawImage(hero,x,y,null);
         		}
         		x+=30;
         	}
         	y+=30;
         }
        
-        Toolkit.getDefaultToolkit().sync();
-        g.dispose();
+        //Toolkit.getDefaultToolkit().sync();
+      //  g.dispose();
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        craft.move();
+       // craft.move();
         repaint();  
     }
 
+    
+    public Object keyPressed(KeyEvent e) {
 
-    private class TAdapter extends KeyAdapter {
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_LEFT) {
+            
+       //     return 'a';
+        }
+
+        if (key == KeyEvent.VK_RIGHT) {
+            
+        //    return 'd';
+        }
+
+        if (key == KeyEvent.VK_UP) {
+            
+         //   return 'w';
+        }
+
+        if (key == KeyEvent.VK_DOWN) {
+            
+          //  return 's';
+        }
+        return null;
+    }
+
+    public char keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_LEFT) {
+        	return 'a';
+        	//Map.game_logic('a');
+        }
+
+        if (key == KeyEvent.VK_RIGHT) {
+        	return 'd';
+        	//Map.game_logic('d');
+        }
+
+        if (key == KeyEvent.VK_UP) {
+        	return 'w';
+        	//Map.game_logic('w');
+        }
+
+        if (key == KeyEvent.VK_DOWN) {
+        	return 's';
+        	
+        }
+        return ' ';
+    }
+
+
+
+
+	
+}
+
+    class TAdapter extends KeyAdapter {
 
         public void keyReleased(KeyEvent e) {
-            craft.keyReleased(e);
+           keyReleased(e);
+           
         }
 
         public void keyPressed(KeyEvent e) {
-            craft.keyPressed(e);
+            keyPressed(e);
         }
     }
+    
 
-}

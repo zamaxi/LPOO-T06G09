@@ -59,7 +59,7 @@ public class Interface {
 		Scanner scan = new Scanner (System.in);
 		String number = scan.nextLine();
 		int size = Integer.parseInt(number);
-		Map.mapa = Map.CreateMap(size);
+		//Map.mapa = Map.CreateMap(size);
 		
 		printMapa(Map.mapa);
 		
