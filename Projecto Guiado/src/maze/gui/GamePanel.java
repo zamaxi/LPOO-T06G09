@@ -17,15 +17,15 @@ import maze.logic.Map;
 
 public class GamePanel extends JPanel implements KeyListener {
 
-	
-	
+
+
 	Image wall, hero, dragon, sword, red_hero, eagle;
 
 	/**
 	 * Create the panel.
 	 */
 	public GamePanel() {
-		
+
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		ImageIcon i4 = new ImageIcon("megaman.png");
 		ImageIcon i5 = new ImageIcon("red_megaman.jpg");
 		ImageIcon i6 = new ImageIcon("eagle.png");
-		
+
 		wall = i1.getImage();
 		dragon = i2.getImage();
 		sword = i3.getImage();
@@ -47,8 +47,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		
+
+
 
 		Graphics2D g2d = (Graphics2D) g;
 
@@ -71,13 +71,13 @@ public class GamePanel extends JPanel implements KeyListener {
 
 				if (Map.mapa[i][k] == 'H') 
 					g2d.drawImage(hero, x, y, null);
-				
+
 				if (Map.mapa[i][k] == 'A') 
 					g2d.drawImage(red_hero, x, y, null);
-				
+
 				if (Map.mapa[i][k] == 'V') 
 					g2d.drawImage(eagle, x, y, null);
-				
+
 				x += 30;
 			}
 			y += 30;
@@ -108,7 +108,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
 			// return 's';
 		}*/
-		
+
 	}
 
 	@Override
@@ -133,23 +133,23 @@ public class GamePanel extends JPanel implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			Map.game_logic('s');
 			}
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_Q) 
 			Map.game_logic('q');
-		
+
 		if(Hero.isAlive()== false){
 			JOptionPane.showMessageDialog(null, "Morreu!");
 			//dispose();
 			System.exit(0); 
 		}
-		
+
 		repaint();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -40,6 +40,7 @@ public class GameFrame extends JFrame {
 			public void run() {
 				try {
 					GameFrame frame = new GameFrame();
+
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,46 +53,77 @@ public class GameFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public GameFrame() {
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		/*
 		
 		JButton btnSair = new JButton("Sair");
+		btnSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				System.exit(0);
+			}
+		});
 		
 		JButton btnNovoJogo = new JButton("Novo Jogo");
 		btnNovoJogo.addMouseListener(new MouseAdapter() {
+			
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				//final GameFrame f = new GameFrame();
+				/*GamePanel gm = new GamePanel();
+				contentPane.add(gm);
+				contentPane.setVisible(false);
+				gm.setVisible(true);
+					
 			}
-			
-			
 		});
+		
+		JButton btnNewButton = new JButton("Op\u00E7\u00F5es");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Options n = new Options();
+				n.setVisible(true);
+			}
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addGap(107)
-					.addComponent(btnNovoJogo, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-					.addGap(129))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(52)
-					.addComponent(btnSair, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+					.addComponent(btnSair, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
 					.addGap(65))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(107)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(btnNovoJogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+					.addGap(129))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(29)
 					.addComponent(btnNovoJogo, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+					.addGap(18)
 					.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 					.addGap(53))
 		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(gl_contentPane);*/
 		
+		final GamePanel gm = new GamePanel();
+		contentPane.
+		this.add(gm);
 		
 	//	int dialogButton = JOptionPane.YES_NO_OPTION;
 		//JOptionPane.showConfirmDialog(null,"Deseja Começar um jogo novo?");
@@ -104,7 +136,7 @@ public class GameFrame extends JFrame {
 		
 		
 	//*	else{
-			
+		
 		
 		
 	}

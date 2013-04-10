@@ -37,7 +37,7 @@ public class Map {
 		z = new Eagle(mapa);
 	}
 	
-	
+	public static int mapSize;
 	
 
 /*
