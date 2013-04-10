@@ -9,8 +9,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import maze.logic.Hero;
 import maze.logic.Map;
 
 public class GamePanel extends JPanel implements KeyListener {
@@ -134,6 +136,12 @@ public class GamePanel extends JPanel implements KeyListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_Q) 
 			Map.game_logic('q');
+		
+		if(Hero.isAlive()== false){
+			JOptionPane.showMessageDialog(null, "Morreu!");
+			//dispose();
+			System.exit(0); 
+		}
 		
 		repaint();
 	}
