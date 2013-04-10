@@ -1,5 +1,7 @@
 package maze.gui;
 
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -40,6 +42,7 @@ public class GameFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		JOptionPane.showConfirmDialog(null,"Deseja Começar um jog novo?");
 		GamePanel gm = new GamePanel();
 		this.add(gm);
 	}
