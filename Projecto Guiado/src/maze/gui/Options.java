@@ -50,10 +50,17 @@ public class Options extends JDialog {
 		setBounds(100, 100, 500, 500);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		final JSpinner spinner_1 = new JSpinner();
+		final JSpinner spinner = new JSpinner();
+		final JRadioButton rdbtnDragoParado = new JRadioButton("Shrek parado");
+		final JRadioButton rdbtnShrekEmMovimento = new JRadioButton("Shrek em movimento aleat\u00F3rio");
+		final JRadioButton rdbtnShrekEmMovimento_1 = new JRadioButton("Shrek em Movimento Aleat\u00F3rio intercalado com dormir");
+		
 		{
 			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
+				
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addMouseListener(new MouseAdapter() {
 					@Override
@@ -66,6 +73,23 @@ public class Options extends JDialog {
 				btnOk.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						Map.mapSize = (int) spinner.getValue();
+						
+						if(Map.mapSize < 10)
+							Map.mapSize = 10;
+						
+						Interface.setN_dragoes((int) spinner_1.getValue());
+						
+						if(rdbtnDragoParado.isSelected() == true)
+							Interface.setModo_de_jogo(1);
+						
+						if(rdbtnDragoParado.isSelected() == true)
+							Interface.setModo_de_jogo(2);
+						
+						if(rdbtnDragoParado.isSelected() == true)
+							Interface.setModo_de_jogo(3);
+						
+						
 						setVisible(false);
 					}
 				});
@@ -77,24 +101,24 @@ public class Options extends JDialog {
 		
 		JLabel lblTamanhoDoLabirinto = new JLabel("Tamanho do Labirinto (>9)");
 		
-		JSpinner spinner = new JSpinner();
+		
 		Map.mapSize = (int) spinner.getValue();
 		
 		
 		JLabel lblNumeroDeDragoes = new JLabel("Numero de Shreks");
 		
-		JSpinner spinner_1 = new JSpinner();
+		//JSpinner spinner_1 = new JSpinner();
 		
 		Interface.setN_dragoes((int) spinner_1.getValue());
-		System.out.println(spinner_1.getValue());
 		
-		JRadioButton rdbtnDragoParado = new JRadioButton("Shrek parado");
+		
+		
 		buttonGroup_1.add(rdbtnDragoParado);
 		
-		JRadioButton rdbtnShrekEmMovimento = new JRadioButton("Shrek em movimento aleat\u00F3rio");
+		
 		buttonGroup_1.add(rdbtnShrekEmMovimento);
 		
-		JRadioButton rdbtnShrekEmMovimento_1 = new JRadioButton("Shrek em Movimento Aleat\u00F3rio intercalado com dormir");
+		
 		buttonGroup_1.add(rdbtnShrekEmMovimento_1);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(

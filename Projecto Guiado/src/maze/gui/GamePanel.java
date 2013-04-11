@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
 
 
-	Image wall, hero, dragon, sword, red_hero, eagle;
+	Image wall, hero, dragon, sword, red_hero, eagle,sleep;
 
 	/**
 	 * Create the panel.
@@ -36,13 +36,15 @@ public class GamePanel extends JPanel implements KeyListener {
 		ImageIcon i4 = new ImageIcon("megaman.png");
 		ImageIcon i5 = new ImageIcon("red_megaman.jpg");
 		ImageIcon i6 = new ImageIcon("eagle.png");
-
+		ImageIcon i7 = new ImageIcon("sleep.png");
+		
 		wall = i1.getImage();
 		dragon = i2.getImage();
 		sword = i3.getImage();
 		hero = i4.getImage();
 		red_hero = i5.getImage();
 		eagle = i6.getImage();
+		sleep = i7.getImage();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -77,6 +79,9 @@ public class GamePanel extends JPanel implements KeyListener {
 
 				if (Map.mapa[i][k] == 'V') 
 					g2d.drawImage(eagle, x, y, null);
+				
+				if (Map.mapa[i][k] == 'd') 
+					g2d.drawImage(sleep, x, y, null);
 
 				x += 30;
 			}

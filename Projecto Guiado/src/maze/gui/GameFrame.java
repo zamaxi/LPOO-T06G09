@@ -33,29 +33,7 @@ public class GameFrame extends JFrame {
 	private JPanel jogo;
 	JFrame aux;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameFrame frame = new GameFrame();
-					
-					 
-					frame.setName("Megaman vs Shrek");
-					frame.setVisible(true);
-				
-					frame.setContentPane(contentPane);
-					
-				
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
