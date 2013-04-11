@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements KeyListener {
 	 * Create the panel.
 	 */
 	public GamePanel() {
-
+		Map.add();
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		
@@ -85,38 +85,10 @@ public class GamePanel extends JPanel implements KeyListener {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-
-	/*	int key = e.getKeyCode();
-
-		if (key == KeyEvent.VK_LEFT) {
-
-			// return 'a';
-		}
-
-		if (key == KeyEvent.VK_RIGHT) {
-
-			// return 'd';
-		}
-
-		if (key == KeyEvent.VK_UP) {
-
-			// return 'w';
-		}
-
-		if (key == KeyEvent.VK_DOWN) {
-
-			// return 's';
-		}*/
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
+	public void keyPressed(KeyEvent e)  {
 		//int key = e.getKeyCode();
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			//return 'a';
 			Map.game_logic('a');
 		}
 
@@ -144,6 +116,11 @@ public class GamePanel extends JPanel implements KeyListener {
 		}
 
 		repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	
 	}
 
 	@Override
