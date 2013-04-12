@@ -38,7 +38,9 @@ public class GameFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public GameFrame() {
-		setBounds(100, 100, 500, 500);
+		
+		setBounds(100, 100, 287, 310);
+		
 		GamePanel gm = new GamePanel();
 		this.add(gm);
 		

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import maze.cli.Interface;
 import maze.logic.Hero;
 import maze.logic.Map;
 
@@ -19,13 +20,16 @@ public class GamePanel extends JPanel implements KeyListener {
 
 
 
-	Image wall, hero, dragon, sword, red_hero, eagle,sleep;
+	Image wall, hero, dragon, sword, red_hero, eagle, sleep, exit;
 
 	/**
 	 * Create the panel.
 	 */
 	public GamePanel() {
-		Map.add();
+		if(Menu.create == false)
+			Map.CreateMap(Map.mapSize);
+		
+		Map.drawDragon(Interface.getN_dragoes());
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		
@@ -37,6 +41,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		ImageIcon i5 = new ImageIcon("red_megaman.jpg");
 		ImageIcon i6 = new ImageIcon("eagle.png");
 		ImageIcon i7 = new ImageIcon("sleep.png");
+		ImageIcon i8 = new ImageIcon("rainbow.png");
 		
 		wall = i1.getImage();
 		dragon = i2.getImage();
@@ -45,6 +50,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		red_hero = i5.getImage();
 		eagle = i6.getImage();
 		sleep = i7.getImage();
+		exit = i8.getImage();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -82,6 +88,9 @@ public class GamePanel extends JPanel implements KeyListener {
 				
 				if (Map.mapa[i][k] == 'd') 
 					g2d.drawImage(sleep, x, y, null);
+				
+				if (Map.mapa[i][k] == 'S') 
+					g2d.drawImage(exit, x, y, null);
 
 				x += 30;
 			}
@@ -91,32 +100,54 @@ public class GamePanel extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e)  {
-		//int key = e.getKeyCode();
-
+		
+		int verify =0;
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			Map.game_logic('a');
+			verify = Map.game_logic('a');
+			
+			if(verify == 1){
+				JOptionPane.showMessageDialog(null, "Venceste!");
+				
+			}
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			//return 'd';
-			Map.game_logic('d');
+			
+			verify = Map.game_logic('d');
+			
+			if(verify == 1){
+				JOptionPane.showMessageDialog(null, "Venceste!");
+				
+			}
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			//return 'w';
-			Map.game_logic('w');
+			
+			verify = Map.game_logic('w');
+			
+			if(verify == 1){
+				JOptionPane.showMessageDialog(null, "Venceste!");
+				setVisible(false);
+			}
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			Map.game_logic('s');
+			verify = Map.game_logic('s');
+			
+			if(verify == 1){
+				JOptionPane.showMessageDialog(null, "Venceste!");
+				setVisible(false);
+			}
+			
 			}
 
 		if (e.getKeyCode() == KeyEvent.VK_Q) 
-			Map.game_logic('q');
+			verify = Map.game_logic('q');
 
 		if(Hero.isAlive()== false){
 			JOptionPane.showMessageDialog(null, "Morreu!");
-			//dispose();
+			
+
 			System.exit(0); 
 		}
 

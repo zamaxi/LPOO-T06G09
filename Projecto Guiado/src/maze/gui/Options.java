@@ -33,15 +33,6 @@ public class Options extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		try {
-			Options dialog = new Options();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	/**
 	 * Create the dialog.
@@ -73,6 +64,8 @@ public class Options extends JDialog {
 				btnOk.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						Menu.create = true;
+						
 						Map.mapSize = (int) spinner.getValue();
 						
 						if(Map.mapSize < 10)
@@ -83,10 +76,10 @@ public class Options extends JDialog {
 						if(rdbtnDragoParado.isSelected() == true)
 							Interface.setModo_de_jogo(1);
 						
-						if(rdbtnDragoParado.isSelected() == true)
+						if(rdbtnShrekEmMovimento.isSelected() == true)
 							Interface.setModo_de_jogo(2);
 						
-						if(rdbtnDragoParado.isSelected() == true)
+						if(rdbtnShrekEmMovimento_1.isSelected() == true)
 							Interface.setModo_de_jogo(3);
 						
 						

@@ -12,10 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
+import maze.logic.Map;
+
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
 	JFrame aux;
+	public static boolean create = false;
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +55,8 @@ public class Menu extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
 					System.exit(0);
+					create = true;
+					Map.CreateMap(Map.mapSize);
 				}
 			});
 			
@@ -64,6 +69,8 @@ public class Menu extends JFrame {
 					contentPane.setVisible(false);
 					aux.setVisible(false);
 					GameFrame jogo = new GameFrame();
+					
+					
 					jogo.setVisible(true);
 				}
 			});

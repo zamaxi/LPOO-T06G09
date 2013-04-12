@@ -11,7 +11,7 @@ import maze.logic.Celula;
 
 public class Map {
 
-	public static char[][] mapa={{'X','X','X','X','X','X','X','X','X','X'},
+	public static char[][] mapa; /*={{'X','X','X','X','X','X','X','X','X','X'},
 	      {'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
 	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
@@ -20,7 +20,7 @@ public class Map {
 	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
 	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
 	      {'X',' ','X','X',' ',' ',' ',' ',' ','X'},
-	      {'X','X','X','X','X','X','X','X','X','X'}};
+	      {'X','X','X','X','X','X','X','X','X','X'}};*/
 	
 	
 	static Hero h;
@@ -33,16 +33,18 @@ public class Map {
 	public static void add(){
 		h = new Hero(mapa);
 		e = new Sword(mapa);
-		d = new Dragon(mapa);
 		z = new Eagle(mapa);
 	}
 	
 	public static int mapSize;
 	
 
-/*
-	public static char [][] CreateMap(int tamanho){
 
+	public static char [][] CreateMap(Integer tamanho){
+
+		if(tamanho < 10 || tamanho == null)
+			tamanho = 10;
+		
 		if(tamanho%2==0)
 		{
 			tamanho=tamanho-1;
@@ -269,10 +271,10 @@ public class Map {
 		d = new Dragon(mapa);
 		v.add(d);
 		setDragons(v);
-
+		Map.mapa = mapa;
 		return mapa;
 	}
-*/	
+
 	
 	
 	
@@ -286,11 +288,18 @@ public class Map {
 		Map.dragons = dragons;
 	}
 
-	public static void drawDragon(int NumeroDragoes) {
+	public static void drawDragon(Integer NumeroDragoes) {
+		
+		if(Interface.getN_dragoes() == 0 || Interface.getN_dragoes()  == null ){
+			Dragon d1 = new Dragon(Map.mapa);
+			dragons.add(d1);
+		}
+		
+		
 		for (int i = 0; i < NumeroDragoes; i++) {
 			Dragon d = new Dragon(Map.mapa);
 			dragons.add(d);
-			
+		
 			// dragons.get(i).moveDragon(mapa);
 		}
 	}

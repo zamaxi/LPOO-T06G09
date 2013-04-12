@@ -21,7 +21,7 @@ public class Interface {
 	}
 
 
-	public static int getN_dragoes() {
+	public static Integer getN_dragoes() {
 		return n_dragoes;
 	}
 
