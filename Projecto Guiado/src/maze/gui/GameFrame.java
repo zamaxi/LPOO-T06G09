@@ -41,6 +41,8 @@ public class GameFrame extends JFrame {
 		
 		setBounds(100, 100, 287, 310);
 		
+		if(Menu.create == true)
+			setBounds(100, 100, Map.mapSize*30+20, Map.mapSize*30+40);
 		GamePanel gm = new GamePanel();
 		this.add(gm);
 		

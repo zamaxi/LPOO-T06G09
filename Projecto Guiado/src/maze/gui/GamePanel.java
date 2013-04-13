@@ -26,8 +26,6 @@ public class GamePanel extends JPanel implements KeyListener {
 	 * Create the panel.
 	 */
 	public GamePanel() {
-		if(Menu.create == false)
-			Map.CreateMap(Map.mapSize);
 		
 		Map.drawDragon(Interface.getN_dragoes());
 		this.setFocusable(true);

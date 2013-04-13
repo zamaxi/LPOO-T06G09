@@ -55,8 +55,7 @@ public class Menu extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
 					System.exit(0);
-					create = true;
-					Map.CreateMap(Map.mapSize);
+					
 				}
 			});
 			
@@ -68,6 +67,10 @@ public class Menu extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 					contentPane.setVisible(false);
 					aux.setVisible(false);
+					
+					if(create == false){
+						Map.CreateMap(10);
+					}
 					GameFrame jogo = new GameFrame();
 					
 					

@@ -64,12 +64,16 @@ public class Options extends JDialog {
 				btnOk.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						Menu.create = true;
+						
+						
 						
 						Map.mapSize = (int) spinner.getValue();
 						
 						if(Map.mapSize < 10)
 							Map.mapSize = 10;
+						
+						Menu.create = true;
+						Map.CreateMap(Map.mapSize);
 						
 						Interface.setN_dragoes((int) spinner_1.getValue());
 						
@@ -95,8 +99,8 @@ public class Options extends JDialog {
 		JLabel lblTamanhoDoLabirinto = new JLabel("Tamanho do Labirinto (>9)");
 		
 		
-		Map.mapSize = (int) spinner.getValue();
 		
+	
 		
 		JLabel lblNumeroDeDragoes = new JLabel("Numero de Shreks");
 		
