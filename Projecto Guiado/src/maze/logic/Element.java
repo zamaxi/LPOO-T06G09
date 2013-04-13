@@ -5,6 +5,14 @@ import java.util.Random;
 public class Element {
 	protected int x,y;
 	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	public Element(char args[][])
 	{
 		Random randomGenerator = new Random();

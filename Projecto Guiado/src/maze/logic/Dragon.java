@@ -7,14 +7,14 @@ import maze.cli.Interface;
 
 public class Dragon extends Element{
 	private char Dragon;
-	private static boolean Killed = false;
+	private boolean Killed = false;
 	private boolean sleep = false;
-	
+
 	public Dragon(char[][] args) {
 		super(args);
 		args[y][x]='D';
 	}
-	
+
 	public boolean isSleep() {
 		return sleep;
 	}
@@ -27,24 +27,24 @@ public class Dragon extends Element{
 		return Dragon;
 	}
 
-	
-	
+
+
 	public void setDragon(char dragon) {
 		Dragon = dragon;
 	}
 
-	
 
-	public static boolean isKilled() {
+
+	public boolean isKilled() {
 		return Killed;
 	}
 
-	public static void setKilled(boolean killed) {
+	public void setKilled(boolean killed) {
 		Killed = killed;
 	}
 
 
-	
+
 	public void moveDragon(char[][] args)
 	{
 		Random randomGenerator = new Random();
@@ -64,18 +64,18 @@ public class Dragon extends Element{
 		{
 			if(isSleep() == true)
 			{
-				
+
 				args[y][x]='d';
 				setSleep(false);
 				break;
 			}
-			
+
 			if(isKilled() == true)
 			{
 				args[y][x] = ' ';
 				break;
 			}
-			
+
 			move = randomGenerator.nextInt(6);
 			if(move == 0)
 			{
@@ -178,14 +178,14 @@ public class Dragon extends Element{
 			{
 				moved=true;
 			}
-		
+
 			if(Interface.getModo_de_jogo()==3){
-			if(move == 5)
-			{
-				moved=true;
-				
+				if(move == 5)
+				{
+					moved=true;
+
 					setSleep(true);
-			}
+				}
 			}
 		}
 

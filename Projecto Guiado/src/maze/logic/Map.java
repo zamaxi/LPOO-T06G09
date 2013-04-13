@@ -21,30 +21,30 @@ public class Map {
 	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
 	      {'X',' ','X','X',' ',' ',' ',' ',' ','X'},
 	      {'X','X','X','X','X','X','X','X','X','X'}};*/
-	
-	
+
+
 	static Hero h;
 	static Sword e;
 	static Eagle z;
 	static Dragon d;
 	static Vector<Dragon> v = new Vector<Dragon>();
 
-	
+
 	public static void add(){
 		h = new Hero(mapa);
 		e = new Sword(mapa);
 		z = new Eagle(mapa);
 	}
-	
+
 	public static int mapSize;
-	
+
 
 
 	public static char [][] CreateMap(Integer tamanho){
 
 		if(tamanho < 10 || tamanho == null)
 			tamanho = 10;
-		
+
 		if(tamanho%2==0)
 		{
 			tamanho=tamanho-1;
@@ -142,8 +142,8 @@ public class Map {
 				break;
 			}
 			}
-			
-			
+
+
 
 		}
 
@@ -256,18 +256,18 @@ public class Map {
 			mapa[i][0]='X';
 			mapa[i][tamanho-1]='X';
 		}
-		
+
 		randomizeMap(mapa);
-		
+
 		h = new Hero(mapa);
 		e = new Sword(mapa);
 		z = new Eagle(mapa);
-		
+
 		for (int i = 1; i < Interface.getN_dragoes(); i++) {
 			d = new Dragon(mapa);
 			v.add(d);
 		}
-		
+
 		d = new Dragon(mapa);
 		v.add(d);
 		setDragons(v);
@@ -275,9 +275,9 @@ public class Map {
 		return mapa;
 	}
 
-	
-	
-	
+
+
+
 	private static Vector<Dragon> dragons = new Vector<Dragon>();
 
 	public static Vector<Dragon> getDragons() {
@@ -289,19 +289,95 @@ public class Map {
 	}
 
 	public static void drawDragon(Integer NumeroDragoes) {
-		
+
 		if(Interface.getN_dragoes() == 0 || Interface.getN_dragoes()  == null ){
 			Dragon d1 = new Dragon(Map.mapa);
 			dragons.add(d1);
 		}
-		
-		
+
+
 		for (int i = 0; i < NumeroDragoes; i++) {
 			Dragon d = new Dragon(Map.mapa);
 			dragons.add(d);
-		
+
 			// dragons.get(i).moveDragon(mapa);
 		}
+	}
+
+	public static void removeDragon(char pos){
+		for (int i = 0; i < dragons.size(); i++){
+			switch(pos){
+			case 'c':{
+				if(dragons.get(i).getY() == (h.getY()+1)){
+					dragons.get(i).setKilled(true);
+					dragons.remove(i);
+					break;
+				}
+			}
+			case 'b':{
+				if(dragons.get(i).getY() == (h.getY()-1)){
+					dragons.get(i).setKilled(true);
+					dragons.remove(i);
+					break;
+				}
+			}
+			case 'd':{
+				if(dragons.get(i).getX() == (h.getX()+1)){
+					dragons.get(i).setKilled(true);
+					dragons.remove(i);
+					break;
+				}
+			}
+			case 'e':{
+				if(dragons.get(i).getX() == (h.getX()-1)){
+					dragons.get(i).setKilled(true);
+					dragons.remove(i);
+					break;
+				}
+			}
+			default:break;
+			}
+		}
+	}
+
+	public static void setMapa(char[][] mapa) {
+		Map.mapa = mapa;
+	}
+
+	public static void setH(Hero h) {
+		Map.h = h;
+	}
+
+	public static void setE(Sword e) {
+		Map.e = e;
+	}
+
+	public static char[][] getMapa() {
+		return mapa;
+	}
+
+	public static Hero getH() {
+		return h;
+	}
+
+	public static Sword getE() {
+		return e;
+	}
+
+	public static Eagle getZ() {
+		return z;
+	}
+
+	public static Vector<Dragon> getV() {
+		return v;
+	}
+
+	public static void setZ(Eagle z) {
+		Map.z = z;
+	}
+
+	public static void setV(Vector<Dragon> v) {
+		Map.v = v;
 	}
 
 	public static void randomizeMap(char[][] args) {
@@ -309,7 +385,7 @@ public class Map {
 		 * 0-aresta superior 1-aresta inferior 2-aresta esquerda 3 aresta
 		 * direita
 		 */
-		
+
 		Random randomGenerator = new Random();
 		int aresta = randomGenerator.nextInt(4);
 		int local;
@@ -351,19 +427,20 @@ public class Map {
 
 	public static int game_logic(char key) {
 		int verify = 0;
-		
+
 
 		if (Hero.isAlive() == true) {
+			
+			removeDragon(h.getDragonPos());
 
-			if (Dragon.isKilled() == false) {
-				for (int i = 0; i < dragons.size(); i++) {
-					if (Interface.getModo_de_jogo() == 1)
-						break;
+			for (int i = 0; i < dragons.size(); i++) {
+				if (Interface.getModo_de_jogo() == 1)
+					break;
 				else
-						getDragons().get(i).moveDragon(mapa);
-				}
-
+					getDragons().get(i).moveDragon(mapa);
 			}
+
+
 
 			if(z.isLevantaVoo() == true ){
 				z.move_Eagle(mapa, Sword.c, Sword.d);
@@ -371,6 +448,7 @@ public class Map {
 				if(Eagle.found == true)
 					e.recoil(mapa);
 			}
+			
 			verify = h.moveHero(Map.mapa, key);
 
 			if (verify == 1) {

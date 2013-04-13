@@ -3,10 +3,21 @@ package maze.logic;
 
 public class Hero extends Element{
 
-public static int a;
-public static int b;
+	public static int a;
+	public static int b;
+	public char dragonPos;
 
-public Hero(char[][] args) {
+	public char getDragonPos() {
+		return dragonPos;
+	}
+
+
+	public void setDragonPos(char dragonPos) {
+		this.dragonPos = dragonPos;
+	}
+
+
+	public Hero(char[][] args) {
 		super(args);
 		// TODO Auto-generated constructor stub
 		a=y;
@@ -16,10 +27,10 @@ public Hero(char[][] args) {
 		else
 			args[a][b]='A';
 	}
-	
+
 
 	private static boolean Alive = true;
-	
+
 	public static boolean isAlive() {
 		return Alive;
 	}
@@ -53,7 +64,7 @@ public Hero(char[][] args) {
 	public static void setArmed(boolean arm) {
 		armed = arm;
 	}
-	
+
 	public int moveHero(char [][] args, char keybind){
 		int result=0;
 		/* 0- Continua a Mover
@@ -66,25 +77,25 @@ public Hero(char[][] args) {
 				setHero(isArmed());
 				args[a+1][b] = ' ';
 			}
-			
+
 			if(Eagle.gotSword == true)
 				if(args[a+1][b] == 'V'){
 					setArmed(true);
 					setHero(isArmed());
 					args[a+1][b] = ' ';
 				}
-			
+
 			if(args[a+1][b] == 'd'){
 				if(isArmed() == true){
 					args[a+1][b] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('b');
 				}
 			}
-			
+
 			if(args[a+1][b] == 'D'){
 				if(isArmed() == true){
 					args[a+1][b] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('b');
 				}
 
 				else result =2;
@@ -100,7 +111,7 @@ public Hero(char[][] args) {
 				args[a+1][b] = getHero();
 				a++;
 			}
-			
+
 		}
 
 		if(keybind == 'w'){
@@ -109,25 +120,25 @@ public Hero(char[][] args) {
 				setHero(isArmed());
 				args[a-1][b] = ' ';
 			}
-			
+
 			if(Eagle.gotSword == true)
 				if(args[a-1][b] == 'V'){
-				setArmed(true);
-				setHero(isArmed());
-				args[a-1][b] = ' ';
-			}
-			
+					setArmed(true);
+					setHero(isArmed());
+					args[a-1][b] = ' ';
+				}
+
 			if(args[a-1][b] == 'd'){
 				if(isArmed() == true){
 					args[a-1][b] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('c');
 				}
 			}
-			
+
 			if(args[a-1][b] == 'D'){
 				if(isArmed() == true){
 					args[a-1][b] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('c');
 				}
 				else result =2;
 			}
@@ -150,27 +161,27 @@ public Hero(char[][] args) {
 				setHero(isArmed());
 				args[a][b+1] = ' ';
 			}
-			
+
 			if(Eagle.gotSword == true)
 				if(args[a][b+1] == 'V'){
-				setArmed(true);
-				setHero(isArmed());
-				args[a][b+1] = ' ';
-			}
+					setArmed(true);
+					setHero(isArmed());
+					args[a][b+1] = ' ';
+				}
 
 			if(args[a][b+1] == 'd'){
 				if(isArmed() == true){
 					args[a][b+1] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('d');
 				}
 			}
-			
+
 			if(args[a][b+1] == 'D'){
 				if(isArmed() == true){
 					args[a][b+1] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('d');
 				}
-				
+
 				else result =2;
 			}
 
@@ -184,7 +195,7 @@ public Hero(char[][] args) {
 				args[a][b+1] = getHero();
 				b++;
 			}
-			
+
 		}
 
 		if(keybind == 'a'){
@@ -196,22 +207,22 @@ public Hero(char[][] args) {
 
 			if(Eagle.gotSword == true)
 				if(args[a][b-1] == 'V'){
-				setArmed(true);
-				setHero(isArmed());
-				args[a][b-1] = ' ';
-			}
-			
+					setArmed(true);
+					setHero(isArmed());
+					args[a][b-1] = ' ';
+				}
+
 			if(args[a][b-1] == 'd'){
 				if(isArmed() == true){
 					args[a][b-1] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('e');
 				}
 			}
-			
+
 			if(args[a][b-1] == 'D'){
 				if(isArmed() == true){
 					args[a][b-1] = ' ';
-					Dragon.setKilled(true);
+					setDragonPos('e');
 				}
 				else result =2;
 			}
@@ -226,9 +237,9 @@ public Hero(char[][] args) {
 				args[a][b-1] = getHero();
 				b--;
 			}
-			
+
 		}
-		
+
 		if(keybind == 'q')
 			result = 3;
 		return result;
