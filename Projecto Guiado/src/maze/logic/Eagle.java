@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 
 /**
- * Class Eagle
+ * Class Eagle.java
  * Cria uma aguia com a posicao do heroi
- *
+ * @author Gabriel Borges, Marco Pinto
  */
 public class Eagle implements Serializable{
 	

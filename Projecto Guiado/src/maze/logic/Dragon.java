@@ -7,8 +7,9 @@ import maze.cli.Interface;
 
 
 /**
- * Class Dragon
+ * Class Dragon.java
  * Cria um dragao no mapa
+ * @author Gabriel Borges, Marco Pinto
  *
  */
 public class Dragon extends Element implements Serializable{

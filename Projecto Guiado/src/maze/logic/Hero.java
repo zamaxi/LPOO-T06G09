@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 
 /**
- * Class Hero
- *
+ * Class Hero.java
+ * Cria um heroi no mapa
+ * @author Gabriel Borges, Marco Pinto
  */
 public class Hero extends Element implements Serializable{
 
@@ -26,7 +27,7 @@ public class Hero extends Element implements Serializable{
 	 * @param args
 	 * @param z
 	 * @param r
-	 * Cria um heroi no mapa
+	 * 
 	 */
 	public Hero(char [][] args, int z, int r){
 		super(args);
@@ -90,7 +91,7 @@ public class Hero extends Element implements Serializable{
 	/**
 	 * @param args
 	 * @param keybind
-	 * @return result
+	 * @return result of operations ( usado no game_logic())
 	 * 
 	 * Move o heroi no mapa conforme a tecla recebida. Se encontra a espada, fica armado e a partir dai pode matar dragoes. 
 	 * So e permitido vencer o jpgo se tiver armado

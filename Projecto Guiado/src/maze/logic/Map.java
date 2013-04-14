@@ -13,7 +13,7 @@ import maze.logic.Celula;
 
 /**
  * Class Map
- *
+ * @author Gabriel Borges, Marco Pinto
  */
 public class Map implements Serializable{
 

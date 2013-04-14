@@ -6,14 +6,12 @@ import java.util.Random;
 
 /**
  * @author Gabriel Borges, Marco Pinto;
+ * class Element.java
  * @see Hero, Dragon, Sword;
  * A classe Element encontra uma posicao Random para por os 3 elementos principais de jogo no mapa
  */
 
-/**
- * @author Kratos
- *
- */
+
 public class Element implements Serializable{
 	
 	protected int x,y;

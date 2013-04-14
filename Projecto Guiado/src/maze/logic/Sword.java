@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 
 /**
- * Class Sword
- * 
- *
+ * Class Sword.java
+ * @author Gabriel Borges, Marco Pinto
+ * Cria uma espada no mapa com o char 'E';
  */
 public class Sword extends Element implements Serializable{
 
@@ -16,7 +16,7 @@ public class Sword extends Element implements Serializable{
 	 * @param args
 	 * @param z
 	 * @param r
-	 * Cria uma espada no mapa com o char 'E';
+	 * 
 	 */
 	public Sword(char [][] args, int z, int r){
 		super(args);

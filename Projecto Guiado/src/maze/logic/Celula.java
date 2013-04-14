@@ -1,5 +1,16 @@
 package maze.logic;
 
+
+/** 
+ * 
+ * Class Celula.java- cria um objecto constituido por 2 coordenadas 
+ * para a criacao do mapa randomizado
+ * 
+ * @see Map
+ * @author Gabriel Borges, Marco Pinto
+ *
+ *
+ */
 public class Celula {
 
 	int x;
