@@ -13,9 +13,9 @@ public class Sword extends Element implements Serializable{
 	public static int c,d;
 	
 	/**
-	 * @param args
-	 * @param z
-	 * @param r
+	 * @param args -mapa de jogo
+	 * @param z - posicao da espada no eixo dos x
+	 * @param r - posicao da espada no eixo dos y
 	 * 
 	 */
 	public Sword(char [][] args, int z, int r){

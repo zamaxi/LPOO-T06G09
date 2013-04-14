@@ -24,9 +24,9 @@ public class Hero extends Element implements Serializable{
 	}
 	
 	/**
-	 * @param args
-	 * @param z
-	 * @param r
+	 * @param args -mapa de jogo
+	 * @param z - posicao do heroi no eixo dos y
+	 * @param r - posicao do heroi no eixo dos x
 	 * 
 	 */
 	public Hero(char [][] args, int z, int r){
@@ -89,9 +89,9 @@ public class Hero extends Element implements Serializable{
 	}
 
 	/**
-	 * @param args
-	 * @param keybind
-	 * @return result of operations ( usado no game_logic())
+	 * @param args -mapa de jogo
+	 * @param keybind -tecla usada pelo utilizador
+	 * @return int result of operations ( usado no game_logic())
 	 * 
 	 * Move o heroi no mapa conforme a tecla recebida. Se encontra a espada, fica armado e a partir dai pode matar dragoes. 
 	 * So e permitido vencer o jpgo se tiver armado

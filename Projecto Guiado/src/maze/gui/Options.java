@@ -30,12 +30,12 @@ public class Options extends JDialog {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 
+	
+	
 	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the dialog.
+	 * Cria o Menu das Opcoes 
+	 *  @author Gabriel Borges, Marco Pinto
+	 *  Entre as opcoes pode escolher o tamanho da labirinto, o numero de dragoes, e o modo de jogo
 	 */
 	public Options() {
 		setBounds(100, 100, 500, 500);

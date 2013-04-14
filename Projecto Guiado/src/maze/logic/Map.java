@@ -15,6 +15,14 @@ import maze.logic.Celula;
  * Class Map
  * @author Gabriel Borges, Marco Pinto
  */
+/**
+ * @author Kratos
+ *
+ */
+/**
+ * @author Kratos
+ *
+ */
 public class Map implements Serializable{
 
 
@@ -45,9 +53,10 @@ public class Map implements Serializable{
 	public static void setMapSize(int mapSize) {
 		Map.mapSize = mapSize;
 	}
-
-	public static char [][] CreateMap(char [][] map, Hero j, Vector<Dragon> f, Eagle k, Sword o){
-		mapa = map;
+	
+	
+	public static char [][] CreateMap(char [][] args, Hero j, Vector<Dragon> f, Eagle k, Sword o){
+		mapa = args;
 		h = new Hero(mapa, j.getX(), j.getY());
 		e = new Sword(mapa, o.getX(), o.getY());
 		z = new Eagle(mapa);
@@ -57,6 +66,12 @@ public class Map implements Serializable{
 
 	}
 
+	/**
+	 * @param tamanho do mapa
+	 * @return mapa de jogo
+	 * Este metodo cria um mapa randomizado com o tamanho pretendido pelo utilizador
+	 * @see Celula
+	 */
 	public static char [][] CreateMap(Integer tamanho){
 
 		if(tamanho < 10 || tamanho == null)

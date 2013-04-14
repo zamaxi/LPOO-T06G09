@@ -21,6 +21,10 @@ public class Celula {
 		y=cy;
 	}
 
+	/**
+	 * @param args  mapa de jogo
+	 * @return bool, returna false caso a celula ja tenha sido visitada ou o inverso
+	 */
 	public boolean CelulasNV(char [][] args) {
 
 		if(x+2<args.length)

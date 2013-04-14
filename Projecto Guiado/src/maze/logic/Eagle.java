@@ -44,9 +44,9 @@ public class Eagle implements Serializable{
 	static boolean gotSword = false;
 	
 	/**
-	 * @param args 
-	 * @param xespada
-	 * @param yespada
+	 * @param args - mapa de jogo
+	 * @param xespada - Posicao no eixo dos x da espada
+	 * @param yespada - Posicao no eixo dos y da espada
 	 * 
 	 * Move a aguia em direcao a posicao da espada (x e y), e ao encontra-la, volta para a posicao de onde foi lancada
 	 * e fica la ate ser apanhada pelo heroi ou morta por um dragao

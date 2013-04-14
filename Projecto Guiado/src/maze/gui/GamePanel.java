@@ -49,8 +49,11 @@ public class GamePanel extends JPanel implements KeyListener {
 	Image wall, hero, dragon, sword, red_hero, eagle, sleep, exit;
 
 	/**
-	 * Create the panel.
+	 * 
+	 * @author Gabriel Borges, Marco Pinto
+	 * Faz o load de todas as imagens usadas na parte grafica do jog e guardas em objetos Image
 	 */
+	 
 	public GamePanel() {
 
 		Map.drawDragon(Interface.getN_dragoes());
@@ -76,6 +79,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		sleep = i7.getImage();
 		exit = i8.getImage();
 	}
+
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -33,6 +33,10 @@ public class Interface {
 	
 	
 	
+	/**
+	 * @param args -mapa de jogo
+	 * Imprime o mapa alfanumerico no ecra
+	 */
 	public static void printMapa(char[][] args)
 	{
 		for(int i=0;i<args.length;i++)
@@ -41,6 +45,11 @@ public class Interface {
 		}
 	}
 
+	/**
+	 * @param args-mapa de jogo
+	 * Interface alfanumerica do jogo. 
+	 * @see Map
+	 */
 	public static void main(String[]args){
 		
 		

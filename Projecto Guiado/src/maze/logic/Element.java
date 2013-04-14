@@ -32,7 +32,7 @@ public class Element implements Serializable{
 	
 	
 	/**
-	 * @param args
+	 * @param args -mapa de jogo
 	 * Class Constructor
 	 */
 	public Element(char args[][])

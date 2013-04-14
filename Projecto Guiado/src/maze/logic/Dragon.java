@@ -58,7 +58,7 @@ public class Dragon extends Element implements Serializable{
 
 
 	/**
-	 * @param args
+	 * @param args - mapa de jogo
 	 * Move o dragao aleatoriamento no mapa, assim como po-lo a dormir 
 	 *
 	 */

@@ -35,7 +35,9 @@ public class GameFrame extends JFrame {
 	
 	
 	/**
-	 * Create the frame.
+	 * Cria o Game frame
+	 * @author Gabriel Borges, Marco Pinto
+	 * Cria um GamePanel(JPanel) conforme se as dimensoes foram ou nao definidas pelo utilizador
 	 */
 	public GameFrame() {
 		

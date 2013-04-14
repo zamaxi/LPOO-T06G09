@@ -41,7 +41,8 @@ public class Menu extends JFrame {
 	JFrame aux;
 	public static boolean create = false;
 	/**
-	 * Launch the application.
+	 *  @author Gabriel Borges, Marco Pinto
+	 *  Main metodo da parte grafica do jogo
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,7 +58,9 @@ public class Menu extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Cria o menu
+	 *  @author Gabriel Borges, Marco Pinto
+	 *  Cria um menu que permite carregar, começar um novo jogo (predefenido ou escolhido pelo utilizador), sair e ler as instrucoes 
 	 */
 	public Menu() {
 		aux = this;
