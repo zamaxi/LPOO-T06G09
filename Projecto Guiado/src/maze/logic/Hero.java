@@ -3,6 +3,10 @@ package maze.logic;
 import java.io.Serializable;
 
 
+/**
+ * Class Hero
+ *
+ */
 public class Hero extends Element implements Serializable{
 
 	public static int a;
@@ -18,6 +22,12 @@ public class Hero extends Element implements Serializable{
 		this.dragonPos = dragonPos;
 	}
 	
+	/**
+	 * @param args
+	 * @param z
+	 * @param r
+	 * Cria um heroi no mapa
+	 */
 	public Hero(char [][] args, int z, int r){
 		super(args);
 		a = r;
@@ -77,6 +87,14 @@ public class Hero extends Element implements Serializable{
 		armed = arm;
 	}
 
+	/**
+	 * @param args
+	 * @param keybind
+	 * @return result
+	 * 
+	 * Move o heroi no mapa conforme a tecla recebida. Se encontra a espada, fica armado e a partir dai pode matar dragoes. 
+	 * So e permitido vencer o jpgo se tiver armado
+	 */
 	public int moveHero(char [][] args, char keybind){
 		int result=0;
 		/* 0- Continua a Mover

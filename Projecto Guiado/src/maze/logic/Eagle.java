@@ -2,6 +2,12 @@ package maze.logic;
 
 import java.io.Serializable;
 
+
+/**
+ * Class Eagle
+ * Cria uma aguia com a posicao do heroi
+ *
+ */
 public class Eagle implements Serializable{
 	
 	private int x,y; //posição da aguia	
@@ -36,6 +42,15 @@ public class Eagle implements Serializable{
 	int xinicial, yinicial;
 	static boolean found = false;
 	static boolean gotSword = false;
+	
+	/**
+	 * @param args 
+	 * @param xespada
+	 * @param yespada
+	 * 
+	 * Move a aguia em direcao a posicao da espada (x e y), e ao encontra-la, volta para a posicao de onde foi lancada
+	 * e fica la ate ser apanhada pelo heroi ou morta por um dragao
+	 */
 	public void move_Eagle(char args[][], int xespada, int yespada) {
 
 

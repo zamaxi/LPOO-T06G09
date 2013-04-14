@@ -6,6 +6,11 @@ import java.util.Random;
 import maze.cli.Interface;
 
 
+/**
+ * Class Dragon
+ * Cria um dragao no mapa
+ *
+ */
 public class Dragon extends Element implements Serializable{
 	private char Dragon;
 	private boolean Killed = false;
@@ -51,6 +56,11 @@ public class Dragon extends Element implements Serializable{
 
 
 
+	/**
+	 * @param args
+	 * Move o dragao aleatoriamento no mapa, assim como po-lo a dormir 
+	 *
+	 */
 	public void moveDragon(char[][] args)
 	{
 		Random randomGenerator = new Random();

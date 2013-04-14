@@ -3,10 +3,22 @@ package maze.logic;
 import java.io.Serializable;
 import java.util.Random;
 
+
+/**
+ * @author Gabriel Borges, Marco Pinto;
+ * @see Hero, Dragon, Sword;
+ * A classe Element encontra uma posicao Random para por os 3 elementos principais de jogo no mapa
+ */
+
+/**
+ * @author Kratos
+ *
+ */
 public class Element implements Serializable{
+	
 	protected int x,y;
 	
-	public int getX() {
+	int getX() {
 		return x;
 	}
 
@@ -19,6 +31,12 @@ public class Element implements Serializable{
 		y = d;
 	}
 
+	
+	
+	/**
+	 * @param args
+	 * Class Constructor
+	 */
 	public Element(char args[][])
 	{
 		Random randomGenerator = new Random();

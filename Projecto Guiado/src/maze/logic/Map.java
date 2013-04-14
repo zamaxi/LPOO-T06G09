@@ -10,21 +10,16 @@ import java.util.Vector;
 import maze.cli.Interface;
 import maze.logic.Celula;
 
+
+/**
+ * Class Map
+ *
+ */
 public class Map implements Serializable{
 
 
 
-	public static char[][] mapa; /*={{'X','X','X','X','X','X','X','X','X','X'},
-	      {'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
-	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
-	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
-	      {'X',' ',' ',' ',' ',' ',' ','X',' ','X'},
-	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
-	      {'X',' ','X','X',' ','X',' ','X',' ','X'},
-	      {'X',' ','X','X',' ',' ',' ',' ',' ','X'},
-	      {'X','X','X','X','X','X','X','X','X','X'}};*/
-
+	public static char[][] mapa; 
 
 	static Hero h;
 	static Sword e;
@@ -310,6 +305,12 @@ public class Map implements Serializable{
 		Map.dragons = dragons;
 	}
 
+	
+	/**
+	 * @param NumeroDragoes
+	 * Desenha no mapa o numero de dragoes indicado pelo utilizador
+	 * Se for menor ou igual a 0, desenha pelo menos 1
+	 */
 	public static void drawDragon(Integer NumeroDragoes) {
 
 		if(Interface.getN_dragoes() == 0 || Interface.getN_dragoes()  == null ){
@@ -326,6 +327,10 @@ public class Map implements Serializable{
 		}
 	}
 
+	/**
+	 * @param pos
+	 * Remove um dragao do vector caso este seja morto.
+	 */
 	public static void removeDragon(char pos){
 		for (int i = 0; i < dragons.size(); i++){
 			switch(pos){
@@ -402,6 +407,10 @@ public class Map implements Serializable{
 		Map.v = v;
 	}
 
+	/**
+	 * @param args
+	 * Cria uma saida numa posicao Random no mapa, retirando os cantos do mesmo
+	 */
 	public static void randomizeMap(char[][] args) {
 		/*
 		 * 0-aresta superior 1-aresta inferior 2-aresta esquerda 3 aresta
@@ -447,6 +456,11 @@ public class Map implements Serializable{
 		}
 	}
 
+	/**
+	 * @param key
+	 * @return result
+	 * Gere toda  a logica de jogo. Recebe uma tecla do utizador, e conforme esta, moverá o heroi ou aguia para a posicao indicada.
+	 */
 	public static int game_logic(char key) {
 		int verify = 0;
 
