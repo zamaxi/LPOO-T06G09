@@ -1,7 +1,9 @@
 package maze.logic;
 
+import java.io.Serializable;
 
-public class Hero extends Element{
+
+public class Hero extends Element implements Serializable{
 
 	public static int a;
 	public static int b;
@@ -14,6 +16,16 @@ public class Hero extends Element{
 
 	public void setDragonPos(char dragonPos) {
 		this.dragonPos = dragonPos;
+	}
+	
+	public Hero(char [][] args, int z, int r){
+		super(args);
+		a = r;
+		b = z;
+		if (armed == false)
+			args[a][b]='H';
+		else
+			args[a][b]='A';
 	}
 
 

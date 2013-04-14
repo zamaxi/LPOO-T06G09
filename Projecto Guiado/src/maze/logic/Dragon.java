@@ -1,14 +1,20 @@
 package maze.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import maze.cli.Interface;
 
 
-public class Dragon extends Element{
+public class Dragon extends Element implements Serializable{
 	private char Dragon;
 	private boolean Killed = false;
 	private boolean sleep = false;
+	
+	public Dragon(char [][] args, int x, int y){
+		super(args);
+		args[y][x] = 'D';
+	}
 
 	public Dragon(char[][] args) {
 		super(args);

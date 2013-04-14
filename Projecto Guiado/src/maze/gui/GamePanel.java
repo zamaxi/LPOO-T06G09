@@ -7,6 +7,10 @@ import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,6 +22,28 @@ import maze.logic.Map;
 
 public class GamePanel extends JPanel implements KeyListener {
 
+	public void saveGame() throws FileNotFoundException, IOException {
+		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(
+				"save.dat"));
+
+		for (int i = 0; i <= Map.getMapa().length - 1; i++) {
+			for (int j = 0; j <= Map.getMapa().length - 1; j++) {
+				if (Map.mapa[i][j] != 'X' && Map.mapa[i][j] != 'S') {
+					Map.mapa[i][j] = ' ';
+				}
+
+			}
+		}
+
+		os.writeObject(Map.mapa);
+		os.writeObject(Map.getH());
+		os.writeObject(Map.getV());
+		os.writeObject(Map.getE());
+		os.writeObject(Map.getZ());
+		os.writeObject(Map.getMapSize());
+
+	}
+
 
 
 	Image wall, hero, dragon, sword, red_hero, eagle, sleep, exit;
@@ -26,11 +52,11 @@ public class GamePanel extends JPanel implements KeyListener {
 	 * Create the panel.
 	 */
 	public GamePanel() {
-		
+
 		Map.drawDragon(Interface.getN_dragoes());
 		this.setFocusable(true);
 		this.requestFocusInWindow();
-		
+
 		addKeyListener(this);
 		ImageIcon i1 = new ImageIcon("wall.png");
 		ImageIcon i2 = new ImageIcon("dragon.png");
@@ -40,7 +66,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		ImageIcon i6 = new ImageIcon("eagle.png");
 		ImageIcon i7 = new ImageIcon("sleep.png");
 		ImageIcon i8 = new ImageIcon("rainbow.png");
-		
+
 		wall = i1.getImage();
 		dragon = i2.getImage();
 		sword = i3.getImage();
@@ -83,10 +109,10 @@ public class GamePanel extends JPanel implements KeyListener {
 
 				if (Map.mapa[i][k] == 'V') 
 					g2d.drawImage(eagle, x, y, null);
-				
+
 				if (Map.mapa[i][k] == 'd') 
 					g2d.drawImage(sleep, x, y, null);
-				
+
 				if (Map.mapa[i][k] == 'S') 
 					g2d.drawImage(exit, x, y, null);
 
@@ -98,53 +124,79 @@ public class GamePanel extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e)  {
-		
+
 		int verify =0;
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			verify = Map.game_logic('a');
-			
+
 			if(verify == 1){
 				JOptionPane.showMessageDialog(null, "Venceste!");
-				
+				System.exit(0);
 			}
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			
+
 			verify = Map.game_logic('d');
-			
+
 			if(verify == 1){
 				JOptionPane.showMessageDialog(null, "Venceste!");
-				
+				System.exit(0);
 			}
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			
+
 			verify = Map.game_logic('w');
-			
+
 			if(verify == 1){
 				JOptionPane.showMessageDialog(null, "Venceste!");
 				setVisible(false);
+				System.exit(0);
 			}
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			verify = Map.game_logic('s');
-			
+
 			if(verify == 1){
 				JOptionPane.showMessageDialog(null, "Venceste!");
 				setVisible(false);
+				System.exit(0);
 			}
-			
-			}
+
+		}
 
 		if (e.getKeyCode() == KeyEvent.VK_Q) 
 			verify = Map.game_logic('q');
 
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			int resposta;
+			resposta = JOptionPane.showConfirmDialog(null, "Deseja Guardar?");
+			if (resposta == JOptionPane.YES_OPTION) {
+				// verifica se o usuário clicou no botão YES
+				try {
+					saveGame();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				System.exit(0);
+			} else if (resposta == JOptionPane.NO_OPTION){
+				System.exit(0);
+			} else{}
+			//setVisible(false);
+
+
+		}
+
 		if(Hero.isAlive()== false){
 			JOptionPane.showMessageDialog(null, "Morreu!");
-			
+
 
 			System.exit(0); 
 		}
@@ -154,7 +206,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-	
+
 	}
 
 	@Override

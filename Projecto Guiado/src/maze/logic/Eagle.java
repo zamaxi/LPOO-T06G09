@@ -1,6 +1,8 @@
 package maze.logic;
 
-public class Eagle{
+import java.io.Serializable;
+
+public class Eagle implements Serializable{
 	
 	private int x,y; //posição da aguia	
 	private boolean levantaVoo = false;

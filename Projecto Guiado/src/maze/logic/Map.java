@@ -1,5 +1,6 @@
 package maze.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,7 +10,9 @@ import java.util.Vector;
 import maze.cli.Interface;
 import maze.logic.Celula;
 
-public class Map {
+public class Map implements Serializable{
+
+
 
 	public static char[][] mapa; /*={{'X','X','X','X','X','X','X','X','X','X'},
 	      {'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -39,6 +42,25 @@ public class Map {
 	public static int mapSize;
 
 
+
+	public static int getMapSize() {
+		return mapSize;
+	}
+
+	public static void setMapSize(int mapSize) {
+		Map.mapSize = mapSize;
+	}
+
+	public static char [][] CreateMap(char [][] map, Hero j, Vector<Dragon> f, Eagle k, Sword o){
+		mapa = map;
+		h = new Hero(mapa, j.getX(), j.getY());
+		e = new Sword(mapa, o.getX(), o.getY());
+		z = new Eagle(mapa);
+		v = f;
+
+		return mapa;
+
+	}
 
 	public static char [][] CreateMap(Integer tamanho){
 
@@ -430,7 +452,7 @@ public class Map {
 
 
 		if (Hero.isAlive() == true) {
-			
+
 			removeDragon(h.getDragonPos());
 
 			for (int i = 0; i < dragons.size(); i++) {
@@ -448,7 +470,7 @@ public class Map {
 				if(Eagle.found == true)
 					e.recoil(mapa);
 			}
-			
+
 			verify = h.moveHero(Map.mapa, key);
 
 			if (verify == 1) {

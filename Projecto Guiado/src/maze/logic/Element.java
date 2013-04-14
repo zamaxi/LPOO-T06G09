@@ -1,8 +1,9 @@
 package maze.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Element {
+public class Element implements Serializable{
 	protected int x,y;
 	
 	public int getX() {
@@ -11,6 +12,11 @@ public class Element {
 
 	public int getY() {
 		return y;
+	}
+	
+	public Element(char [][] args, int z, int d){
+		x = z;
+		y = d;
 	}
 
 	public Element(char args[][])
