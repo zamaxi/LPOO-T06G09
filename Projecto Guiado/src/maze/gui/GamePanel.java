@@ -23,8 +23,7 @@ import maze.logic.Map;
 public class GamePanel extends JPanel implements KeyListener {
 
 	public void saveGame() throws FileNotFoundException, IOException {
-		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(
-				"save.dat"));
+		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("save.dat"));
 
 		for (int i = 0; i <= Map.getMapa().length - 1; i++) {
 			for (int j = 0; j <= Map.getMapa().length - 1; j++) {
@@ -38,10 +37,10 @@ public class GamePanel extends JPanel implements KeyListener {
 		os.writeObject(Map.mapa);
 		os.writeObject(Map.getH());
 		os.writeObject(Map.getV());
+		System.out.print(Map.getV());
 		os.writeObject(Map.getE());
 		os.writeObject(Map.getZ());
 		os.writeObject(Map.getMapSize());
-
 	}
 
 
