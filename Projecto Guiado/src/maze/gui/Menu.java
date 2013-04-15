@@ -13,6 +13,7 @@ import java.util.Vector;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
@@ -139,35 +140,46 @@ public class Menu extends JFrame {
 				jogo.setVisible(true);
 			}
 		});
+		
+		JButton btnInstrues = new JButton("Instru\u00E7\u00F5es");
+		btnInstrues.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Move o teu herói com os botões de direcção\nManda a tua fénix com a tecla 'Q'\nGuarda o jogo com o 'Esc'");
+			}
+		});
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-				gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(52)
-						.addComponent(btnSair, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-						.addGap(65))
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(107)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(btnCarregarJogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-										.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-										.addComponent(btnNovoJogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
-										.addGap(129))
-				);
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(53)
+					.addComponent(btnSair, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+					.addGap(64))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(107)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnInstrues, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+						.addComponent(btnCarregarJogo, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+						.addComponent(btnNovoJogo, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+					.addGap(129))
+		);
 		gl_contentPane.setVerticalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(29)
-						.addComponent(btnNovoJogo, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(btnCarregarJogo, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-						.addGap(18)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-						.addGap(53))
-				);
+					.addGap(29)
+					.addComponent(btnNovoJogo, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnCarregarJogo, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnInstrues, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		contentPane.setLayout(gl_contentPane);
 
 		/*	this.add(gm);
