@@ -62,6 +62,10 @@ public class Dragon extends Element implements Serializable{
 	 * Move o dragao aleatoriamento no mapa, assim como po-lo a dormir 
 	 *
 	 */
+	
+
+	int sword =0;
+	
 	public void moveDragon(char[][] args)
 	{
 		Random randomGenerator = new Random();
@@ -74,7 +78,6 @@ public class Dragon extends Element implements Serializable{
 		 * 5- dragao a dormir
 		 */
 		int move;
-		int sword =0;
 		boolean moved=false;
 
 		while(moved == false)
