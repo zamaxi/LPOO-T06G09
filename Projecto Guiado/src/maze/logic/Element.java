@@ -44,8 +44,8 @@ public class Element implements Serializable{
 		
 		while(args[y][x] != ' ')
 		{
-			int movex = randomGenerator.nextInt(Map.mapa.length -1)+1;
-			int movey = randomGenerator.nextInt(Map.mapa.length  -1)+1;
+			int movex = randomGenerator.nextInt(args.length -1)+1;
+			int movey = randomGenerator.nextInt(args.length  -1)+1;
 			x= movex;
 			y= movey;
 		}
