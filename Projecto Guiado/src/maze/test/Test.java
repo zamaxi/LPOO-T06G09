@@ -7,7 +7,7 @@ import maze.logic.*;
 
 public class Test {
 
-	public char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
+	char[][] mapa ={{'X','X','X','X','X','X','X','X','X','X'},
 		{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 		{'X',' ','X','X',' ','X',' ','X',' ','X'},
 		{'X',' ','X','X',' ','X',' ','X',' ','X'},
@@ -18,7 +18,7 @@ public class Test {
 		{'X',' ','X','X',' ',' ',' ',' ',' ','X'},
 		{'X','X','X','X','X','X','X','X','X','X'}};
 
-	Hero h = new Hero(mapa);
+	Hero h = new Hero(mapa, 1, 1);
 
 	@org.junit.Test
 	public void testMoveHero() {
