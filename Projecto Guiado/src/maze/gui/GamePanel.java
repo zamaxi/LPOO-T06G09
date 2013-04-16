@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
 
 
-	Image wall, hero, dragon, sword, red_hero, eagle, sleep, exit, thef;
+	Image wall, hero, dragon, sword, red_hero, eagle, sleep, exit, thef, floor;
 
 	/**
 	 * 
@@ -64,11 +64,12 @@ public class GamePanel extends JPanel implements KeyListener {
 		ImageIcon i2 = new ImageIcon("dragon.png");
 		ImageIcon i3 = new ImageIcon("sword.png");
 		ImageIcon i4 = new ImageIcon("megaman.png");
-		ImageIcon i5 = new ImageIcon("red_megaman.jpg");
+		ImageIcon i5 = new ImageIcon("red_megaman.png");
 		ImageIcon i6 = new ImageIcon("eagle.png");
 		ImageIcon i7 = new ImageIcon("sleep.png");
 		ImageIcon i8 = new ImageIcon("rainbow.png");
 		ImageIcon i9 = new ImageIcon("shark.png");
+		ImageIcon i10 = new ImageIcon("floor.png");
 
 		wall = i1.getImage();
 		dragon = i2.getImage();
@@ -79,6 +80,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		sleep = i7.getImage();
 		exit = i8.getImage();
 		thef = i9.getImage();
+		floor = i10.getImage();
 	}
 
 
@@ -123,6 +125,9 @@ public class GamePanel extends JPanel implements KeyListener {
 				
 				if (Map.mapa[i][k] == 'F') 
 					g2d.drawImage(thef, x, y, null);
+				
+				if (Map.mapa[i][k] == ' ') 
+					g2d.drawImage(floor, x, y, null);
 
 				x += 30;
 			}

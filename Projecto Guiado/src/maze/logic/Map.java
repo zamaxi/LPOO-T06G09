@@ -288,22 +288,22 @@ public class Map implements Serializable{
 			mapa[i][0]='X';
 			mapa[i][tamanho-1]='X';
 		}
+		Map.mapa = mapa;
+		randomizeMap(Map.mapa);
 
-		randomizeMap(mapa);
-
-		h = new Hero(mapa);
-		e = new Sword(mapa);
-		z = new Eagle(mapa);
+		h = new Hero(Map.mapa);
+		e = new Sword(Map.mapa);
+		z = new Eagle(Map.mapa);
 
 		for (int i = 1; i < Interface.getN_dragoes(); i++) {
-			d = new Dragon(mapa);
+			d = new Dragon(Map.mapa);
 			v.add(d);
 		}
 
-		d = new Dragon(mapa);
+		d = new Dragon(Map.mapa);
 		v.add(d);
 		setDragons(v);
-		Map.mapa = mapa;
+		
 		return mapa;
 	}
 
