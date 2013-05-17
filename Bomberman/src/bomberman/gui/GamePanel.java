@@ -128,12 +128,17 @@ public class GamePanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		game.getM().moveMonster(game.getZ().getMapa());
+		printmap();
 		repaint(); 	
 	}
 
 
-
+	void printmap(){
+	for(int i = 0; i < game.getZ().getLength(); i++){
+		System.out.println(game.getZ().getMapa()[i]);
+	}
 	
+}
 
 }
 
