@@ -25,7 +25,7 @@ public class Game {
  
 	}
 	
-	public static void initilaizeObjects(){
+	public static void initializeObjects(){
 		z.addBomberman(Game.b);
 		z.addMonster(m);
 		z.addPW(Game.p);

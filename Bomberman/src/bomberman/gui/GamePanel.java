@@ -86,24 +86,23 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 
 	public void keyPressed(KeyEvent e)  {
-
+		Game.initializeObjects();
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-
+			Game.gameLogic('a');
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
+			Game.gameLogic('d');
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-
-
+			Game.gameLogic('w');
 		}
 
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-
+			Game.gameLogic('s');
 		}
 
 		repaint();
