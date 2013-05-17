@@ -3,11 +3,14 @@ package bomberman.gui;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 import javax.swing.JPanel;
 
@@ -17,10 +20,11 @@ import bomberman.logic.Game;
 
 
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener{
 
 	Game game = new Game();
-	Image wall,brick,floor;
+	Image wall,brick,floor,monster;
+	Timer timer;
 	/**
 	 * Create the panel.
 	 */
@@ -34,14 +38,18 @@ public class GamePanel extends JPanel {
 		ImageIcon i1 = new ImageIcon("wall.jpg");
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
+		ImageIcon i4 = new ImageIcon("Monster.png");
 		
 		wall = i1.getImage();
 		floor = i2.getImage();
 		brick = i3.getImage();
+		monster = i4.getImage();
 		
+		timer = new Timer(200,this);
+		timer.start();
 	}
 
-	
+
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -68,6 +76,9 @@ public class GamePanel extends JPanel {
 				if (mapa[i][k] == ' ') 
 					g2d.drawImage(floor, x, y, null);
 
+				if (mapa[i][k] == 'M') 
+					g2d.drawImage(monster, x, y, null);
+				
 				x += 50;
 			}
 			y += 50;
@@ -82,7 +93,6 @@ public class GamePanel extends JPanel {
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
 
 		}
 
@@ -112,6 +122,18 @@ public class GamePanel extends JPanel {
 		// TODO Auto-generated method stub
 
 	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		game.getM().moveMonster(game.getZ().getMapa());
+		repaint(); 	
+	}
+
+
+
+	
 
 }
 
