@@ -28,23 +28,23 @@ public class GamePanel extends JPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	
+
 	public GamePanel() {
-		
+
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 
-	//	addKeyListener((KeyListener) this);
+		//	addKeyListener((KeyListener) this);
 		ImageIcon i1 = new ImageIcon("wall.jpg");
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
 		ImageIcon i4 = new ImageIcon("Monster.png");
-		
+
 		wall = i1.getImage();
 		floor = i2.getImage();
 		brick = i3.getImage();
 		monster = i4.getImage();
-		
+
 		timer = new Timer(200,this);
 		timer.start();
 	}
@@ -55,14 +55,14 @@ public class GamePanel extends JPanel implements ActionListener{
 		super.paintComponent(g);
 
 
-		
+
 		Graphics2D g2d = (Graphics2D) g;
 
 		int x = 0, y = 0;
-		
-		
+
+
 		char mapa[][] = game.getZ().getMapa();
-		
+
 		for (int i = 0; i < mapa.length; i++) {
 			x = 0;
 			for (int k = 0; k < mapa.length; k++) {
@@ -78,18 +78,18 @@ public class GamePanel extends JPanel implements ActionListener{
 
 				if (mapa[i][k] == 'M') 
 					g2d.drawImage(monster, x, y, null);
-				
+
 				x += 50;
 			}
 			y += 50;
 		}
 	}
-	
+
 	public void keyPressed(KeyEvent e)  {
 
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			
+
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -99,25 +99,25 @@ public class GamePanel extends JPanel implements ActionListener{
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 
 
-			}
-		
+		}
+
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			
-			}
-	
+
+		}
+
 		repaint();
 	}
 
 
-	
 
-	
+
+
 	public void keyReleased(KeyEvent e) {
 
 	}
 
-	
+
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
@@ -134,11 +134,11 @@ public class GamePanel extends JPanel implements ActionListener{
 
 
 	void printmap(){
-	for(int i = 0; i < game.getZ().getLength(); i++){
-		System.out.println(game.getZ().getMapa()[i]);
+		for(int i = 0; i < game.getZ().getLength(); i++){
+			System.out.println(game.getZ().getMapa()[i]);
+		}
+
 	}
-	
-}
 
 }
 

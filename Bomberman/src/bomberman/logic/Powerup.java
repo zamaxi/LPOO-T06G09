@@ -4,7 +4,7 @@ public class Powerup {
 
 	int x,y;
 	
-	public Powerup(char [][] args, int z, int d){
+	public Powerup(int z, int d){
 		x = z;
 		y = d;
 	}
