@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
@@ -20,10 +19,10 @@ import bomberman.logic.Game;
 
 
 
-public class GamePanel extends JPanel implements ActionListener{
+public class GamePanel extends JPanel implements ActionListener, KeyListener{
 
 	Game game = new Game();
-	Image wall,brick,floor,monster;
+	Image wall,brick,floor,monster, bomberman, bomb;
 	Timer timer;
 	/**
 	 * Create the panel.
@@ -33,17 +32,22 @@ public class GamePanel extends JPanel implements ActionListener{
 
 		this.setFocusable(true);
 		this.requestFocusInWindow();
+		addKeyListener(this);
 
-		//	addKeyListener((KeyListener) this);
+		
 		ImageIcon i1 = new ImageIcon("wall.jpg");
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
 		ImageIcon i4 = new ImageIcon("Monster.png");
+		ImageIcon i5 = new ImageIcon("testbomb.png");
+		ImageIcon i6 = new ImageIcon("bomb2.jpg");
 
 		wall = i1.getImage();
 		floor = i2.getImage();
 		brick = i3.getImage();
 		monster = i4.getImage();
+		bomberman = i5.getImage();
+		bomb = i6.getImage();
 
 		timer = new Timer(200,this);
 		timer.start();
@@ -71,13 +75,20 @@ public class GamePanel extends JPanel implements ActionListener{
 					g2d.drawImage(wall, x, y, null);
 
 				if (mapa[i][k] == 'b')
-					g2d.drawImage(brick, x, y, null);
+					g2d.drawImage(bomberman, x, y, null);
 
 				if (mapa[i][k] == ' ') 
 					g2d.drawImage(floor, x, y, null);
 
 				if (mapa[i][k] == 'M') 
 					g2d.drawImage(monster, x, y, null);
+				
+				if (mapa[i][k] == 'f')
+					g2d.drawImage(bomb, x, y, null);
+				
+				if (mapa[i][k] == 'e')
+					g2d.drawImage(bomb, x, y, null);
+				
 
 				x += 50;
 			}
@@ -85,24 +96,32 @@ public class GamePanel extends JPanel implements ActionListener{
 		}
 	}
 
+	@Override
 	public void keyPressed(KeyEvent e)  {
-		Game.initializeObjects();
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			Game.gameLogic('a');
+			game.gameLogic('a');
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			Game.gameLogic('d');
+			game.gameLogic('d');
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			Game.gameLogic('w');
+			game.gameLogic('w');
 		}
 
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			Game.gameLogic('s');
+			game.gameLogic('s');
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			game.gameLogic('b');
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			System.exit(0);
 		}
 
 		repaint();
@@ -118,7 +137,6 @@ public class GamePanel extends JPanel implements ActionListener{
 
 
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -2,8 +2,9 @@ package bomberman.logic;
 
 public class PWLife extends Powerup{
 
-	public PWLife(int z, int d) {
-		super(z, d);
+	public PWLife(char[][]args, int z, int d) {
+		super(args, z, d);
+		args[y][x] = '2';
 		// TODO Auto-generated constructor stub
 	}
 

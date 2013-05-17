@@ -34,6 +34,14 @@ public class Bomb {
 					@Override
 					public void run() {
 						map[x][y] = ' ';
+						if(map[x+1][y] != 'X')
+							map[x+1][y] = ' ';
+						if(map[x][y+1] != 'X')
+							map[x][y+1] = ' ';
+						if(map[x-1][y] != 'X')
+							map[x-1][y] = ' ';
+						if(map[x][y-1] != 'X')
+							map[x][y-1] = ' ';
 					}
 				}, 
 				2000 

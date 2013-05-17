@@ -4,9 +4,11 @@ public class Bomberman {
 
 	int x,y;
 
-	public Bomberman(int z, int d){
+	public Bomberman(char [][] map, int z, int d){
 		x = d;
-		y = z;			
+		y = z;
+		
+		map[y][x] = 'b';
 	}
 
 	void moveBomberman(char[][] map, char key){
