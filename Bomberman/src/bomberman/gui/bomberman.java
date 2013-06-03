@@ -1,86 +1,106 @@
 package bomberman.gui;
 
-
-
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
+import bomberman.logic.Game;
+
 public class bomberman {
 
-    private String craft = "testbomb.png";
+	private String craft = "testbomb.png";
+	private int dx;
+	private int dy;
+	private int x;
+	
+	public void setX(int x) {
+		this.x = x;
+	}
 
-    private int dx;
-    private int dy;
-    private int x;
-    private int y;
-    private Image image;
+	public void setY(int y) {
+		this.y = y;
+	}
 
-    public bomberman() {
-        ImageIcon ii = new ImageIcon(craft);
-        image = ii.getImage();
-        x = 40;
-        y = 60;
-    }
+	private int y;
+	private int width;
+	private int height;
+	private Image image;
 
+	public bomberman() {
+		ImageIcon ii = new ImageIcon(craft);
+		image = ii.getImage();
+		x = 50;
+		y = 50;
+		width = image.getWidth(null);
+		height = image.getHeight(null);
+	}
 
-    public void move() {
-        x += dx;
-        y += dy;
-        
-    }
+	public void move() {
+		x += dx;
+		y += dy;
 
-    public int getX() {
-        return x;
-    }
+	}
 
-    public int getY() {
-        return y;
-    }
+	public int getX() {
+		return x;
+	}
 
-    public Image getImage() {
-        return image;
-    }
+	public int getY() {
+		return y;
+	}
 
-    public void keyPressed(KeyEvent e) {
+	public Image getImage() {
+		return image;
+	}
 
-        int key = e.getKeyCode();
+	public void keyPressed(KeyEvent e) {
 
-        if (key == KeyEvent.VK_LEFT) {
-            dx = -1;
-        }
+		int key = e.getKeyCode();
 
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 1;
-        }
+		if (key == KeyEvent.VK_LEFT) {
+			dx = -1;
 
-        if (key == KeyEvent.VK_UP) {
-            dy = -1;
-        }
+		}
 
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 1;
-        }
-    }
+		if (key == KeyEvent.VK_RIGHT) {
+			dx = 1;
 
-    public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
+		}
 
-        if (key == KeyEvent.VK_LEFT) {
-            dx = 0;
-        }
+		if (key == KeyEvent.VK_UP) {
+			dy = -1;
 
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 0;
-        }
+		}
 
-        if (key == KeyEvent.VK_UP) {
-            dy = 0;
-        }
+		if (key == KeyEvent.VK_DOWN) {
+			dy = 1;
 
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 0;
-        }
-    }
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+
+		if (key == KeyEvent.VK_LEFT) {
+			dx = 0;
+		}
+
+		if (key == KeyEvent.VK_RIGHT) {
+			dx = 0;
+		}
+
+		if (key == KeyEvent.VK_UP) {
+			dy = 0;
+		}
+
+		if (key == KeyEvent.VK_DOWN) {
+			dy = 0;
+		}
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle(getX(), getY(), width, height);
+	}
 }

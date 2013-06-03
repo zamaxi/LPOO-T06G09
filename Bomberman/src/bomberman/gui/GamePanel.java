@@ -1,6 +1,7 @@
 package bomberman.gui;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Vector;
+
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import javax.swing.JPanel;
@@ -19,7 +22,12 @@ public class GamePanel extends JPanel implements ActionListener {
 	Game game = new Game();
 	Image wall, brick, floor, monster, bomberman, bomb;
 	Timer timer;
+	private int B_WIDTH;
+    private int B_HEIGHT;
+    private int width;
+    private int height;
 	 private bomberman craft;
+	 Vector<Rectangle> r;
 	/**
 	 * Create the panel.
 	 */
@@ -31,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener {
         setDoubleBuffered(true);
         
 		ImageIcon i1 = new ImageIcon("wall.jpg");
+		
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
 		ImageIcon i4 = new ImageIcon("Monster.png");
@@ -42,21 +51,35 @@ public class GamePanel extends JPanel implements ActionListener {
 		monster = i4.getImage();
 		bomberman = i5.getImage();
 		bomb = i6.getImage();
+		
+		width = wall.getWidth(null);
+		height = wall.getHeight(null);
+		
 		timer = new Timer(5, this);
         timer.start();
+                
 	}
 
+	 public void addNotify() {
+         super.addNotify();
+         B_WIDTH = getWidth();
+         B_HEIGHT = getHeight();   
+     }
+	 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		        
+		
 		int x = 0, y = 0;
 		char mapa[][] = game.getZ().getMapa();
 		for (int i = 0; i < mapa.length; i++) {
 			x = 0;
 			for (int k = 0; k < mapa.length; k++) {
-				if (mapa[i][k] == 'X')
+				if (mapa[i][k] == 'X'){
 					g2d.drawImage(wall, x, y, null);
+				}
+				
 				if (mapa[i][k] == 'b')
 					g2d.drawImage(bomberman, x, y, null);
 				if (mapa[i][k] == ' ')
@@ -74,6 +97,8 @@ public class GamePanel extends JPanel implements ActionListener {
 			y += 50;
 		}
 		
+		
+		
 		g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
 		
 		//Toolkit.getDefaultToolkit().sync();
@@ -82,11 +107,31 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	
 
-
+	public void checkCollisions() {
+		Rectangle r3 = craft.getBounds();
+		char mapa[][] = game.getZ().getMapa();
+		int x = 0, y = 0;
+		for (int j = 0; j< mapa.length; j++) {
+			x=0;
+			for (int k = 0; k < mapa.length; k++) {
+				if
+			}
+		}
+		
+		for(int i =0; i < r.size();i++){
+			
+			 if(r3.intersects(r.get(i))) {
+                craft.setX(craft.getX());
+                craft.setY(craft.getY());
+            }
+		}
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		game.getM().moveMonster(game.getZ().getMapa());
 		craft.move();
 		printmap();
+		//checkCollisions();
 		repaint();
 	}
 	
