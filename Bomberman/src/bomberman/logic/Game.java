@@ -6,7 +6,7 @@ public class Game {
 
 	static Maze z = new Maze();
 	static Monster m = new Monster(z.getMapa());
-	public Bomberman b = new Bomberman(z.getMapa(), 1,1);
+	//public Bomberman b = new Bomberman(z.getMapa(), 1,1);
 	
 	public Monster getM() {
 		return m;
@@ -20,7 +20,7 @@ public class Game {
  
 	}
 	
-	public void gameLogic(char key){		
+	/*public void gameLogic(char key){		
 		b.moveBomberman(z.getMapa(), key);
-	}
+	}*/
 }
