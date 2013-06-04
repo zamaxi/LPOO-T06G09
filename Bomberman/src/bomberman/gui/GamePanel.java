@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private int width;
 	private int height;
 	private bomberman craft;
+	private monster monster1;
 	/**
 	 * Create the panel.
 	 */
@@ -99,7 +100,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
 		g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
-
+		g2d.drawImage(monster1.getImage(),monster1.getX(), monster1.getY(),this);
 		//Toolkit.getDefaultToolkit().sync();
 		//   g.dispose();
 	}
@@ -107,7 +108,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
-		game.getM().moveMonster(game.getZ().getMapa());
+	//	game.getM().moveMonster(game.getZ().getMapa());
 		craft.move(game);
 		printmap();
 		repaint();
