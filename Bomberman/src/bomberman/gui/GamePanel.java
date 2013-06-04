@@ -23,11 +23,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	Image wall, brick, floor, monster, bomberman, bomb;
 	Timer timer;
 	private int B_WIDTH;
-    private int B_HEIGHT;
-    private int width;
-    private int height;
-	 private bomberman craft;
-	 Vector<Rectangle> r;
+	private int B_HEIGHT;
+	private int width;
+	private int height;
+	private bomberman craft;
 	/**
 	 * Create the panel.
 	 */
@@ -36,10 +35,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.requestFocusInWindow();
 		craft = new bomberman();
 		addKeyListener(new TAdapter());
-        setDoubleBuffered(true);
-        
+		setDoubleBuffered(true);
+
 		ImageIcon i1 = new ImageIcon("wall.jpg");
-		
+
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
 		ImageIcon i4 = new ImageIcon("Monster.png");
@@ -51,26 +50,26 @@ public class GamePanel extends JPanel implements ActionListener {
 		monster = i4.getImage();
 		bomberman = i5.getImage();
 		bomb = i6.getImage();
-		
+
 		width = wall.getWidth(null);
 		height = wall.getHeight(null);
-		
+
 		timer = new Timer(5, this);
-        timer.start();
-                
+		timer.start();
+
 	}
 
-	 public void addNotify() {
-         super.addNotify();
-         B_WIDTH = getWidth();
-         B_HEIGHT = getHeight();   
-     }
-	 
+	public void addNotify() {
+		super.addNotify();
+		B_WIDTH = getWidth();
+		B_HEIGHT = getHeight();   
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		        
-		
+
+
 		int x = 0, y = 0;
 		char mapa[][] = game.getZ().getMapa();
 		for (int i = 0; i < mapa.length; i++) {
@@ -79,7 +78,7 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (mapa[i][k] == 'X'){
 					g2d.drawImage(wall, x, y, null);
 				}
-				
+
 				if (mapa[i][k] == 'b')
 					g2d.drawImage(bomberman, x, y, null);
 				if (mapa[i][k] == ' ')
@@ -96,66 +95,40 @@ public class GamePanel extends JPanel implements ActionListener {
 			}
 			y += 50;
 		}
-		
-		
-		
+
+
+
 		g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
-		
+
 		//Toolkit.getDefaultToolkit().sync();
-     //   g.dispose();
+		//   g.dispose();
 	}
 
-	
 
-	public void checkCollisions() {
-		Rectangle r3 = craft.getBounds();
-		char mapa[][] = game.getZ().getMapa();
-		int x = 0, y = 0;
-		for (int j = 0; j< mapa.length; j++) {
-			x=0;
-			for (int k = 0; k < mapa.length; k++) {
-				if (mapa[j][k] == 'X'){
-					Rectangle rect = new Rectangle(x,y,width,height);
-					r.add(rect);					
-				}
-				x += 50;
-			}
-			y += 50;
-		}
-		
-		for(int i =0; i < r.size();i++){
-			
-			/* if(r3.intersects(r.get(i))) {
-                craft.setX(craft.getX());
-                craft.setY(craft.getY());
-            }*/
-		}
-	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		game.getM().moveMonster(game.getZ().getMapa());
-		craft.move();
+		craft.move(game);
 		printmap();
-		checkCollisions();
 		repaint();
 	}
-	
 
 
-	 private class TAdapter extends KeyAdapter {
 
-	        public void keyReleased(KeyEvent e) {
-	            craft.keyReleased(e);
-	        }
+	private class TAdapter extends KeyAdapter {
 
-	        public void keyPressed(KeyEvent e) {
-	            craft.keyPressed(e);
-	        }
-	    }
+		public void keyReleased(KeyEvent e) {
+			craft.keyReleased(e);
+		}
 
-	
+		public void keyPressed(KeyEvent e) {
+			craft.keyPressed(e);
+		}
+	}
 
-	
+
+
+
 	void printmap() {
 		for (int i = 0; i < game.getZ().getLength(); i++) {
 			System.out.println(game.getZ().getMapa()[i]);
@@ -164,7 +137,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
 }
-  /*  public void actionPerformed(ActionEvent e) {
+/*  public void actionPerformed(ActionEvent e) {
         craft.move();
         repaint();  
     }
