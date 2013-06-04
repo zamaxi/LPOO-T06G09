@@ -31,8 +31,8 @@ public class bomberman {
 	public bomberman() {
 		ImageIcon ii = new ImageIcon(craft);
 		image = ii.getImage();
-		x = 50;
-		y = 50;
+		x = 51;
+		y = 51;
 		width = image.getWidth(null);
 		height = image.getHeight(null);
 	}

@@ -114,16 +114,21 @@ public class GamePanel extends JPanel implements ActionListener {
 		for (int j = 0; j< mapa.length; j++) {
 			x=0;
 			for (int k = 0; k < mapa.length; k++) {
-				if
+				if (mapa[j][k] == 'X'){
+					Rectangle rect = new Rectangle(x,y,width,height);
+					r.add(rect);					
+				}
+				x += 50;
 			}
+			y += 50;
 		}
 		
 		for(int i =0; i < r.size();i++){
 			
-			 if(r3.intersects(r.get(i))) {
+			/* if(r3.intersects(r.get(i))) {
                 craft.setX(craft.getX());
                 craft.setY(craft.getY());
-            }
+            }*/
 		}
 	}
 	
@@ -131,7 +136,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		game.getM().moveMonster(game.getZ().getMapa());
 		craft.move();
 		printmap();
-		//checkCollisions();
+		checkCollisions();
 		repaint();
 	}
 	
