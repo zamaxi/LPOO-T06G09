@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		craft = new bomberman();
+		monster1 = new monster();
 		addKeyListener(new TAdapter());
 		setDoubleBuffered(true);
 
