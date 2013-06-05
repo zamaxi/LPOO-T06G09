@@ -27,7 +27,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	private int width;
 	private int height;
 	private bomberman craft;
-	private monster monstro;
 	private monster monster1;
 	/**
 	 * Create the panel.
@@ -36,7 +35,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		craft = new bomberman();
-		monstro = new monster(game.getZ().getMapa());
 		monster1 = new monster(game.getZ().getMapa());
 		addKeyListener(new TAdapter());
 		setDoubleBuffered(true);
@@ -113,7 +111,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 	//	game.getM().moveMonster(game.getZ().getMapa());
 		craft.move(game);
-		monstro.moveMonster(game);
+		monster1.moveMonster(game);
 		//printmap();
 		repaint();
 	}

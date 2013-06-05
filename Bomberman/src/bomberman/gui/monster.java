@@ -17,6 +17,7 @@ public class monster {
 	int direction =1;
 	boolean colide = false;
 	Vector<Rectangle> r = new Vector<Rectangle>();
+
 	public int getX() {
 		return x;
 	}
@@ -37,10 +38,12 @@ public class monster {
 		ImageIcon ii = new ImageIcon("Monster.png");
 		image = ii.getImage();
 		Random randomGenerator = new Random();
+		
 		while( args [y][x] != ' '){
-		x = randomGenerator.nextInt(args.length -1)+1;
-		y = randomGenerator.nextInt(args.length  -1)+1;
+			x = randomGenerator.nextInt(args.length -1)+1;
+			y = randomGenerator.nextInt(args.length -1)+1;
 		}
+		
 		x *= 50;
 		y *= 50;
 		x += 1;
@@ -75,7 +78,7 @@ public class monster {
 			}
 		}
 	}
-	
+
 	public Image getImage() {
 		return image;
 	}
@@ -83,36 +86,47 @@ public class monster {
 	public Rectangle getBounds() {
 		return new Rectangle(getX(), getY(), width, height);
 	}
-	
+
 	public void moveMonster(Game g) {
 		Random randomGenerator = new Random();
 
 		checkCollisions(g, this.x + 1, this.y + 1);
 
 		if (colide == true) {
+			if (direction == 0)
+				x -= 1;
+
+			if(direction == 1)
+				y -= 1;
+
+			if(direction == 2)
+				x += 1;
+
+			if(direction == 3)
+				y += 1;
 
 			direction = randomGenerator.nextInt(4);
-			//System.out.println(direction);
+			System.out.println(direction);
 
 			colide = false;
 			return;
 		}
 		if (colide == false) {
-			
 			if (direction == 0)
 				x += 1;
-			
+
 			if(direction == 1)
 				y += 1;
-				
+
 			if(direction == 2)
 				x -= 1;
-			
+
 			if(direction == 3)
 				y -= 1;
+			
 			System.out.println("x: " + x);
 			System.out.println("y: " + y);
 		}
-		
+
 	}
 }

@@ -75,7 +75,6 @@ public class bomberman {
 			y += dy;
 		}
 		else{
-			
 			colide = false;
 		}
 	}
