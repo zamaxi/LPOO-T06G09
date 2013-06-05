@@ -75,20 +75,7 @@ public class bomberman {
 			y += dy;
 		}
 		else{
-			//			switch(testDirection){
-			//			case 1:{
-			//				x += 1;
-			//			}
-			//			case 2:{
-			//				x -= 1;
-			//			}
-			//			case 3:{
-			//				y += 1;
-			//			}
-			//			case 4:{
-			//				y -= 1;
-			//			}
-			//			}
+			
 			colide = false;
 		}
 	}

@@ -5,12 +5,12 @@ package bomberman.logic;
 public class Game {
 
 	static Maze z = new Maze();
-	static Monster m = new Monster(z.getMapa());
+//	static Monster m = new Monster(z.getMapa());
 	//public Bomberman b = new Bomberman(z.getMapa(), 1,1);
 	
-	public Monster getM() {
+/*	public Monster getM() {
 		return m;
-	}
+	}*/
 
 	public Maze getZ() {
 		return z;
