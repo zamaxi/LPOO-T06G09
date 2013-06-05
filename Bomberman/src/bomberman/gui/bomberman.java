@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 
+import bomberman.logic.Bombant;
 import bomberman.logic.Game;
 
 public class bomberman {
@@ -91,7 +92,7 @@ public class bomberman {
 		return image;
 	}
 
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e, Game g) {
 
 		int key = e.getKeyCode();
 
@@ -113,6 +114,10 @@ public class bomberman {
 		if (key == KeyEvent.VK_DOWN) {
 			dy = 1;
 			testDirection = 4;
+		}
+		
+		if(key == KeyEvent.VK_SPACE){
+			dropBomb();
 		}
 	}
 
@@ -138,5 +143,33 @@ public class bomberman {
 
 	public Rectangle getBounds() {
 		return new Rectangle(getX(), getY(), width, height);
+		
 	}
+	
+	
+	boolean dropped;
+	
+	public boolean getDropped() {
+		return dropped;
+	}
+	public void setDropped(boolean dropped) {
+		this.dropped = dropped;
+	}
+	
+	public void dropBomb(){
+		new java.util.Timer().schedule( 
+				new java.util.TimerTask() {
+					@Override
+					public void run() {
+						dropped = true;
+						
+					}
+	
+				},
+				2000
+				);
+		dropped = false;
+	}
+	
 }
+

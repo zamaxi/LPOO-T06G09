@@ -28,7 +28,7 @@ public class Maze {
 		return length;
 	}
 
-	public void addBomb(Bomb b){
+	public void addBomb(Bombant b){
 		mapa[b.y][b.x] = 'e';
 	}
 

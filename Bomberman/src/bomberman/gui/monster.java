@@ -16,6 +16,8 @@ public class monster {
 	int width, height;
 	int direction =1;
 	boolean colide = false;
+	boolean dead = true;
+	
 	Vector<Rectangle> r = new Vector<Rectangle>();
 
 	public int getX() {
@@ -106,7 +108,7 @@ public class monster {
 				y += 1;
 
 			direction = randomGenerator.nextInt(4);
-			System.out.println(direction);
+			
 
 			colide = false;
 			return;
@@ -124,8 +126,7 @@ public class monster {
 			if(direction == 3)
 				y -= 1;
 			
-			System.out.println("x: " + x);
-			System.out.println("y: " + y);
+			
 		}
 
 	}

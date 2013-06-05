@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private int height;
 	private bomberman craft;
 	private monster monster1;
+	private Bomb bomb1;
 	/**
 	 * Create the panel.
 	 */
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.requestFocusInWindow();
 		craft = new bomberman();
 		monster1 = new monster(game.getZ().getMapa());
+		bomb1 = new Bomb();
 		addKeyListener(new TAdapter());
 		setDoubleBuffered(true);
 
@@ -102,6 +104,12 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
 		g2d.drawImage(monster1.getImage(),monster1.getX(), monster1.getY(),this);
+		
+		if(craft.getDropped() == true){
+			g2d.drawImage(bomb1.getImage(),craft.getX(),craft.getY(),this);
+			System.out.println("DROPOU");
+		}
+			
 		//Toolkit.getDefaultToolkit().sync();
 		//   g.dispose();
 	}
@@ -112,6 +120,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	//	game.getM().moveMonster(game.getZ().getMapa());
 		craft.move(game);
 		monster1.moveMonster(game);
+		
 		//printmap();
 		repaint();
 	}
@@ -125,7 +134,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 
 		public void keyPressed(KeyEvent e) {
-			craft.keyPressed(e);
+			craft.keyPressed(e, game);
 		}
 	}
 

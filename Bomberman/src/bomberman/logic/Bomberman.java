@@ -56,8 +56,8 @@ public class Bomberman {
 			break;
 		}
 		case 'b':{
-			Bomb e = new Bomb(x, y);
-			e.dropBomb(map);
+			Bombant e = new Bombant(x, y);
+			//e.dropBomb(map);
 			
 		}
 		default: break;
