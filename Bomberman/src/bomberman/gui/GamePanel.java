@@ -106,8 +106,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		g2d.drawImage(monster1.getImage(),monster1.getX(), monster1.getY(),this);
 		
 		if(craft.getDropped() == true){
-			g2d.drawImage(bomb1.getImage(),craft.getX(),craft.getY(),this);
-			System.out.println("DROPOU");
+			g2d.drawImage(bomb, (craft.getBomb().getX()/50)*51,(craft.getBomb().getY()/50)*51,this);
+			
+			g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
 		}
 			
 		//Toolkit.getDefaultToolkit().sync();

@@ -16,6 +16,8 @@ public class bomberman {
 	private int dx;
 	private int dy;
 	private int x;
+	private Bomb bomb;
+	
 
 	public void setX(int x) {
 		this.x = x;
@@ -117,6 +119,12 @@ public class bomberman {
 		}
 		
 		if(key == KeyEvent.VK_SPACE){
+			bomb = new Bomb();
+			bomb.setX(this.x);
+			bomb.setY(this.y);
+			
+			dropped = true;
+			
 			dropBomb();
 		}
 	}
@@ -161,14 +169,19 @@ public class bomberman {
 				new java.util.TimerTask() {
 					@Override
 					public void run() {
-						dropped = true;
-						
+						dropped = false;		
 					}
-	
 				},
 				2000
 				);
-		dropped = false;
+	}
+
+	public Bomb getBomb() {
+		return bomb;
+	}
+
+	public void setBomb(Bomb bomb) {
+		this.bomb = bomb;
 	}
 	
 }
