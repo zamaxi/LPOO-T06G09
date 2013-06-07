@@ -1,67 +1,25 @@
 package bomberman.logic;
 
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.util.Vector;
+
+import bomberman.logic.Game;
+
 public class Bomberman {
 
-	int x,y;
+	private int dx;
+	private int dy;
+	private int x;
+	private int y;
+	boolean dropped;
+	Vector <Bomb > bombs = new Vector <Bomb >();
+	private int nBombs;
 
-	public Bomberman(char [][] map, int z, int d){
-		x = d;
-		y = z;
-		
-		map[y][x] = 'b';
-	}
-
-	void moveBomberman(char[][] map, char key){
-		switch(key){
-		case 'w':{
-			if(map[(y-1)][x]!='X'){
-				if(map[y][x] != 'f')
-					map[y][x] = ' ';
-				else 
-					map[y][x] = 'e';
-				y -= 1;
-				map[y][x] = 'b';
-			}
-			break;
-		}
-		case 's':{
-			if(map[(y+1)][x]!='X'){
-				if(map[y][x] != 'f')
-					map[y][x] = ' ';
-				else 
-					map[y][x] = 'e';
-				y += 1;
-				map[y][x] = 'b';
-			}
-			break;
-		}
-		case 'a':{
-			if(map[y][(x-1)]!='X'){
-				if(map[y][x] == 'f')
-					map[y][x] = 'e';
-				else map[y][x] = ' ';
-				x -= 1;
-				map[y][x] = 'b';
-			}
-			break;
-		}
-		case 'd':{
-			if(map[y][(x+1)]!='X'){
-				if(map[y][x] != 'f')
-					map[y][x] = ' ';
-				else map[y][x] = 'e';
-				x += 1;
-				map[y][x] = 'b';
-			}
-			break;
-		}
-		case 'b':{
-			Bombant e = new Bombant(x, y);
-			//e.dropBomb(map);
-			
-		}
-		default: break;
-		}
+	public Bomberman() {
+		x = 51;
+		y = 51;
+		nBombs = 1;
 	}
 
 	public int getX() {
@@ -79,4 +37,127 @@ public class Bomberman {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public boolean getDropped() {
+		return dropped;
+	}
+	public void setDropped(boolean dropped) {
+		this.dropped = dropped;
+	}
+
+	public Vector<Bomb> getBombs() {
+		return bombs;
+	}
+	
+	public int getnBombs() {
+		return nBombs;
+	}
+
+	public void setnBombs(int nBombs) {
+		this.nBombs = nBombs;
+	}
+
+	private int width = 50;
+	private int height = 50;
+	Vector<Rectangle> r = new Vector<Rectangle>();
+	boolean colide = false;
+
+	public void checkCollisions(Game g, int x1, int y1) {
+		Rectangle r3 = new Rectangle(x1, y1, 40, 40);
+		char mapa[][] = g.getZ().getMapa();
+		int x = 0, y = 0;
+		if(r.size() == 0){
+			for (int j = 0; j< mapa.length; j++) {
+				x=0;
+				for (int k = 0; k < mapa.length; k++) {
+					if (mapa[j][k] == 'X'){
+						Rectangle rect = new Rectangle(x, y, 50, 50);
+						r.add(rect);
+					}
+					x += 50;
+				}
+				y += 50;
+			}
+		}
+
+		for(int i =0; i < r.size();i++){
+
+			if(r3.intersects(r.get(i))) {
+				colide = true;
+			}
+		}
+	}
+
+	public void move(Game g) {
+		checkCollisions(g, (this.x + dx), (this.y + dy));
+		if(colide == false){
+			x += dx;
+			y += dy;
+		}
+		else{
+			colide = false;
+		}
+	}
+
+	int count = 0;
+
+	public void keyPressed(KeyEvent e, Game g) {
+
+		int key = e.getKeyCode();
+
+		if (key == KeyEvent.VK_LEFT) {
+			dx = -1;
+		}
+
+		if (key == KeyEvent.VK_RIGHT) {
+			dx = 1;
+		}
+
+		if (key == KeyEvent.VK_UP) {
+			dy = -1;
+		}
+
+		if (key == KeyEvent.VK_DOWN) {
+			dy = 1;
+		}
+
+
+		if(key == KeyEvent.VK_SPACE){			
+			if(nBombs > bombs.size()){
+				Bomb bomb = new Bomb();
+				bomb.setX(this.x);
+				bomb.setY(this.y);
+				
+				bombs.add(bomb);
+				bomb.dropBomb();
+				dropped = true;
+			}
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+
+		if (key == KeyEvent.VK_LEFT) {
+			dx = 0;
+		}
+
+		if (key == KeyEvent.VK_RIGHT) {
+			dx = 0;
+		}
+
+		if (key == KeyEvent.VK_UP) {
+			dy = 0;
+		}
+
+		if (key == KeyEvent.VK_DOWN) {
+			dy = 0;
+		}
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle(getX(), getY(), width, height);
+
+	}
 }
+

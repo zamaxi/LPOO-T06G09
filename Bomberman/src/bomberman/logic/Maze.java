@@ -28,12 +28,12 @@ public class Maze {
 		return length;
 	}
 
-	public void addBomb(Bombant b){
-		mapa[b.y][b.x] = 'e';
+	public void addBomb(Bomb b){
+		mapa[b.getY()][b.getX()] = 'e';
 	}
 
 	public void addBomberman(Bomberman b){
-		mapa[b.y][b.x] = 'b';
+		mapa[b.getY()][b.getX()] = 'b';
 	}
 
 	public void addMonster(Monster m){
