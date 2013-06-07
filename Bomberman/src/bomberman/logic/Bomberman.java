@@ -14,6 +14,7 @@ public class Bomberman {
 	private int y;
 	boolean dropped;
 	Vector <Bomb > bombs = new Vector <Bomb >();
+	Vector<Rectangle> bricks = new Vector<Rectangle>();
 	private int nBombs;
 
 	public Bomberman() {
@@ -66,6 +67,7 @@ public class Bomberman {
 		Rectangle r3 = new Rectangle(x1, y1, 40, 40);
 		char mapa[][] = g.getZ().getMapa();
 		int x = 0, y = 0;
+	
 		if(r.size() == 0){
 			for (int j = 0; j< mapa.length; j++) {
 				x=0;
@@ -74,6 +76,12 @@ public class Bomberman {
 						Rectangle rect = new Rectangle(x, y, 50, 50);
 						r.add(rect);
 					}
+					
+					if (mapa[j][k] == 'o') {
+						Rectangle rect = new Rectangle(x, y, 50, 50);
+						bricks.add(rect);
+					}
+						
 					x += 50;
 				}
 				y += 50;
@@ -86,6 +94,11 @@ public class Bomberman {
 				colide = true;
 			}
 		}
+	
+		for(int i =0; i < bricks.size();i++)
+			if (r3.intersects(bricks.get(i))) 
+				colide = true;
+	
 	}
 
 	public void move(Game g) {
@@ -123,14 +136,21 @@ public class Bomberman {
 
 
 		if(key == KeyEvent.VK_SPACE){			
+			
 			if(nBombs > bombs.size()){
 				Bomb bomb = new Bomb();
 				bomb.setX(this.x);
 				bomb.setY(this.y);
+				bomb.setBounds(x, y);
 				
 				bombs.add(bomb);
 				bomb.dropBomb();
+				
 				dropped = true;
+				bomb.setExplode(false);
+				
+				bomb.explosion();
+				
 			}
 		}
 	}

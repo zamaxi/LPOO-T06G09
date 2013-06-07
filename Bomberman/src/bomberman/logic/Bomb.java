@@ -5,7 +5,16 @@ import java.awt.Rectangle;
 public class Bomb {
 	private int x;
 	private int y;
+	boolean explode;
 	
+	public boolean isExplode() {
+		return explode;
+	}
+
+	public void setExplode(boolean explode) {
+		this.explode = explode;
+	}
+
 	public int getX() {
 		return x;
 	}
@@ -36,6 +45,7 @@ public class Bomb {
 	
 	public Bomb() {
 		dropped = true;
+	//	explode = true;
 	}
 	
 	public void setBounds(int x1,int y1){
@@ -43,17 +53,33 @@ public class Bomb {
 	}
 	
 	public Rectangle getBounds(){
-		return bounds;}
+		return bounds;
+		}
 	
 	public void dropBomb(){
+		
 		new java.util.Timer().schedule( 
 				new java.util.TimerTask() {
 					@Override
 					public void run() {
 						dropped = false;
+						explode = false;
 					}
 				},
 				2000
+				);
+	}
+	
+	public void explosion(){
+		//explode = true;
+		new java.util.Timer().schedule( 
+				new java.util.TimerTask() {
+					@Override 
+					public void run() {
+						explode = true;
+					}
+				},
+				1500
 				);
 	}
 }

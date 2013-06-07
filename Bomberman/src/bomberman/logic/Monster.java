@@ -12,9 +12,9 @@ public class Monster {
 	int direction =1;
 	boolean colide = false;
 	boolean dead = true;
-	
+	Vector<Rectangle> bricks = new Vector<Rectangle>();
 	Vector<Rectangle> r = new Vector<Rectangle>();
-
+	
 	public int getX() {
 		return x;
 	}
@@ -56,11 +56,21 @@ public class Monster {
 					if (mapa[j][k] == 'X') {
 						Rectangle rect = new Rectangle(x, y, 50, 50);
 						r.add(rect);
+						
+						
 					}
+					
+					if (mapa[j][k] == 'o') {
+						Rectangle rect = new Rectangle(x, y, 50, 50);
+						bricks.add(rect);
+					}
+					
 					x += 50;
 				}
 				y += 50;
 			}
+			
+			
 		}
 
 		for (int i = 0; i < r.size(); i++) {
@@ -69,6 +79,12 @@ public class Monster {
 				colide = true;
 			}
 		}
+			
+		for(int i =0; i < bricks.size();i++)
+				if (r3.intersects(bricks.get(i))) 
+					colide = true;
+			
+		
 	}
 
 	public Rectangle getBounds() {

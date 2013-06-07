@@ -15,13 +15,15 @@ import bomberman.logic.Bomberman;
 import bomberman.logic.Game;
 import bomberman.logic.Monster;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener, Runnable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	Game game = new Game();
-	Image wall, brick, floor, monster, bomberman, bomb;
+	private Thread animator;
+	 private final int DELAY = 50;
+	Image wall, brick, floor, monster, bomberman, bomb,explosion;
 	Timer timer;
 	private Bomberman craft;
 	private Monster monster1;
@@ -43,18 +45,31 @@ public class GamePanel extends JPanel implements ActionListener {
 		ImageIcon i4 = new ImageIcon("Monster.png");
 		ImageIcon i5 = new ImageIcon("testbomb.png");
 		ImageIcon i6 = new ImageIcon("bomb2.jpg");
+		ImageIcon i7 = new ImageIcon("explosion.png");
 		wall = i1.getImage();
 		floor = i2.getImage();
 		brick = i3.getImage();
 		monster = i4.getImage();
 		bomberman = i5.getImage();
 		bomb = i6.getImage();
-
+		explosion = i7.getImage();
 		timer = new Timer(5, this);
 		timer.start();
 
 	}
 
+	
+	 public void addNotify() {
+	        super.addNotify();
+	        animator = new Thread(this);
+	        animator.start();
+	    }
+	
+	
+	
+	
+	
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -71,6 +86,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
 				if (mapa[i][k] == 'b')
 					g2d.drawImage(bomberman, x, y, null);
+				if (mapa[i][k] == 'o')
+					g2d.drawImage(brick, x, y, null);
 				if (mapa[i][k] == ' ')
 					g2d.drawImage(floor, x, y, null);
 				if (mapa[i][k] == 'M')
@@ -91,14 +108,23 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 		if(craft.getDropped() == true){
 			for(int i = 0; i < craft.getBombs().size(); i++){
-				if(craft.getBombs().get(i).getDropped() == false)
+				if(craft.getBombs().get(i).getDropped() == false){
 					craft.getBombs().remove(i);
+				}
 					
-				g2d.drawImage(bomb, (craft.getBombs().get(i).getX()/50)*51,(craft.getBombs().get(i).getY()/50)*51,this);
+				
+				if(craft.getBombs().get(i).isExplode()== true){
+					g2d.drawImage(explosion, (craft.getBombs().get(i).getX()/50)*51-50,(craft.getBombs().get(i).getY()/50)*51-50,this);
+				}
+				if(craft.getBombs().get(i).isExplode()== false)
+					g2d.drawImage(bomb, (craft.getBombs().get(i).getX()/50)*51,(craft.getBombs().get(i).getY()/50)*51,this);
 			}
 			
-			g2d.drawImage(bomberman, craft.getX(), craft.getY(), this);
+			
 		}
+		
+		g2d.drawImage(bomberman, craft.getX(), craft.getY(), this);
+		g2d.drawImage(monster, monster1.getX(), monster1.getY(),this);
 	}
 
 
