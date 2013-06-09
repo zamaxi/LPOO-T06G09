@@ -41,8 +41,7 @@ public class Instructions extends JDialog {
 			JLabel thumb = new JLabel();
 			thumb.setIcon(i1);
 			this.add(thumb);
-			System.out.println(this.getHeight());
-			System.out.println(this.getWidth());
+
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
