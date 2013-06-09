@@ -45,7 +45,6 @@ public class Bomb {
 	
 	public Bomb() {
 		dropped = true;
-	//	explode = true;
 	}
 	
 	public void setBounds(int x1,int y1){

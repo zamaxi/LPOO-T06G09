@@ -12,7 +12,7 @@ public class Monster {
 	int direction =1;
 	boolean colide = false;
 	boolean dead = true;
-	Vector<Rectangle> bricks = new Vector<Rectangle>();
+	Vector<Rectangle> bricks;
 	Vector<Rectangle> r = new Vector<Rectangle>();
 	
 	public int getX() {
@@ -46,45 +46,51 @@ public class Monster {
 	}
 
 	public void checkCollisions(Game g, int x1, int y1) {
-		Rectangle r3 = new Rectangle(x1, y1, 40, 40);
+		bricks = new Vector<Rectangle>();
+		Rectangle r3 = new Rectangle(x1, y1, 23, 37);
 		char mapa[][] = g.getZ().getMapa();
 		int x = 0, y = 0;
-		if (r.size() == 0) {
-			for (int j = 0; j < mapa.length; j++) {
-				x = 0;
+	
+		if(r.size() == 0){
+			for (int j = 0; j< mapa.length; j++) {
+				x=0;
 				for (int k = 0; k < mapa.length; k++) {
-					if (mapa[j][k] == 'X') {
+					if (mapa[j][k] == 'X'){
 						Rectangle rect = new Rectangle(x, y, 50, 50);
 						r.add(rect);
-						
-						
-					}
-					
-					if (mapa[j][k] == 'o') {
-						Rectangle rect = new Rectangle(x, y, 50, 50);
-						bricks.add(rect);
-					}
-					
+					}						
 					x += 50;
 				}
 				y += 50;
 			}
-			
-			
+		}
+		
+		if(bricks.size() == 0){
+			y=0;
+			for (int j = 0; j< mapa.length; j++) {
+				x=0;
+				for (int k = 0; k < mapa.length; k++) {
+					if (mapa[j][k] == 'o') {
+						Rectangle rect = new Rectangle(x, y, 50, 50);
+						bricks.add(rect);
+					}
+					x += 50;
+				}
+				y += 50;
+			}
 		}
 
-		for (int i = 0; i < r.size(); i++) {
+		for(int i =0; i < r.size();i++){
 
-			if (r3.intersects(r.get(i))) {
+			if(r3.intersects(r.get(i))) {
 				colide = true;
 			}
 		}
-			
+	
 		for(int i =0; i < bricks.size();i++)
-				if (r3.intersects(bricks.get(i))) 
-					colide = true;
-			
-		
+			if (r3.intersects(bricks.get(i))) 
+				colide = true;
+	
 	}
 
 	public Rectangle getBounds() {

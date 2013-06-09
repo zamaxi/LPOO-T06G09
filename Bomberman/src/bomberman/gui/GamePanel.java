@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	Game game = new Game();
 
-	Image wall, brick, floor, monster, bomberman, bomb,explosion;
+	Image wall, brick, floor, monster, bomberman, bomb,explosion1,explosion2,explosion3,explosion4,explosion5;
 	Timer timer;
 	private Bomberman craft;
 	private Monster monster1;
@@ -119,14 +119,23 @@ public class GamePanel extends JPanel implements ActionListener {
 		ImageIcon i4 = new ImageIcon("Monster.png");
 		ImageIcon i5 = new ImageIcon("testbomb.png");
 		ImageIcon i6 = new ImageIcon("bomb2.jpg");
-		ImageIcon i7 = new ImageIcon("explosion.png");
+		ImageIcon i7 = new ImageIcon("explosion1.png");
+		ImageIcon i8 = new ImageIcon("explosion2.png");
+		ImageIcon i9 = new ImageIcon("explosion3.png");
+		ImageIcon i10 = new ImageIcon("explosion4.png");
+		ImageIcon i11 = new ImageIcon("explosion5.png");
+		
 		wall = i1.getImage();
 		floor = i2.getImage();
 		brick = i3.getImage();
 		monster = i4.getImage();
 		bomberman = i5.getImage();
 		bomb = i6.getImage();
-		explosion = i7.getImage();
+		explosion1 = i7.getImage();
+		explosion2 = i8.getImage();
+		explosion3 = i9.getImage();
+		explosion4 = i10.getImage();
+		explosion5 = i11.getImage();
 		timer = new Timer(5, this);
 		timer.start();
 
@@ -175,6 +184,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
 				if (mapa[i][k] == 'e')
 					g2d.drawImage(bomb, x, y, null);
+				
+				
 				x += 50;
 			}
 			y += 50;
@@ -191,10 +202,43 @@ public class GamePanel extends JPanel implements ActionListener {
 					
 				
 				if(craft.getBombs().get(i).isExplode()== true){
-					g2d.drawImage(explosion, (craft.getBombs().get(i).getX()/50)*51-50,(craft.getBombs().get(i).getY()/50)*51-50,this);
+					g2d.drawImage(explosion5, (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
+					
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] != 'X')
+						g2d.drawImage(explosion2, ((craft.getBombs().get(i).getX()-50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
+					
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] == 'o')
+						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] = ' ';
+					
+					craft.clearBricks(((craft.getBombs().get(i).getX()-50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
+					
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] != 'X')
+						g2d.drawImage(explosion4, ((craft.getBombs().get(i).getX()+50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
+					
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] == 'o')
+						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] = ' ';
+					
+					craft.clearBricks(((craft.getBombs().get(i).getX()+50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
+					
+					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
+						g2d.drawImage(explosion1, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()-50)/50)*50,this);
+					
+					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
+						mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
+					
+					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()-50)/50)*50);
+					
+					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
+						g2d.drawImage(explosion3, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()+50)/50)*50,this);		
+					
+					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
+						mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
+					
+					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()+50)/50)*50);
 				}
+				
 				if(craft.getBombs().get(i).isExplode()== false){
-					g2d.drawImage(bomb_a[drawBomb], (craft.getBombs().get(i).getX()/50)*51,(craft.getBombs().get(i).getY()/50)*51,this);
+					g2d.drawImage(bomb_a[drawBomb], (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
 					drawBomb++;
 					if(drawBomb == 3)
 						drawBomb =0;

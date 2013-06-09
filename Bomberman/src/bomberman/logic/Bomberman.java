@@ -91,13 +91,22 @@ public class Bomberman {
 					if (mapa[j][k] == 'X'){
 						Rectangle rect = new Rectangle(x, y, 50, 50);
 						r.add(rect);
-					}
-					
+					}						
+					x += 50;
+				}
+				y += 50;
+			}
+		}
+		
+		if(bricks.size() == 0){
+			y=0;
+			for (int j = 0; j< mapa.length; j++) {
+				x=0;
+				for (int k = 0; k < mapa.length; k++) {
 					if (mapa[j][k] == 'o') {
 						Rectangle rect = new Rectangle(x, y, 50, 50);
 						bricks.add(rect);
 					}
-						
 					x += 50;
 				}
 				y += 50;
@@ -115,6 +124,14 @@ public class Bomberman {
 			if (r3.intersects(bricks.get(i))) 
 				colide = true;
 	
+	}
+	
+	public void clearBricks(int x, int y){
+		for(int i = 0; i < bricks.size(); i++){
+			if(bricks.get(i).getX() == x && bricks.get(i).getY() == y){
+				bricks.remove(i);
+			}
+		}
 	}
 
 	public void move(Game g) {
@@ -158,7 +175,7 @@ public class Bomberman {
 		}
 		
 		
-		System.out.println(moveBomberman);
+		//System.out.println(moveBomberman);
 
 		if(key == KeyEvent.VK_SPACE){			
 			
@@ -172,7 +189,6 @@ public class Bomberman {
 				bomb.dropBomb();
 				
 				dropped = true;
-				bomb.setExplode(false);
 				
 				bomb.explosion();
 				
