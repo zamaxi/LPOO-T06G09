@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	Game game = new Game();
 
-	Image wall, brick, floor, monster, bomberman, bomb,explosion1,explosion2,explosion3,explosion4,explosion5;
+	Image wall, brick, floor, monster, bomberman, bomb,explosion1,explosion2,explosion3,explosion4,explosion5, explosion6, explosion7;
 	Timer timer;
 	private Bomberman craft;
 	private Monster monster1;
@@ -32,8 +32,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	Image[] bombermanDown = new Image[3];
 	Image[] bomb_a = new Image[3];
 	Image[] monster_a = new Image[4];
-	
-	
+
+
 	/**
 	 * Create the panel.
 	 */
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		setDoubleBuffered(true);
 		ImageIcon temp;
 		Image tp;
-		
+
 		temp = new ImageIcon("bomberman_right1.png");
 		tp = temp.getImage();
 		bombermanLeft[0]= tp;
@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		temp = new ImageIcon("bomberman_right3.png");
 		tp = temp.getImage();
 		bombermanLeft[2]= tp;
-		
+
 		temp = new ImageIcon("bomberman_left1.png");
 		tp = temp.getImage();
 		bombermanRight[0]= tp;
@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		temp = new ImageIcon("bomberman_left3.png");
 		tp = temp.getImage();
 		bombermanRight[2]= tp;
-		
+
 		temp = new ImageIcon("bomberman_up1.png");
 		tp = temp.getImage();
 		bombermanUp[0]= tp;
@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		temp = new ImageIcon("bomberman_up3.png");
 		tp = temp.getImage();
 		bombermanUp[2]= tp;
-		
+
 		temp = new ImageIcon("bomberman_down1.png");
 		tp = temp.getImage();
 		bombermanDown[0]= tp;
@@ -86,7 +86,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		temp = new ImageIcon("bomberman_down3.png");
 		tp = temp.getImage();
 		bombermanDown[2]= tp;
-		
+
 		temp = new ImageIcon("bomb1.png");
 		tp = temp.getImage();
 		bomb_a[0]= tp;
@@ -96,8 +96,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		temp = new ImageIcon("bomb3.png");
 		tp = temp.getImage();
 		bomb_a[2]= tp;
-		
-		
+
+
 		temp = new ImageIcon("monster1.png");
 		tp = temp.getImage();
 		monster_a[0]= tp;
@@ -110,9 +110,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		temp = new ImageIcon("monster4.png");
 		tp = temp.getImage();
 		monster_a[3]= tp;
-		
-		
-		
+
+
+
 		ImageIcon i1 = new ImageIcon("wall.jpg");
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
@@ -124,7 +124,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		ImageIcon i9 = new ImageIcon("explosion3.png");
 		ImageIcon i10 = new ImageIcon("explosion4.png");
 		ImageIcon i11 = new ImageIcon("explosion5.png");
-		
+		ImageIcon i12 = new ImageIcon("explosion6.png");
+		ImageIcon i13 = new ImageIcon("explosion7.png");
+
 		wall = i1.getImage();
 		floor = i2.getImage();
 		brick = i3.getImage();
@@ -136,20 +138,22 @@ public class GamePanel extends JPanel implements ActionListener {
 		explosion3 = i9.getImage();
 		explosion4 = i10.getImage();
 		explosion5 = i11.getImage();
+		explosion6 = i12.getImage();
+		explosion7 = i13.getImage();
 		timer = new Timer(5, this);
 		timer.start();
 
 	}
 
 
-	
-	
-	
+
+
+
 	int draw =0;
 	int drawBomb =0;
 	int drawMonster =0;
 	int lastMovement =0;
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -157,12 +161,12 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		int x = 0, y = 0;
 		char mapa[][] = game.getZ().getMapa();
-		
-		
+
+
 		if(craft.getMoveBomberman() != 0)
 			lastMovement = craft.getMoveBomberman();
-		
-		
+
+
 		for (int i = 0; i < mapa.length; i++) {
 			x = 0;
 			for (int k = 0; k < mapa.length; k++) {
@@ -184,69 +188,143 @@ public class GamePanel extends JPanel implements ActionListener {
 
 				if (mapa[i][k] == 'e')
 					g2d.drawImage(bomb, x, y, null);
-				
-				
+
+
 				x += 50;
 			}
 			y += 50;
 		}
-		
+
 		//g2d.drawImage(bomberman, craft.getX(), craft.getY(), this);
-	//	g2d.drawImage(monster, monster1.getX(), monster1.getY(),this);
-		
+		//	g2d.drawImage(monster, monster1.getX(), monster1.getY(),this);
+
 		if(craft.getDropped() == true){
 			for(int i = 0; i < craft.getBombs().size(); i++){
 				if(craft.getBombs().get(i).getDropped() == false){
 					craft.getBombs().remove(i);
 				}
-					
-				
-				if(craft.getBombs().get(i).isExplode()== true){
+
+
+				if(craft.getBombs().get(i).isExplode()== true && craft.getBombs().get(i).getRange() == 1){
 					g2d.drawImage(explosion5, (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-					
+
 					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] != 'X')
 						g2d.drawImage(explosion2, ((craft.getBombs().get(i).getX()-50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-					
+
 					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] == 'o')
 						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] = ' ';
-					
+
 					craft.clearBricks(((craft.getBombs().get(i).getX()-50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
-					
+
 					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] != 'X')
 						g2d.drawImage(explosion4, ((craft.getBombs().get(i).getX()+50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-					
+
 					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] == 'o')
 						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] = ' ';
-					
+
 					craft.clearBricks(((craft.getBombs().get(i).getX()+50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
-					
+
 					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
 						g2d.drawImage(explosion1, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()-50)/50)*50,this);
-					
+
 					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
 						mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
-					
+
 					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()-50)/50)*50);
-					
+
 					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
 						g2d.drawImage(explosion3, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()+50)/50)*50,this);		
-					
+
 					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
 						mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
-					
+
 					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()+50)/50)*50);
 				}
-				
+				else if(craft.getBombs().get(i).isExplode()== true && craft.getBombs().get(i).getRange() == 2){
+					g2d.drawImage(explosion5, (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
+
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] != 'X')
+						g2d.drawImage(explosion6, ((craft.getBombs().get(i).getX()-50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
+
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] == 'o')
+						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] = ' ';
+
+					craft.clearBricks(((craft.getBombs().get(i).getX()-50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
+
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] != 'X' && mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)-1] != 'X'){
+						g2d.drawImage(explosion2, (((craft.getBombs().get(i).getX()-50)/50)*50)-50,(craft.getBombs().get(i).getY()/50)*50,this);
+
+						if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)-1] == 'o')
+							mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)-1] = ' ';
+
+						craft.clearBricks((((craft.getBombs().get(i).getX()-50)/50)*50)-50,(craft.getBombs().get(i).getY()/50)*50);
+					}
+
+					//
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] != 'X')
+						g2d.drawImage(explosion6, ((craft.getBombs().get(i).getX()+50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
+
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] == 'o')
+						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] = ' ';
+
+					craft.clearBricks(((craft.getBombs().get(i).getX()+50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
+
+					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] != 'X' && mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)+1] != 'X'){
+						g2d.drawImage(explosion4, (((craft.getBombs().get(i).getX()+50)/50)*50)+50,(craft.getBombs().get(i).getY()/50)*50,this);
+
+						if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)+1] == 'o')
+							mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)+1] = ' ';
+
+						craft.clearBricks((((craft.getBombs().get(i).getX()+50)/50)*50)+50,(craft.getBombs().get(i).getY()/50)*50);
+					}
+
+					//
+					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
+						g2d.drawImage(explosion7, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()-50)/50)*50,this);
+
+					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
+						mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
+
+					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()-50)/50)*50);
+
+					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][((craft.getBombs().get(i).getX())/50)] != 'X' && mapa[((craft.getBombs().get(i).getY()-50)/50)-1][((craft.getBombs().get(i).getX())/50)] != 'X'){
+						g2d.drawImage(explosion1, (((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()-50)/50)*50)-50,this);
+
+						if(mapa[((craft.getBombs().get(i).getY()-50)/50)-1][((craft.getBombs().get(i).getX())/50)] == 'o')
+							mapa[((craft.getBombs().get(i).getY()-50)/50)-1][((craft.getBombs().get(i).getX())/50)] = ' ';
+
+						craft.clearBricks((((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()-50)/50)*50)-50);
+					}
+
+					//
+					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
+						g2d.drawImage(explosion7, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()+50)/50)*50,this);		
+
+					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
+						mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
+
+					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()+50)/50)*50);
+
+					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][((craft.getBombs().get(i).getX())/50)] != 'X' && mapa[((craft.getBombs().get(i).getY()+50)/50)+1][((craft.getBombs().get(i).getX())/50)] != 'X'){
+						g2d.drawImage(explosion3, (((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()+50)/50)*50)+50,this);
+
+						if(mapa[((craft.getBombs().get(i).getY()+50)/50)+1][((craft.getBombs().get(i).getX())/50)] == 'o')
+							mapa[((craft.getBombs().get(i).getY()+50)/50)+1][((craft.getBombs().get(i).getX())/50)] = ' ';
+
+						craft.clearBricks((((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()+50)/50)*50)+50);
+					}
+				}
+
 				if(craft.getBombs().get(i).isExplode()== false){
 					g2d.drawImage(bomb_a[drawBomb], (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
 					drawBomb++;
 					if(drawBomb == 3)
 						drawBomb =0;
 				}
-					
+
 			}
-			
-			
+
+
 		}
 		if(craft.getMoveBomberman() == 0 && lastMovement == 0)
 			g2d.drawImage(bombermanDown[1], craft.getX(), craft.getY(), this);
@@ -258,9 +336,9 @@ public class GamePanel extends JPanel implements ActionListener {
 			g2d.drawImage(bombermanLeft[1], craft.getX(), craft.getY(), this);
 		if(craft.getMoveBomberman() == 0 && lastMovement == 4)
 			g2d.drawImage(bombermanUp[1], craft.getX(), craft.getY(), this);
-		
-		
-		
+
+
+
 		if(craft.getMoveBomberman() == 1)
 			g2d.drawImage(bombermanRight[draw], craft.getX(), craft.getY(), this);
 		if(craft.getMoveBomberman() == 2)
@@ -272,8 +350,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		draw++;
 		if(draw == 3)
 			draw=0;
-		
-		
+
+
 		g2d.drawImage(monster_a[drawMonster], monster1.getX(), monster1.getY(),this);
 		drawMonster++;
 		if(drawMonster == 4)
@@ -286,8 +364,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		craft.move(game);
 		monster1.moveMonster(game);
 		//craft.setMoveBomberman(0);
-		
-		
+
+
 		repaint();
 	}
 

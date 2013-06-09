@@ -6,7 +6,16 @@ public class Bomb {
 	private int x;
 	private int y;
 	boolean explode;
+	int range;
 	
+	public int getRange() {
+		return range;
+	}
+
+	public void setRange(int range) {
+		this.range = range;
+	}
+
 	public boolean isExplode() {
 		return explode;
 	}
@@ -45,6 +54,7 @@ public class Bomb {
 	
 	public Bomb() {
 		dropped = true;
+		range = 1;
 	}
 	
 	public void setBounds(int x1,int y1){
