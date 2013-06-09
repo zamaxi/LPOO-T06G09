@@ -5,7 +5,12 @@ import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import bomberman.logic.Game;
-
+/**
+ * 
+ * @author Kratos
+ * dimensions
+ * 23 x 37
+ */
 public class Bomberman {
 
 	private int dx;
@@ -16,11 +21,22 @@ public class Bomberman {
 	Vector <Bomb > bombs = new Vector <Bomb >();
 	Vector<Rectangle> bricks = new Vector<Rectangle>();
 	private int nBombs;
-
+	private int Lives;
+	private int moveBomberman =0 ;
+	
 	public Bomberman() {
 		x = 51;
 		y = 51;
 		nBombs = 1;
+		Lives = 3;
+	}	
+
+	public void setMoveBomberman(int moveBomberman) {
+		this.moveBomberman = moveBomberman;
+	}
+
+	public int getMoveBomberman() {
+		return moveBomberman;
 	}
 
 	public int getX() {
@@ -64,7 +80,7 @@ public class Bomberman {
 	boolean colide = false;
 
 	public void checkCollisions(Game g, int x1, int y1) {
-		Rectangle r3 = new Rectangle(x1, y1, 40, 40);
+		Rectangle r3 = new Rectangle(x1, y1, 23, 37);
 		char mapa[][] = g.getZ().getMapa();
 		int x = 0, y = 0;
 	
@@ -115,25 +131,34 @@ public class Bomberman {
 	int count = 0;
 
 	public void keyPressed(KeyEvent e, Game g) {
-
+		moveBomberman = 0;
 		int key = e.getKeyCode();
 
+		if(key == KeyEvent.KEY_RELEASED) 
+			moveBomberman =0;
+		
 		if (key == KeyEvent.VK_LEFT) {
 			dx = -1;
+			moveBomberman = 3;
 		}
 
 		if (key == KeyEvent.VK_RIGHT) {
 			dx = 1;
+			moveBomberman = 1;
 		}
 
 		if (key == KeyEvent.VK_UP) {
 			dy = -1;
+			moveBomberman = 4;
 		}
 
 		if (key == KeyEvent.VK_DOWN) {
 			dy = 1;
+			moveBomberman =2;
 		}
-
+		
+		
+		System.out.println(moveBomberman);
 
 		if(key == KeyEvent.VK_SPACE){			
 			
@@ -160,6 +185,7 @@ public class Bomberman {
 
 		if (key == KeyEvent.VK_LEFT) {
 			dx = 0;
+			
 		}
 
 		if (key == KeyEvent.VK_RIGHT) {
@@ -173,6 +199,8 @@ public class Bomberman {
 		if (key == KeyEvent.VK_DOWN) {
 			dy = 0;
 		}
+		
+		moveBomberman =0;
 	}
 
 	public Rectangle getBounds() {
