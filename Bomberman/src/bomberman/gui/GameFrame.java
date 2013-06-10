@@ -33,7 +33,7 @@ public class GameFrame extends JFrame {
 	 */
 	public GameFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 550);
+		setBounds(200, 20, 550+15, 550+120);
 		GamePanel gm = new GamePanel();
 		this.add(gm);
 	}

@@ -2,6 +2,7 @@ package bomberman.logic;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 import java.util.Vector;
 
 import bomberman.logic.Game;
@@ -23,13 +24,21 @@ public class Bomberman {
 	private int nBombs;
 	private int Lives;
 	private int moveBomberman =0 ;
-	
+
 	public Bomberman() {
 		x = 51;
 		y = 51;
 		nBombs = 1;
 		Lives = 3;
 	}	
+
+	public int getLives() {
+		return Lives;
+	}
+
+	public void setLives(int lives) {
+		Lives = lives;
+	}
 
 	public void setMoveBomberman(int moveBomberman) {
 		this.moveBomberman = moveBomberman;
@@ -127,13 +136,35 @@ public class Bomberman {
 	}
 	
 	public void clearBricks(int x, int y){
+
 		for(int i = 0; i < bricks.size(); i++){
 			if(bricks.get(i).getX() == x && bricks.get(i).getY() == y){
 				bricks.remove(i);
+				
 			}
 		}
+	
 	}
 
+	public int pwprobability(){
+		Random randomGenerator = new Random();
+		int a;
+		a=	randomGenerator.nextInt(25)+1;
+		
+		if(a == 1)
+			return a;
+		if(a == 2)
+			return a;
+		if(a == 3)
+			return a;
+		if(a == 4)
+			return a;
+		if(a == 5)
+			return a;
+		else
+			return 0;
+	}
+	
 	public void move(Game g) {
 		checkCollisions(g, (this.x + dx), (this.y + dy));
 		if(colide == false){

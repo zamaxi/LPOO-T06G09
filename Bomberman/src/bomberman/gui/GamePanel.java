@@ -1,5 +1,6 @@
 package bomberman.gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -7,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import javax.swing.JPanel;
@@ -22,18 +27,21 @@ public class GamePanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	Game game = new Game();
 
-	Image wall, brick, floor, monster, bomberman, bomb,explosion1,explosion2,explosion3,explosion4,explosion5, explosion6, explosion7;
+	Image wall, brick, floor, monster, bomberman,statebar, bomb,explosion1,explosion2,explosion3,explosion4,explosion5, explosion6, explosion7;
 	Timer timer;
 	private Bomberman craft;
 	private Monster monster1;
+	boolean brickDestroyed;
 	Image[] bombermanLeft = new Image[3];
 	Image[] bombermanRight= new Image[3];
 	Image[] bombermanUp = new Image[3];
 	Image[] bombermanDown = new Image[3];
 	Image[] bomb_a = new Image[3];
 	Image[] monster_a = new Image[4];
+	Image[] powerup = new Image[6];
 
-
+	
+	int time=60000;
 	/**
 	 * Create the panel.
 	 */
@@ -111,8 +119,26 @@ public class GamePanel extends JPanel implements ActionListener {
 		tp = temp.getImage();
 		monster_a[3]= tp;
 
-
-
+		temp = new ImageIcon("pwbomb.png");
+		tp = temp.getImage();
+		powerup[0]= tp;
+		temp = new ImageIcon("pwlife.png");
+		tp = temp.getImage();
+		powerup[1]= tp;
+		temp = new ImageIcon("range.png");
+		tp = temp.getImage();
+		powerup[2]= tp;
+		temp = new ImageIcon("pwspeed.png");
+		tp = temp.getImage();
+		powerup[3]= tp;
+		temp = new ImageIcon("pwvest.png");
+		tp = temp.getImage();
+		powerup[4]= tp;
+		temp = new ImageIcon("Pwwall.png");
+		tp = temp.getImage();
+		powerup[5]= tp;
+		
+		
 		ImageIcon i1 = new ImageIcon("wall.jpg");
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
@@ -126,7 +152,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		ImageIcon i11 = new ImageIcon("explosion5.png");
 		ImageIcon i12 = new ImageIcon("explosion6.png");
 		ImageIcon i13 = new ImageIcon("explosion7.png");
-
+		ImageIcon i14 = new ImageIcon("statebar.png");
+		statebar = i14.getImage();
 		wall = i1.getImage();
 		floor = i2.getImage();
 		brick = i3.getImage();
@@ -161,7 +188,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		int x = 0, y = 0;
 		char mapa[][] = game.getZ().getMapa();
-
+		brickDestroyed = false;
 
 		if(craft.getMoveBomberman() != 0)
 			lastMovement = craft.getMoveBomberman();
@@ -195,9 +222,10 @@ public class GamePanel extends JPanel implements ActionListener {
 			y += 50;
 		}
 
+		
 		//g2d.drawImage(bomberman, craft.getX(), craft.getY(), this);
 		//	g2d.drawImage(monster, monster1.getX(), monster1.getY(),this);
-
+		
 		if(craft.getDropped() == true){
 			for(int i = 0; i < craft.getBombs().size(); i++){
 				if(craft.getBombs().get(i).getDropped() == false){
@@ -213,6 +241,12 @@ public class GamePanel extends JPanel implements ActionListener {
 
 					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] == 'o')
 						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] = ' ';
+							
+					
+						
+						
+					
+						
 
 					craft.clearBricks(((craft.getBombs().get(i).getX()-50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
 
@@ -356,6 +390,27 @@ public class GamePanel extends JPanel implements ActionListener {
 		drawMonster++;
 		if(drawMonster == 4)
 			drawMonster=0;
+		
+		g2d.drawImage(statebar, 0,550,this);
+		AttributedString attributedString = new AttributedString(""+craft.getLives());
+        attributedString.addAttribute(TextAttribute.FOREGROUND, Color.RED, 0, 1/*stringlenght*/);
+        attributedString.addAttribute(TextAttribute.SIZE, 30, 0, 1);
+        g2d.drawString(attributedString.getIterator(), 125, 603);
+       
+        if(time > 10000){
+        AttributedString attributedString2 = new AttributedString(""+time/1000);
+        attributedString2.addAttribute(TextAttribute.FOREGROUND, Color.YELLOW, 0, 2/*stringlenght*/);
+        attributedString2.addAttribute(TextAttribute.SIZE, 30, 0, 2);
+        g2d.drawString(attributedString2.getIterator(), 400, 603);
+        }
+		
+        if(time < 10000){
+            AttributedString attributedString2 = new AttributedString(""+time/1000);
+            attributedString2.addAttribute(TextAttribute.FOREGROUND, Color.YELLOW, 0, 1/*stringlenght*/);
+            attributedString2.addAttribute(TextAttribute.SIZE, 30, 0, 1);
+            g2d.drawString(attributedString2.getIterator(), 400, 603);
+            
+	}
 	}
 
 
@@ -364,8 +419,15 @@ public class GamePanel extends JPanel implements ActionListener {
 		craft.move(game);
 		monster1.moveMonster(game);
 		//craft.setMoveBomberman(0);
-
-
+		
+		if(time % 1000 == 0)
+			System.out.println(time/1000);
+		time -= 5;
+		if(time == 0){
+			craft.setLives(craft.getLives()-1);
+			time = 60000;
+		}
+		
 		repaint();
 	}
 
@@ -382,7 +444,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 	}
 
-
+	
 
 
 	void printmap() {
