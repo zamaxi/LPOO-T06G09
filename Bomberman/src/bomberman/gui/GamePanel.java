@@ -222,131 +222,28 @@ public class GamePanel extends JPanel implements ActionListener {
 			y += 50;
 		}
 
-		
-		//g2d.drawImage(bomberman, craft.getX(), craft.getY(), this);
-		//	g2d.drawImage(monster, monster1.getX(), monster1.getY(),this);
-		
 		if(craft.getDropped() == true){
 			for(int i = 0; i < craft.getBombs().size(); i++){
+				craft.getBombs().get(i).createNotWall(game);
+				craft.getBombs().get(i).createBricks(game);
 				
-
-
-				if(craft.getBombs().get(i).isExplode()== true && craft.getBombs().get(i).getRange() == 1){
-					g2d.drawImage(explosion5, (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] != 'X')
-						g2d.drawImage(explosion2, ((craft.getBombs().get(i).getX()-50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] == 'o')
-						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] = ' ';
-							
+				if(craft.getBombs().get(i).isExplode()== true){
 					
+					for(int j = 0; j < craft.getBombs().get(i).getBombRect().size(); j++){
+						for(int k = 0; k < craft.getBombs().get(i).getNotWallRect().size(); k++){
+							if(craft.getBombs().get(i).getBombRect().get(j).intersects(craft.getBombs().get(i).getNotWallRect().get(k))){
+								g2d.drawImage(explosion5, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50)*50, (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50)*50, this);
+							}
+						}
 						
-						
-					
-						
-
-					craft.clearBricks(((craft.getBombs().get(i).getX()-50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] != 'X')
-						g2d.drawImage(explosion4, ((craft.getBombs().get(i).getX()+50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] == 'o')
-						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] = ' ';
-
-					craft.clearBricks(((craft.getBombs().get(i).getX()+50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
-
-					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
-						g2d.drawImage(explosion1, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()-50)/50)*50,this);
-
-					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
-						mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
-
-					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()-50)/50)*50);
-
-					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
-						g2d.drawImage(explosion3, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()+50)/50)*50,this);		
-
-					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
-						mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
-
-					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()+50)/50)*50);
-				}
-				else if(craft.getBombs().get(i).isExplode()== true && craft.getBombs().get(i).getRange() == 2){
-					g2d.drawImage(explosion5, (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] != 'X')
-						g2d.drawImage(explosion6, ((craft.getBombs().get(i).getX()-50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] == 'o')
-						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] = ' ';
-
-					craft.clearBricks(((craft.getBombs().get(i).getX()-50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)] != 'X' && mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)-1] != 'X'){
-						g2d.drawImage(explosion2, (((craft.getBombs().get(i).getX()-50)/50)*50)-50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-						if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)-1] == 'o')
-							mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()-50)/50)-1] = ' ';
-
-						craft.clearBricks((((craft.getBombs().get(i).getX()-50)/50)*50)-50,(craft.getBombs().get(i).getY()/50)*50);
-					}
-
-					//
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] != 'X')
-						g2d.drawImage(explosion6, ((craft.getBombs().get(i).getX()+50)/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] == 'o')
-						mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] = ' ';
-
-					craft.clearBricks(((craft.getBombs().get(i).getX()+50)/50)*50, (craft.getBombs().get(i).getY()/50)*50);
-
-					if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)] != 'X' && mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)+1] != 'X'){
-						g2d.drawImage(explosion4, (((craft.getBombs().get(i).getX()+50)/50)*50)+50,(craft.getBombs().get(i).getY()/50)*50,this);
-
-						if(mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)+1] == 'o')
-							mapa[(craft.getBombs().get(i).getY()/50)][((craft.getBombs().get(i).getX()+50)/50)+1] = ' ';
-
-						craft.clearBricks((((craft.getBombs().get(i).getX()+50)/50)*50)+50,(craft.getBombs().get(i).getY()/50)*50);
-					}
-
-					//
-					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
-						g2d.drawImage(explosion7, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()-50)/50)*50,this);
-
-					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
-						mapa[((craft.getBombs().get(i).getY()-50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
-
-					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()-50)/50)*50);
-
-					if(mapa[((craft.getBombs().get(i).getY()-50)/50)][((craft.getBombs().get(i).getX())/50)] != 'X' && mapa[((craft.getBombs().get(i).getY()-50)/50)-1][((craft.getBombs().get(i).getX())/50)] != 'X'){
-						g2d.drawImage(explosion1, (((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()-50)/50)*50)-50,this);
-
-						if(mapa[((craft.getBombs().get(i).getY()-50)/50)-1][((craft.getBombs().get(i).getX())/50)] == 'o')
-							mapa[((craft.getBombs().get(i).getY()-50)/50)-1][((craft.getBombs().get(i).getX())/50)] = ' ';
-
-						craft.clearBricks((((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()-50)/50)*50)-50);
-					}
-
-					//
-					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] != 'X')
-						g2d.drawImage(explosion7, (craft.getBombs().get(i).getX()/50)*50,((craft.getBombs().get(i).getY()+50)/50)*50,this);		
-
-					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] == 'o')
-						mapa[((craft.getBombs().get(i).getY()+50)/50)][(craft.getBombs().get(i).getX()/50)] = ' ';
-
-					craft.clearBricks((craft.getBombs().get(i).getX()/50)*50, ((craft.getBombs().get(i).getY()+50)/50)*50);
-
-					if(mapa[((craft.getBombs().get(i).getY()+50)/50)][((craft.getBombs().get(i).getX())/50)] != 'X' && mapa[((craft.getBombs().get(i).getY()+50)/50)+1][((craft.getBombs().get(i).getX())/50)] != 'X'){
-						g2d.drawImage(explosion3, (((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()+50)/50)*50)+50,this);
-
-						if(mapa[((craft.getBombs().get(i).getY()+50)/50)+1][((craft.getBombs().get(i).getX())/50)] == 'o')
-							mapa[((craft.getBombs().get(i).getY()+50)/50)+1][((craft.getBombs().get(i).getX())/50)] = ' ';
-
-						craft.clearBricks((((craft.getBombs().get(i).getX())/50)*50),(((craft.getBombs().get(i).getY()+50)/50)*50)+50);
+						for(int k = 0; k < craft.getBombs().get(i).getBricksRect().size(); k++){
+							if(craft.getBombs().get(i).getBombRect().get(j).intersects(craft.getBombs().get(i).getBricksRect().get(k))){
+								mapa[(int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50)][(int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50)] = ' ';
+							}
+						}
 					}
 				}
-
+				
 				if(craft.getBombs().get(i).isExplode()== false){
 					g2d.drawImage(bomb_a[drawBomb], (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
 					drawBomb++;
@@ -426,8 +323,8 @@ public class GamePanel extends JPanel implements ActionListener {
 			game.getMonstrinhos().get(i).moveMonster(game);
 		//craft.setMoveBomberman(0);
 		
-		if(time % 1000 == 0)
-			System.out.println(time/1000);
+//		if(time % 1000 == 0)
+//			System.out.println(time/1000);
 		time -= 5;
 		if(time == 0){
 			craft.setLives(craft.getLives()-1);

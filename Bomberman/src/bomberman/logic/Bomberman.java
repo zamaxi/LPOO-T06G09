@@ -20,7 +20,7 @@ public class Bomberman {
 	private int y;
 	boolean dropped;
 	Vector <Bomb > bombs = new Vector <Bomb >();
-	Vector<Rectangle> bricks = new Vector<Rectangle>();
+	Vector<Rectangle> bricks;
 	private int nBombs;
 	private int Lives;
 	private int moveBomberman =0 ;
@@ -92,6 +92,10 @@ public class Bomberman {
 	private int width = 50;
 	private int height = 50;
 	Vector<Rectangle> r = new Vector<Rectangle>();
+	public Vector<Rectangle> getR() {
+		return r;
+	}
+
 	boolean colide = false;
 
 	/**
@@ -119,6 +123,7 @@ public class Bomberman {
 			}
 		}
 		
+		bricks = new Vector<Rectangle>();
 		if(bricks.size() == 0){
 			y=0;
 			for (int j = 0; j< mapa.length; j++) {
