@@ -247,6 +247,9 @@ public class Bomberman {
 			dy = 0;
 		}
 		
+		if (key == KeyEvent.VK_ESCAPE) {
+			
+		}
 		moveBomberman =0;
 	}
 

@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		craft = new Bomberman();
-		monster1 = new Monster(game.getZ().getMapa());
+		//monster1 = new Monster(game.getZ().getMapa());
 		addKeyListener(new TAdapter());
 		setDoubleBuffered(true);
 		ImageIcon temp;
@@ -385,11 +385,13 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(draw == 3)
 			draw=0;
 
-
-		g2d.drawImage(monster_a[drawMonster], monster1.getX(), monster1.getY(),this);
+		for(int i=0;i < game.getMonstrinhos().size();i++){
+			g2d.drawImage(monster_a[drawMonster], game.getMonstrinhos().get(i).getX(), game.getMonstrinhos().get(i).getY(),this);
+			
+		}
 		drawMonster++;
 		if(drawMonster == 4)
-			drawMonster=0;
+		drawMonster=0;
 		
 		g2d.drawImage(statebar, 0,550,this);
 		AttributedString attributedString = new AttributedString(""+craft.getLives());
@@ -417,7 +419,10 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		craft.move(game);
-		monster1.moveMonster(game);
+		
+		
+		for(int i =0; i< game.getMonstrinhos().size();i++)
+			game.getMonstrinhos().get(i).moveMonster(game);
 		//craft.setMoveBomberman(0);
 		
 		if(time % 1000 == 0)
