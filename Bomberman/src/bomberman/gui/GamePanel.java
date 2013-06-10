@@ -228,9 +228,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 		if(craft.getDropped() == true){
 			for(int i = 0; i < craft.getBombs().size(); i++){
-				if(craft.getBombs().get(i).getDropped() == false){
-					craft.getBombs().remove(i);
-				}
+				
 
 
 				if(craft.getBombs().get(i).isExplode()== true && craft.getBombs().get(i).getRange() == 1){
@@ -356,6 +354,9 @@ public class GamePanel extends JPanel implements ActionListener {
 						drawBomb =0;
 				}
 
+				if(craft.getBombs().get(i).getDropped() == false){
+					craft.getBombs().remove(i);
+				}
 			}
 
 
