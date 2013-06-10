@@ -31,6 +31,11 @@ public class Monster {
 		this.y = y;
 	}
 
+	
+	/**
+	 * Colocará um Monstro aleatóriamente numa posição livre do mapa
+	 * @param args mapa obase que ira ser usado para colocar um Monstro
+	 */
 	public Monster(char args [][]){
 		Random randomGenerator = new Random();
 		
@@ -45,6 +50,12 @@ public class Monster {
 		y += 1;
 	}
 
+	/**
+	 * 
+	 * @param g - jogo no qual vai verificar se houve colisoes
+	 * @param x1 - corrdenada x que ira criar o Rectangle à volta do objecto para verificar a colisão
+	 * @param y1 - corrdenada y que ira criar o Rectangle à volta do objecto para verificar a colisão
+	 */
 	public void checkCollisions(Game g, int x1, int y1) {
 		bricks = new Vector<Rectangle>();
 		Rectangle r3 = new Rectangle(x1, y1, 23, 37);
@@ -97,6 +108,10 @@ public class Monster {
 		return new Rectangle(getX(), getY(), width, height);
 	}
 
+	/**
+	 * Move o monstro aleatória mente pelo mapa. So muda de direcção caso colida contra uma parede
+	 * @param g
+	 */
 	public void moveMonster(Game g) {
 		Random randomGenerator = new Random();
 

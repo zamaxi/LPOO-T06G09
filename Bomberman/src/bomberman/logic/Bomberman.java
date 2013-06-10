@@ -25,13 +25,19 @@ public class Bomberman {
 	private int Lives;
 	private int moveBomberman =0 ;
 
+	/**
+	 * Construtor da classe bomberman
+	 * Este objecto será controlado pelo utilizador e será capaz de largar bombas
+	 * de maneira a matar os monstros
+	 * @author Gabriel Borges, Marco Pinto
+	 */
 	public Bomberman() {
 		x = 51;
 		y = 51;
 		nBombs = 1;
 		Lives = 3;
 	}	
-
+	
 	public int getLives() {
 		return Lives;
 	}
@@ -88,6 +94,12 @@ public class Bomberman {
 	Vector<Rectangle> r = new Vector<Rectangle>();
 	boolean colide = false;
 
+	/**
+	 * 
+	 * @param g - jogo no qual vai verificar se houve colisoes
+	 * @param x1 - corrdenada x que ira criar o Rectangle à volta do objecto para verificar a colisão
+	 * @param y1 - corrdenada y que ira criar o Rectangle à volta do objecto para verificar a colisão
+	 */
 	public void checkCollisions(Game g, int x1, int y1) {
 		Rectangle r3 = new Rectangle(x1, y1, 23, 37);
 		char mapa[][] = g.getZ().getMapa();
@@ -135,6 +147,11 @@ public class Bomberman {
 	
 	}
 	
+	/**
+	 * 
+	 * @param x - coordenada x do tijolo destrutivel que sera eliminado do vector
+	 * @param y - coordenada y do tijolo destrutivel que sera eliminado do vector
+	 */
 	public void clearBricks(int x, int y){
 
 		for(int i = 0; i < bricks.size(); i++){
@@ -146,6 +163,11 @@ public class Bomberman {
 	
 	}
 
+	/**
+	 * Metodo para calcular a probabilidade de aparecer um powerup, caso um bloco seja destruido
+	 * 
+	 * @return a, inteiro que toma valores 1,2,3,4 ou 5 caso a seja igual a esses numeros, ou 0 caso não
+	 */
 	public int pwprobability(){
 		Random randomGenerator = new Random();
 		int a;
@@ -164,7 +186,11 @@ public class Bomberman {
 		else
 			return 0;
 	}
-	
+	/**
+	 * Movimenta o bomberman caso não seja detectada nenhuma colisão
+	 * @param g jogo
+	 * 
+	 */
 	public void move(Game g) {
 		checkCollisions(g, (this.x + dx), (this.y + dy));
 		if(colide == false){

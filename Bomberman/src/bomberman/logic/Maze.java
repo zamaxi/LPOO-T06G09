@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Maze {
 	//11*11
+	
+	/**
+	 * Mapa base desenhado com as parede sólidas
+	 */
 	char[][]mapa = {{'X','X','X','X','X','X','X','X','X','X','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ','X',' ','X',' ','X',' ','X',' ','X'},
@@ -38,6 +42,9 @@ public class Maze {
 		mapa[b.getY()][b.getX()] = 'b';
 	}
 	
+	/**
+	 * Metodo para criar aleatoriamente tijolos destrutiveis no mapa, com a proporção de 1/3 do mapa
+	 */
 	public void randomize(){
 		
 		Random randomGenerator = new Random();

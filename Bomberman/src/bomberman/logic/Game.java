@@ -23,7 +23,9 @@ public class Game {
 	public Maze getZ() {
 		return z;
 	}
-
+/**
+ * Cria um jogo com todos os objectos que irão interverir no correr do mesmo
+ */
 	public Game(){
 		z.randomize();
 		for(int i =0; i < n_monster;i++){

@@ -51,7 +51,10 @@ public class Bomb {
 	public void setDropped(boolean dropped) {
 		this.dropped = dropped;
 	}
-	
+	/**
+	 * Construtor da Classe Bomb
+	 * Cria uma bomba
+	 */
 	public Bomb() {
 		dropped = true;
 		range = 1;
@@ -65,6 +68,9 @@ public class Bomb {
 		return bounds;
 		}
 	
+	/**
+	 * Deixa uma bomba no mapa durante 2 segundos
+	 */
 	public void dropBomb(){
 		
 		new java.util.Timer().schedule( 
@@ -78,7 +84,9 @@ public class Bomb {
 				2000
 				);
 	}
-	
+	/**
+	 * Durante os ultimos 0.5 segundos da bomba presente no mapa, esta explode, eliminado dos os blocos destrutiveis e matando os monstros do mapa
+	 */
 	public void explosion(){
 		//explode = true;
 		new java.util.Timer().schedule( 
