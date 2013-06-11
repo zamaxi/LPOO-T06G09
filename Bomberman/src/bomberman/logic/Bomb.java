@@ -24,7 +24,7 @@ public class Bomb {
 		return bombRect;
 	}
 
-	public int getRange() {
+	public static int getRange() {
 		return range;
 	}
 
@@ -73,7 +73,6 @@ public class Bomb {
 	 */
 	public Bomb() {
 		dropped = true;
-		range = 1;
 	}
 
 	public void setBounds(int x1,int y1){
@@ -188,7 +187,11 @@ public class Bomb {
 					@Override 
 					public void run() {
 						explode = true;
-						createRect(range);
+						
+						if(range == 2)
+							createRect(2);
+						else
+							createRect(1);
 					}
 				},
 				1500
