@@ -21,8 +21,9 @@ public class Bomberman {
 	private int x;
 	private int y;
 	boolean dropped;
+	boolean speedUp = false;
 	boolean Alive = true;
-	
+
 	public boolean isAlive() {
 		return Alive;
 	}
@@ -33,6 +34,7 @@ public class Bomberman {
 
 	Vector <Bomb > bombs = new Vector <Bomb >();
 	Vector<Rectangle> bricks;
+	Vector<Rectangle> pw;
 	private int nBombs;
 	private int Lives;
 	private int moveBomberman =0 ;
@@ -49,7 +51,7 @@ public class Bomberman {
 		nBombs = 1;
 		Lives = 3;
 	}	
-	
+
 	public int getLives() {
 		return Lives;
 	}
@@ -92,7 +94,7 @@ public class Bomberman {
 	public Vector<Bomb> getBombs() {
 		return bombs;
 	}
-	
+
 	public int getnBombs() {
 		return nBombs;
 	}
@@ -109,6 +111,8 @@ public class Bomberman {
 	}
 
 	boolean colide = false;
+	boolean vestUp = false;
+	boolean wallUp = false;
 
 	/**
 	 * 
@@ -120,7 +124,7 @@ public class Bomberman {
 		Rectangle r3 = new Rectangle(x1, y1, 23, 37);
 		char mapa[][] = g.getZ().getMapa();
 		int x2 = 0, y2 = 0;
-	
+
 		if(r.size() == 0){
 			for (int j = 0; j< mapa.length; j++) {
 				x2=0;
@@ -134,7 +138,7 @@ public class Bomberman {
 				y2 += 50;
 			}
 		}
-		
+
 		bricks = new Vector<Rectangle>();
 		if(bricks.size() == 0){
 			y2=0;
@@ -151,20 +155,23 @@ public class Bomberman {
 			}
 		}
 
+
 		for(int i =0; i < r.size();i++){
 
 			if(r3.intersects(r.get(i))) {
 				colide = true;
 			}
 		}
-	
-		for(int i =0; i < bricks.size();i++)
-			if (r3.intersects(bricks.get(i))) 
-				colide = true;
-		
-		for(int i =0; i < g.getMonstrinhos().size();i++){
-			//if(r3.intersects(g.getMonstrinhos().get(i).getBounds())){
-			//	Alive = true;
+
+
+		if(wallUp == false){
+			for(int i =0; i < bricks.size();i++)
+				if (r3.intersects(bricks.get(i))) 
+					colide = true;
+		}
+
+		if(vestUp == false){
+			for(int i =0; i < g.getMonstrinhos().size();i++){
 				Rectangle rm = new Rectangle(g.getMonstrinhos().get(i).getX(),g.getMonstrinhos().get(i).getY(),23,37);
 				if(r3.intersects(rm)){
 					Lives--;
@@ -172,15 +179,65 @@ public class Bomberman {
 					x = 51;
 					y = 51;
 				}
-					//System.out.println("DROPOU");
-		//		
-		//	}
+			}
 		}
-		
-		
-	
+
+
+		y2 = 0;
+		for (int j = 0; j< mapa.length; j++) {
+			x2=0;
+			for (int k = 0; k < mapa.length; k++) {
+				if (mapa[j][k] == '1'){
+					Rectangle pw = new Rectangle(x2, y2, 50, 50);
+					if(r3.intersects(pw)){
+						nBombs = 2;
+						mapa[j][k] = ' ';
+					}
+				}
+				else if(mapa[j][k] == '2'){
+					Rectangle pw = new Rectangle(x2, y2, 50, 50);
+					if(r3.intersects(pw)){
+						Lives++;
+						mapa[j][k] = ' ';
+					}
+				}
+				else if(mapa[j][k] == '3'){
+					Rectangle pw = new Rectangle(x2, y2, 50, 50);
+					if(r3.intersects(pw)){
+						Bomb.setRange(2);
+						System.out.println(Bomb.getRange());
+						mapa[j][k] = ' ';
+					}
+				}
+				else if(mapa[j][k] == '4'){
+					Rectangle pw = new Rectangle(x2, y2, 50, 50);
+					if(r3.intersects(pw)){
+						speedUp = true;
+						mapa[j][k] = ' ';
+					}
+				}
+				else if(mapa[j][k] == '5'){
+					Rectangle pw = new Rectangle(x2, y2, 50, 50);
+					if(r3.intersects(pw)){
+						vestUp = true;
+						mapa[j][k] = ' ';
+					}
+				}
+				else if(mapa[j][k] == '6'){
+					Rectangle pw = new Rectangle(x2, y2, 50, 50);
+					if(r3.intersects(pw)){
+						wallUp = true;
+						mapa[j][k] = ' ';
+					}
+				}
+
+				x2 += 50;
+			}
+			y2 += 50;
+		}
+
 	}
-	
+
 	/**
 	 * 
 	 * @param x - coordenada x do tijolo destrutivel que sera eliminado do vector
@@ -191,10 +248,10 @@ public class Bomberman {
 		for(int i = 0; i < bricks.size(); i++){
 			if(bricks.get(i).getX() == x && bricks.get(i).getY() == y){
 				bricks.remove(i);
-				
+
 			}
 		}
-	
+
 	}
 
 	/**
@@ -206,7 +263,7 @@ public class Bomberman {
 		Random randomGenerator = new Random();
 		int a;
 		a=	randomGenerator.nextInt(25)+1;
-		
+
 		if(a == 1)
 			return a;
 		if(a == 2)
@@ -244,46 +301,66 @@ public class Bomberman {
 
 		if(key == KeyEvent.KEY_RELEASED) 
 			moveBomberman =0;
-		
+
 		if (key == KeyEvent.VK_LEFT) {
-			dx = -1;
+			if(speedUp == false)
+				dx = -1;
+			else
+				dx = -2;
+
 			moveBomberman = 3;
 		}
 
 		if (key == KeyEvent.VK_RIGHT) {
-			dx = 1;
+			if(speedUp == false)
+				dx = 1;
+			else
+				dx = 2;
+
 			moveBomberman = 1;
 		}
 
 		if (key == KeyEvent.VK_UP) {
-			dy = -1;
+			if(speedUp == false)
+				dy = -1;
+			else
+				dy = -2;
+
 			moveBomberman = 4;
 		}
 
 		if (key == KeyEvent.VK_DOWN) {
-			dy = 1;
+			if(speedUp == false)
+				dy = 1;
+			else
+				dy = 2;
+
 			moveBomberman =2;
 		}
-		
+
 		if (key == KeyEvent.VK_ESCAPE) {
+			final JOptionPane optionPane = new JOptionPane(
+					"Deseja sair do jogo?",
+					JOptionPane.QUESTION_MESSAGE,
+					JOptionPane.YES_NO_OPTION);
 		}
 		//System.out.println(moveBomberman);
 
 		if(key == KeyEvent.VK_SPACE){			
-			
+
 			if(nBombs > bombs.size()){
 				Bomb bomb = new Bomb();
 				bomb.setX(this.x);
 				bomb.setY(this.y);
 				bomb.setBounds(x, y);
-				
+
 				bombs.add(bomb);
 				bomb.dropBomb();
-				
+
 				dropped = true;
-				
+
 				bomb.explosion();
-				
+
 			}
 		}
 	}
@@ -293,7 +370,7 @@ public class Bomberman {
 
 		if (key == KeyEvent.VK_LEFT) {
 			dx = 0;
-			
+
 		}
 
 		if (key == KeyEvent.VK_RIGHT) {
@@ -307,9 +384,9 @@ public class Bomberman {
 		if (key == KeyEvent.VK_DOWN) {
 			dy = 0;
 		}
-		
+
 		if (key == KeyEvent.VK_ESCAPE) {
-			
+
 		}
 		moveBomberman =0;
 	}
