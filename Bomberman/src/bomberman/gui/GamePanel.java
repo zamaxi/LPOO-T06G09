@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	Game game = new Game();
 
-	Image wall, brick, floor, monster, bomberman,statebar, bomb,explosion1,explosion2,explosion3,explosion4,explosion5, explosion6, explosion7;
+	Image wall, brick, floor, monster, gameover,bomberman,statebar, bomb,explosion1,explosion2,explosion3,explosion4,explosion5, explosion6, explosion7;
 	Timer timer;
 	private Bomberman craft;
 	private Monster monster1;
@@ -153,6 +153,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		ImageIcon i12 = new ImageIcon("explosion6.png");
 		ImageIcon i13 = new ImageIcon("explosion7.png");
 		ImageIcon i14 = new ImageIcon("statebar.png");
+		ImageIcon i15 = new ImageIcon("game_over.png");
+		gameover = i15.getImage();
 		statebar = i14.getImage();
 		wall = i1.getImage();
 		floor = i2.getImage();
@@ -309,12 +311,23 @@ public class GamePanel extends JPanel implements ActionListener {
             attributedString2.addAttribute(TextAttribute.FOREGROUND, Color.YELLOW, 0, 1/*stringlenght*/);
             attributedString2.addAttribute(TextAttribute.SIZE, 30, 0, 1);
             g2d.drawString(attributedString2.getIterator(), 400, 603);
-            
+            }
+        
+        if(game_over== true){
+        	g2d.drawImage(gameover, 100, 100, this);
+        	try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        	
 	}
-	}
 
 
-
+	boolean game_over = false;
+	
 	public void actionPerformed(ActionEvent e) {
 		craft.move(game);
 		
@@ -329,6 +342,18 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(time == 0){
 			craft.setLives(craft.getLives()-1);
 			time = 60000;
+		}
+		
+		if(craft.getLives() == 0)
+			game_over = true;
+		
+		if(craft.isAlive() == false){
+			craft.setAlive(true);
+			game.getZ().clearMap();
+			game.getZ().randomize();
+			
+			for(int i =0;i < game.getMonstrinhos().size();i++)
+				game.getMonstrinhos().get(i).randomizePositions(game.getZ().getMapa());
 		}
 		
 		repaint();

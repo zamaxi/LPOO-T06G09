@@ -12,6 +12,7 @@ public class Monster {
 	int direction =1;
 	boolean colide = false;
 	boolean dead = true;
+	Rectangle bounds;
 	Vector<Rectangle> bricks;
 	Vector<Rectangle> r = new Vector<Rectangle>();
 	
@@ -40,8 +41,15 @@ public class Monster {
 		Random randomGenerator = new Random();
 		
 		while( args [y][x] != ' '){
+			
+			
 			x = randomGenerator.nextInt(args.length -1)+1;
 			y = randomGenerator.nextInt(args.length -1)+1;
+			
+			if(x == 1 || x == 2)
+				continue;
+			if(y == 1 || y == 2)
+				continue;
 		}
 		
 		x *= 50;
@@ -50,6 +58,27 @@ public class Monster {
 		y += 1;
 	}
 
+	public void randomizePositions(char args [][]){
+		Random randomGenerator = new Random();
+		x =0;
+		y = 0;
+		while( args [y][x] != ' '){
+			
+			
+			x = randomGenerator.nextInt(args.length -1)+1;
+			y = randomGenerator.nextInt(args.length -1)+1;
+			
+			if(x == 1 || x == 2)
+				continue;
+			if(y == 1 || y == 2)
+				continue;
+		}
+		
+		x *= 50;
+		y *= 50;
+		x += 1;
+		y += 1;
+	}
 	/**
 	 * 
 	 * @param g - jogo no qual vai verificar se houve colisoes

@@ -32,6 +32,8 @@ public class Game {
 			Monster monster1 = new Monster(z.getMapa());
 			monstrinhos.add(monster1);
 		}
+		
+		 
 	}
 	
 	

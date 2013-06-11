@@ -19,6 +19,16 @@ public class Bomberman {
 	private int x;
 	private int y;
 	boolean dropped;
+	boolean Alive = true;
+	
+	public boolean isAlive() {
+		return Alive;
+	}
+
+	public void setAlive(boolean alive) {
+		Alive = alive;
+	}
+
 	Vector <Bomb > bombs = new Vector <Bomb >();
 	Vector<Rectangle> bricks;
 	private int nBombs;
@@ -107,35 +117,35 @@ public class Bomberman {
 	public void checkCollisions(Game g, int x1, int y1) {
 		Rectangle r3 = new Rectangle(x1, y1, 23, 37);
 		char mapa[][] = g.getZ().getMapa();
-		int x = 0, y = 0;
+		int x2 = 0, y2 = 0;
 	
 		if(r.size() == 0){
 			for (int j = 0; j< mapa.length; j++) {
-				x=0;
+				x2=0;
 				for (int k = 0; k < mapa.length; k++) {
 					if (mapa[j][k] == 'X'){
-						Rectangle rect = new Rectangle(x, y, 50, 50);
+						Rectangle rect = new Rectangle(x2, y2, 50, 50);
 						r.add(rect);
 					}						
-					x += 50;
+					x2 += 50;
 				}
-				y += 50;
+				y2 += 50;
 			}
 		}
 		
 		bricks = new Vector<Rectangle>();
 		if(bricks.size() == 0){
-			y=0;
+			y2=0;
 			for (int j = 0; j< mapa.length; j++) {
-				x=0;
+				x2=0;
 				for (int k = 0; k < mapa.length; k++) {
 					if (mapa[j][k] == 'o') {
-						Rectangle rect = new Rectangle(x, y, 50, 50);
+						Rectangle rect = new Rectangle(x2, y2, 50, 50);
 						bricks.add(rect);
 					}
-					x += 50;
+					x2 += 50;
 				}
-				y += 50;
+				y2 += 50;
 			}
 		}
 
@@ -149,6 +159,23 @@ public class Bomberman {
 		for(int i =0; i < bricks.size();i++)
 			if (r3.intersects(bricks.get(i))) 
 				colide = true;
+		
+		for(int i =0; i < g.getMonstrinhos().size();i++){
+			//if(r3.intersects(g.getMonstrinhos().get(i).getBounds())){
+			//	Alive = true;
+				Rectangle rm = new Rectangle(g.getMonstrinhos().get(i).getX(),g.getMonstrinhos().get(i).getY(),23,37);
+				if(r3.intersects(rm)){
+					Lives--;
+					Alive = false;
+					x = 51;
+					y = 51;
+				}
+					//System.out.println("DROPOU");
+		//		
+		//	}
+		}
+		
+		
 	
 	}
 	

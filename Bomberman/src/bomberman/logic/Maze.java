@@ -58,6 +58,12 @@ public class Maze {
 				if(i == 1 && j == 1)
 					continue;
 				
+				if(i == 2 && j == 1)
+					continue;
+				
+				if(i == 1 && j == 1)
+					continue;
+				
 				int appeared = randomGenerator.nextInt(3);
 				
 				if(j == 10)
@@ -66,12 +72,24 @@ public class Maze {
 				if(appeared == 0 && mapa[i][j] != 'X')
 					mapa[i][j] = 'o';
 				
+				mapa[3][1] = 'o';
+				mapa[1][3] = 'o';
 			}
 				
 			
 		}
 	}
 
+	public void clearMap() {
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < length; j++) {
+				if(mapa[i][j] == 'o')
+					mapa[i][j] = ' ';
+			}
+				
+		}
+	}
+	
 	public void addMonster(Monster m){
 		mapa[m.y][m.x] = 'm';
 	}
