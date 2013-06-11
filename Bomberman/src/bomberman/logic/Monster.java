@@ -68,9 +68,11 @@ public class Monster {
 			x = randomGenerator.nextInt(args.length -1)+1;
 			y = randomGenerator.nextInt(args.length -1)+1;
 			
-			if(x == 1 || x == 2)
+			if(x == 1 && y == 1)
 				continue;
-			if(y == 1 || y == 2)
+			if(x == 1 && y == 2)
+				continue;
+			if(x == 2 && y == 1)
 				continue;
 		}
 		

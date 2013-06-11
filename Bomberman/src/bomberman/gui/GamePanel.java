@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public GamePanel() {
+	public GamePanel(Menu menu) {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		craft = new Bomberman();
@@ -332,6 +332,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(draw == 3)
 			draw=0;
 
+		
 		for(int i=0;i < game.getMonstrinhos().size();i++){
 			g2d.drawImage(monster_a[drawMonster], game.getMonstrinhos().get(i).getX(), game.getMonstrinhos().get(i).getY(),this);
 
@@ -339,6 +340,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		drawMonster++;
 		if(drawMonster == 4)
 			drawMonster=0;
+		
 
 		g2d.drawImage(statebar, 0,550,this);
 		AttributedString attributedString = new AttributedString(""+craft.getLives());
@@ -362,12 +364,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		if(game_over== true){
 			g2d.drawImage(gameover, 100, 100, this);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			timer.stop();
 		}
 
 	}
@@ -379,6 +376,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		craft.move(game);
 
 
+		if(time%10==0)
 		for(int i =0; i< game.getMonstrinhos().size();i++)
 			game.getMonstrinhos().get(i).moveMonster(game);
 		//craft.setMoveBomberman(0);
@@ -394,7 +392,13 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(craft.getLives() == 0)
 			game_over = true;
 
+		for(int i =0; i < craft.getBombs().size(); i++){
+	
+		if(craft.isAlive() == false)
+			craft.getBombs().get(i).setExplode(false);
+		}
 		if(craft.isAlive() == false){
+			
 			craft.setAlive(true);
 			game.getZ().clearMap();
 			game.getZ().randomize();

@@ -182,6 +182,20 @@ public class Bomberman {
 			}
 		}
 
+		for (int i = 0; i < bombs.size(); i++) {
+			for (int j = 0; j < bombs.get(i).getBombRect().size(); j++) {
+	
+				if (bombs.get(i).isExplode() == true) {
+					if (r3.intersects(bombs.get(i).getBombRect().get(j))) {
+						Lives--;
+						Alive = false;
+						x = 51;
+						y = 51;
+						System.out.println("DROPOU");
+					}
+				}
+			}
+		}
 
 		y2 = 0;
 		for (int j = 0; j< mapa.length; j++) {
@@ -234,6 +248,29 @@ public class Bomberman {
 				x2 += 50;
 			}
 			y2 += 50;
+		}
+		
+		
+		for(int i =0; i < g.getMonstrinhos().size();i++){
+			boolean elimina = false;
+			
+			for(int j =0; j < bombs.size();j++){
+				Rectangle rm = new Rectangle(g.getMonstrinhos().get(i).getX(),g.getMonstrinhos().get(i).getY(),23,37);
+				
+				for(int k =0; k < bombs.get(j).getBombRect().size();k++){
+					
+					if(rm.intersects(bombs.get(j).getBombRect().get(k))){
+						g.getMonstrinhos().remove(i);
+						elimina = true;
+					}
+					if(elimina == true)
+						break;
+					
+				}
+				if(elimina == true)
+					break;
+				
+			}
 		}
 
 	}

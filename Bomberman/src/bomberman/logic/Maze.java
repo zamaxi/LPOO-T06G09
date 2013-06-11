@@ -61,7 +61,7 @@ public class Maze {
 				if(i == 2 && j == 1)
 					continue;
 				
-				if(i == 1 && j == 1)
+				if(i == 1 && j == 2)
 					continue;
 				
 				int appeared = randomGenerator.nextInt(3);

@@ -70,7 +70,9 @@ public class Menu extends JFrame {
 	
 	Vector<Integer> highscore= new Vector<Integer>();
 	public Menu() {
-		//aux.setResizable(false);
+		aux = this;
+		aux.setResizable(false);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(50, 25, 1083, 610);
 		
@@ -109,7 +111,7 @@ public class Menu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				contentPane.setVisible(false);
-				GameFrame jogo = new GameFrame();
+				GameFrame jogo = new GameFrame(aux);
 				jogo.setVisible(true);
 			}
 		});
