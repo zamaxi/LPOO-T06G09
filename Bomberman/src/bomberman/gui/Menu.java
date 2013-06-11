@@ -110,7 +110,8 @@ public class Menu extends JFrame {
 		btnNovoJogo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				contentPane.setVisible(false);
+				//contentPane.setVisible(false);
+				aux.setVisible(false);
 				GameFrame jogo = new GameFrame(aux);
 				jogo.setVisible(true);
 			}

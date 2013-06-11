@@ -13,6 +13,7 @@ import java.text.AttributedString;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
@@ -47,19 +48,22 @@ public class GamePanel extends JPanel implements ActionListener {
 	Image[] bomb_a = new Image[3];
 	Image[] monster_a = new Image[4];
 	Image[] powerup = new Image[6];
-
-
+	JFrame w;
+	JFrame m;
 	int time=60000;
 	/**
 	 * Create the panel.
 	 */
-	public GamePanel(Menu menu) {
+	public GamePanel(JFrame menu, JFrame window) {
+		
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		craft = new Bomberman();
 		//monster1 = new Monster(game.getZ().getMapa());
 		addKeyListener(new TAdapter());
 		setDoubleBuffered(true);
+		m = menu;
+		w = window;
 		ImageIcon temp;
 		Image tp;
 
@@ -365,6 +369,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(game_over== true){
 			g2d.drawImage(gameover, 100, 100, this);
 			timer.stop();
+			m.setVisible(true);
+			w.setVisible(false);
 		}
 
 	}
