@@ -11,6 +11,11 @@ public class Monster {
 	int width, height;
 	int direction =1;
 	boolean colide = false;
+	
+	public boolean getColide(){
+		return colide;
+	}
+	
 	boolean dead = true;
 	Rectangle bounds;
 	Vector<Rectangle> bricks;
