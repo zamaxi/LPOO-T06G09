@@ -29,7 +29,7 @@ public class Bomberman {
 	private int x;
 	private int y;
 	boolean dropped;
-	boolean speedUp = false;
+	public boolean speedUp = false;
 	boolean Alive = true;
 	boolean exit = false;
 	public boolean isExit() {
@@ -55,14 +55,14 @@ public class Bomberman {
 	private int Lives;
 	private int moveBomberman =0 ;
 
-/**
- * 
- *  
- *
- *
- * Este objecto será controlado pelo utilizador e será capaz de largar bombas de maneira a matar os monstros
- * @author Gabriel Borges, Marco Pinto
- */
+	/**
+	 * 
+	 *  
+	 *
+	 *
+	 * Este objecto será controlado pelo utilizador e será capaz de largar bombas de maneira a matar os monstros
+	 * @author Gabriel Borges, Marco Pinto
+	 */
 	public Bomberman() {
 		x = 51;
 		y = 51;
@@ -129,8 +129,22 @@ public class Bomberman {
 	}
 
 	boolean colide = false;
+
+	public boolean getColide(){
+		return colide;
+	}
+
 	boolean vestUp = false;
 	boolean wallUp = false;
+
+
+	public void resetPowerups(){
+		nBombs = 1;
+		Bomb.setRange(1);
+		speedUp = false;
+		vestUp = false;
+		wallUp = false;
+	}
 
 	/**
 	 * 
@@ -202,7 +216,7 @@ public class Bomberman {
 
 		for (int i = 0; i < bombs.size(); i++) {
 			for (int j = 0; j < bombs.get(i).getBombRect().size(); j++) {
-	
+
 				if (bombs.get(i).isExplode() == true) {
 					if (r3.intersects(bombs.get(i).getBombRect().get(j))) {
 						Lives--;
@@ -245,6 +259,17 @@ public class Bomberman {
 					Rectangle pw = new Rectangle(x2, y2, 50, 50);
 					if(r3.intersects(pw)){
 						speedUp = true;
+
+						new java.util.Timer().schedule( 
+								new java.util.TimerTask() {
+									@Override 
+									public void run() {
+										speedUp = false;
+									}
+								},
+								10000
+								);
+
 						mapa[j][k] = ' ';
 					}
 				}
@@ -252,6 +277,17 @@ public class Bomberman {
 					Rectangle pw = new Rectangle(x2, y2, 50, 50);
 					if(r3.intersects(pw)){
 						vestUp = true;
+
+						new java.util.Timer().schedule( 
+								new java.util.TimerTask() {
+									@Override 
+									public void run() {
+										vestUp = false;
+									}
+								},
+								10000
+								);
+
 						mapa[j][k] = ' ';
 					}
 				}
@@ -259,6 +295,17 @@ public class Bomberman {
 					Rectangle pw = new Rectangle(x2, y2, 50, 50);
 					if(r3.intersects(pw)){
 						wallUp = true;
+
+						new java.util.Timer().schedule( 
+								new java.util.TimerTask() {
+									@Override 
+									public void run() {
+										wallUp = false;
+									}
+								},
+								10000
+								);
+
 						mapa[j][k] = ' ';
 					}
 				}
@@ -267,27 +314,27 @@ public class Bomberman {
 			}
 			y2 += 50;
 		}
-		
-		
+
+
 		for(int i =0; i < g.getMonstrinhos().size();i++){
 			boolean elimina = false;
-			
+
 			for(int j =0; j < bombs.size();j++){
 				Rectangle rm = new Rectangle(g.getMonstrinhos().get(i).getX(),g.getMonstrinhos().get(i).getY(),23,37);
-				
+
 				for(int k =0; k < bombs.get(j).getBombRect().size();k++){
-					
+
 					if(rm.intersects(bombs.get(j).getBombRect().get(k))){
 						g.getMonstrinhos().remove(i);
 						elimina = true;
 					}
 					if(elimina == true)
 						break;
-					
+
 				}
 				if(elimina == true)
 					break;
-				
+
 			}
 		}
 

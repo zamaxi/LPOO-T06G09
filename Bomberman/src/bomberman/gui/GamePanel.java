@@ -435,6 +435,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(craft.isAlive() == false){
 			
 			craft.setAlive(true);
+			craft.resetPowerups();
 			game.getZ().clearMap();
 			game.getZ().randomize();
 
