@@ -1,6 +1,7 @@
 package bomberman.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,6 +10,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.font.TextAttribute;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.text.AttributedString;
 import java.util.Random;
 
@@ -194,6 +200,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	int drawBomb =0;
 	int drawMonster =0;
 	int lastMovement =0;
+	private JFrame frame;
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -336,7 +343,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		if(draw == 3)
 			draw=0;
 
-		
+	
 		for(int i=0;i < game.getMonstrinhos().size();i++){
 			g2d.drawImage(monster_a[drawMonster], game.getMonstrinhos().get(i).getX(), game.getMonstrinhos().get(i).getY(),this);
 
@@ -346,7 +353,14 @@ public class GamePanel extends JPanel implements ActionListener {
 			drawMonster=0;
 		
 
+		
 		g2d.drawImage(statebar, 0,550,this);
+		
+		AttributedString attributedString3 = new AttributedString("LEVEL: "+game.getLevel());
+		attributedString3.addAttribute(TextAttribute.FOREGROUND, Color.ORANGE, 0, 8/*stringlenght*/);
+		attributedString3.addAttribute(TextAttribute.SIZE, 15, 0, 8);
+		g2d.drawString(attributedString3.getIterator(), 242, 600);
+		
 		AttributedString attributedString = new AttributedString(""+craft.getLives());
 		attributedString.addAttribute(TextAttribute.FOREGROUND, Color.RED, 0, 1/*stringlenght*/);
 		attributedString.addAttribute(TextAttribute.SIZE, 30, 0, 1);
@@ -367,17 +381,32 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 
 		if(game_over== true){
-			g2d.drawImage(gameover, 100, 100, this);
+			try {
+				FileWriter outFile = new FileWriter("highscore.txt",true);
+				PrintWriter out = new PrintWriter(outFile);
+
+				out.println(game.getLevel());
+				out.close();
+			} catch (IOException e){
+				e.printStackTrace();
+			}
 			timer.stop();
+			
 			m.setVisible(true);
 			w.setVisible(false);
 		}
 
+		if(craft.isExit()== true){
+			m.setVisible(true);
+			w.setVisible(false);
+		}
 	}
 
 
 	boolean game_over = false;
-
+	boolean next_nevel = false;
+	
+	
 	public void actionPerformed(ActionEvent e) {
 		craft.move(game);
 
@@ -409,10 +438,33 @@ public class GamePanel extends JPanel implements ActionListener {
 			game.getZ().clearMap();
 			game.getZ().randomize();
 
-			for(int i =0;i < game.getMonstrinhos().size();i++)
-				game.getMonstrinhos().get(i).randomizePositions(game.getZ().getMapa());
+			for (int i = 0; i < game.getMonstrinhos().size(); i++)
+				game.getMonstrinhos().get(i)
+						.randomizePositions(game.getZ().getMapa());
 		}
 
+		if (game.getMonstrinhos().size() == 0)
+			next_nevel = true;
+
+		if (next_nevel == true) {
+			next_nevel = false;
+			game.getZ().clearMap();
+			game.getZ().randomize();
+			time = 60000;
+			craft.setX(51);
+			craft.setY(51);
+			game.setLevel(game.getLevel() + 1);
+			game.setN_monster(game.getN_monster() + 1);
+			
+			for (int i = 0; i < game.getN_monster(); i++) {
+				Monster m = new Monster(game.getZ().getMapa());
+				game.getMonstrinhos().add(m);
+			}
+			
+
+		}
+		
+		
 		repaint();
 	}
 

@@ -16,8 +16,22 @@ public class Game {
 	}
 
 	int n_monster=3;
+	public int getN_monster() {
+		return n_monster;
+	}
+	public void setN_monster(int n_monster) {
+		this.n_monster = n_monster;
+	}
+
+	int level;
 	
-	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	static Maze z = new Maze();
    
 	public Maze getZ() {
@@ -28,6 +42,7 @@ public class Game {
  */
 	public Game(){
 		z.randomize();
+		level = 1;
 		for(int i =0; i < n_monster;i++){
 			Monster monster1 = new Monster(z.getMapa());
 			monstrinhos.add(monster1);

@@ -1,10 +1,12 @@
 package bomberman.logic;
 
+import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Vector;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import bomberman.logic.Game;
@@ -23,6 +25,14 @@ public class Bomberman {
 	boolean dropped;
 	boolean speedUp = false;
 	boolean Alive = true;
+	boolean exit = false;
+	public boolean isExit() {
+		return exit;
+	}
+
+	public void setExit(boolean exit) {
+		this.exit = exit;
+	}
 
 	public boolean isAlive() {
 		return Alive;
@@ -331,6 +341,7 @@ public class Bomberman {
 	}
 
 	int count = 0;
+	private JFrame frame;
 
 	public void keyPressed(KeyEvent e, Game g) {
 		moveBomberman = 0;
@@ -376,10 +387,11 @@ public class Bomberman {
 		}
 
 		if (key == KeyEvent.VK_ESCAPE) {
-			final JOptionPane optionPane = new JOptionPane(
-					"Deseja sair do jogo?",
-					JOptionPane.QUESTION_MESSAGE,
-					JOptionPane.YES_NO_OPTION);
+			//JOptionPane.showConfirmDialog(frame, arg1)
+			int v = JOptionPane.showConfirmDialog(null,
+					"Deseja Sair do jogo?",null, JOptionPane.YES_NO_OPTION);
+			if(v == 0)
+				exit = true;
 		}
 		//System.out.println(moveBomberman);
 

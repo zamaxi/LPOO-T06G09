@@ -250,6 +250,7 @@ public class Menu extends JFrame {
 	}
 	
 	private int maxValue(Vector chars) {
+		
 		int max = (int) chars.get(0);
 		for (int ktr = 0; ktr < chars.size(); ktr++) {
 			
