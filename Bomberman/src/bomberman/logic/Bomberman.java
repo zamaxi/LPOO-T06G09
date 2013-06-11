@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
+
 import bomberman.logic.Game;
 /**
  * 
@@ -263,7 +265,12 @@ public class Bomberman {
 			moveBomberman =2;
 		}
 		
-		
+		if (key == KeyEvent.VK_ESCAPE) {
+			final JOptionPane optionPane = new JOptionPane(
+				    "Deseja sair do jogo?",
+				    JOptionPane.QUESTION_MESSAGE,
+				    JOptionPane.YES_NO_OPTION);
+		}
 		//System.out.println(moveBomberman);
 
 		if(key == KeyEvent.VK_SPACE){			

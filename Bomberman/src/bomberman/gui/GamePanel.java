@@ -13,6 +13,7 @@ import java.text.AttributedString;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
@@ -369,6 +370,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		public void keyPressed(KeyEvent e) {
 			craft.keyPressed(e, game);
+			
+			
+			
 		}
 	}
 
