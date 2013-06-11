@@ -16,6 +16,12 @@ import bomberman.logic.Game;
  * dimensions
  * 23 x 37
  */
+
+/**
+ * 
+ * @author Kratos
+ *Construtor da Classe Bomberman
+ */
 public class Bomberman {
 
 	private int dx;
@@ -49,12 +55,14 @@ public class Bomberman {
 	private int Lives;
 	private int moveBomberman =0 ;
 
-	/**
-	 * Construtor da classe bomberman
-	 * Este objecto será controlado pelo utilizador e será capaz de largar bombas
-	 * de maneira a matar os monstros
-	 * @author Gabriel Borges, Marco Pinto
-	 */
+/**
+ * 
+ *  
+ *
+ *
+ * Este objecto será controlado pelo utilizador e será capaz de largar bombas de maneira a matar os monstros
+ * @author Gabriel Borges, Marco Pinto
+ */
 	public Bomberman() {
 		x = 51;
 		y = 51;

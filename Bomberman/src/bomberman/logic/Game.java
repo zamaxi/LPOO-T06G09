@@ -6,7 +6,11 @@ import java.util.TimerTask;
 import java.util.Vector;
 
 
-
+/**
+ * 
+ * @author Kratos
+ * Class Game
+ */
 public class Game {
 
 

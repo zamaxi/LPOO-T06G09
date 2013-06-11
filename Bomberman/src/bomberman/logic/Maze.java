@@ -1,7 +1,12 @@
 package bomberman.logic;
 
 import java.util.Random;
-
+/**
+ * 
+ * @author Kratos
+ * Class Maze
+ * 
+ */
 public class Maze {
 	//11*11
 	

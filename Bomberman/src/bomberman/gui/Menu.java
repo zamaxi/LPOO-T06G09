@@ -37,7 +37,11 @@ import java.util.Vector;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-
+/**
+ * Class Menu
+ * @author Kratos
+ *
+ */
 public class Menu extends JFrame {
 
 	JFrame aux;
