@@ -266,10 +266,6 @@ public class Bomberman {
 		}
 		
 		if (key == KeyEvent.VK_ESCAPE) {
-			final JOptionPane optionPane = new JOptionPane(
-				    "Deseja sair do jogo?",
-				    JOptionPane.QUESTION_MESSAGE,
-				    JOptionPane.YES_NO_OPTION);
 		}
 		//System.out.println(moveBomberman);
 

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.imageio.ImageIO;
@@ -25,8 +26,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Vector;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 
@@ -59,6 +67,8 @@ public class Menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	Vector<Integer> highscore= new Vector<Integer>();
 	public Menu() {
 		//aux.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,6 +118,37 @@ public class Menu extends JFrame {
 		water = new ImageIcon("loadGame.png");
 		JButton btnCarregarJogo = new JButton(water);
 		btnCarregarJogo.setFont(new Font("Tekton Pro Cond", Font.PLAIN, 11));
+		btnCarregarJogo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Vector highscores = new Vector();
+				try{
+					  FileInputStream fstream = new FileInputStream("highscore.txt");
+					  
+					  DataInputStream in = new DataInputStream(fstream);
+					  BufferedReader br = new BufferedReader(new InputStreamReader(in));
+					  
+					  String strLine;
+					  int i =0;
+					  
+					  while ((strLine = br.readLine()) != null)   {
+						  
+						int foo = Integer.parseInt(strLine);
+					  	highscores.add(foo);
+					  	i++;
+					  }
+					  in.close();
+					    }catch (Exception e1){
+					  System.err.println("Error: " + e1.getMessage());
+					  }
+				
+				int max = maxValue(highscores);
+				JOptionPane.showMessageDialog(null, "O nivel máximo atingido foi " + max);
+				
+			}
+		});
+		
 		
 		water = new ImageIcon("Instructionsb.png");
 		JButton btnInstrues = new JButton(water);
@@ -203,6 +244,18 @@ public class Menu extends JFrame {
 				},
 				1500
 				);
+	}
+	
+	private int maxValue(Vector chars) {
+		int max = (int) chars.get(0);
+		for (int ktr = 0; ktr < chars.size(); ktr++) {
+			
+			int a = (int) chars.get(ktr);
+			if (a > max) {
+				max = a;
+			}
+		}
+		return max;
 	}
 	    
 }
