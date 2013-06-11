@@ -2,6 +2,12 @@ package bomberman.logic;
 
 import java.awt.Rectangle;
 
+/**
+ * 
+ * @author Kratos
+ *Construtor da Classe Powerup
+ *Objecto controlado pelo utilizador
+ */
 public class Powerup {
 
 	int x,y;

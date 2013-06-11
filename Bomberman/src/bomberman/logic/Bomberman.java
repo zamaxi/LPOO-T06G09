@@ -21,6 +21,7 @@ import bomberman.logic.Game;
  * 
  * @author Kratos
  *Construtor da Classe Bomberman
+ *Objecto controlado pelo utilizador
  */
 public class Bomberman {
 
@@ -138,6 +139,9 @@ public class Bomberman {
 	boolean wallUp = false;
 
 
+	/**
+	 * Faz reset aos powerups
+	 */
 	public void resetPowerups(){
 		nBombs = 1;
 		Bomb.setRange(1);

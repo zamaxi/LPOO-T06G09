@@ -3,6 +3,12 @@ package bomberman.logic;
 import java.awt.Rectangle;
 import java.util.Vector;
 
+/**
+ * 
+ * @author Kratos
+ *Construtor da Classe Bomb
+ *Objecto controlado pelo utilizador
+ */
 public class Bomb {
 	private int x;
 	private int y;

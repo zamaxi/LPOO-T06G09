@@ -1,5 +1,11 @@
 package bomberman.logic;
 
+/**
+ * 
+ * @author KratosBomb
+ *Construtor da Classe PWSpeed
+ *Objecto controlado pelo utilizador
+ */
 public class PWSpeed extends Powerup{
 
 	public PWSpeed(char[][]args, int z, int d) {

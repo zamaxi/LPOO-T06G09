@@ -4,7 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-
+/**
+ * 
+ * @author Kratos
+ *Classe GameFrame
+ */
 public class GameFrame extends JFrame {
 
 	/**

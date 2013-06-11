@@ -3,6 +3,12 @@ package bomberman.logic;
 import java.awt.Rectangle;
 import java.util.Vector;
 
+/**
+ * 
+ * @author Kratos
+ *Construtor da Classe PWBomb
+ *Objecto controlado pelo utilizador
+ */
 public class PWBomb extends Powerup{
 	Vector<Rectangle> pw;
 

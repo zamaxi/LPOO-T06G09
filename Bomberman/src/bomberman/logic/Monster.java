@@ -6,6 +6,12 @@ import java.util.Vector;
 
 import bomberman.logic.Game;
 
+/**
+ * 
+ * @author Kratos
+ *Construtor da Classe Monster
+ *Objecto controlado pelo utilizador
+ */
 public class Monster {
 	int x=0,y=0;
 	int width, height;
