@@ -7,7 +7,7 @@ public class Bomb {
 	private int x;
 	private int y;
 	boolean explode;
-	int range;
+	static int range;
 	Vector<Rectangle> bombRect = new Vector<Rectangle>();
 	Vector<Rectangle> notWallRect;
 	Vector<Rectangle> bricksRect;
@@ -28,8 +28,8 @@ public class Bomb {
 		return range;
 	}
 
-	public void setRange(int range) {
-		this.range = range;
+	public static void setRange(int ran) {
+		range = ran;
 	}
 
 	public boolean isExplode() {

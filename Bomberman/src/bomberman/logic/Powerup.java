@@ -31,4 +31,8 @@ public class Powerup {
 
 	}
 	
+	public void collision(){
+		
+	}
+	
 }

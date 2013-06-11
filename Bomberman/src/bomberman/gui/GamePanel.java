@@ -20,6 +20,13 @@ import javax.swing.JPanel;
 import bomberman.logic.Bomberman;
 import bomberman.logic.Game;
 import bomberman.logic.Monster;
+import bomberman.logic.PWBomb;
+import bomberman.logic.PWLife;
+import bomberman.logic.PWRange;
+import bomberman.logic.PWSpeed;
+import bomberman.logic.PWVest;
+import bomberman.logic.PWWall;
+import bomberman.logic.Powerup;
 
 public class GamePanel extends JPanel implements ActionListener {
 	/**
@@ -41,7 +48,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	Image[] monster_a = new Image[4];
 	Image[] powerup = new Image[6];
 
-	
+
 	int time=60000;
 	/**
 	 * Create the panel.
@@ -138,8 +145,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		temp = new ImageIcon("Pwwall.png");
 		tp = temp.getImage();
 		powerup[5]= tp;
-		
-		
+
+
 		ImageIcon i1 = new ImageIcon("wall.jpg");
 		ImageIcon i2 = new ImageIcon("floor.jpg");
 		ImageIcon i3 = new ImageIcon("brick.jpg");
@@ -219,6 +226,23 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (mapa[i][k] == 'e')
 					g2d.drawImage(bomb, x, y, null);
 
+				if (mapa[i][k] == '1')
+					g2d.drawImage(powerup[0], x, y, null);
+
+				if (mapa[i][k] == '2')
+					g2d.drawImage(powerup[1], x, y, null);
+
+				if (mapa[i][k] == '3')
+					g2d.drawImage(powerup[2], x, y, null);
+
+				if (mapa[i][k] == '4')
+					g2d.drawImage(powerup[3], x, y, null);
+
+				if (mapa[i][k] == '5')
+					g2d.drawImage(powerup[4], x, y, null);
+
+				if (mapa[i][k] == '6')
+					g2d.drawImage(powerup[5], x, y, null);
 
 				x += 50;
 			}
@@ -229,24 +253,46 @@ public class GamePanel extends JPanel implements ActionListener {
 			for(int i = 0; i < craft.getBombs().size(); i++){
 				craft.getBombs().get(i).createNotWall(game);
 				craft.getBombs().get(i).createBricks(game);
-				
+
 				if(craft.getBombs().get(i).isExplode()== true){
-					
+
 					for(int j = 0; j < craft.getBombs().get(i).getBombRect().size(); j++){
 						for(int k = 0; k < craft.getBombs().get(i).getNotWallRect().size(); k++){
 							if(craft.getBombs().get(i).getBombRect().get(j).intersects(craft.getBombs().get(i).getNotWallRect().get(k))){
 								g2d.drawImage(explosion5, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50)*50, (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50)*50, this);
 							}
 						}
-						
+
 						for(int k = 0; k < craft.getBombs().get(i).getBricksRect().size(); k++){
 							if(craft.getBombs().get(i).getBombRect().get(j).intersects(craft.getBombs().get(i).getBricksRect().get(k))){
-								mapa[(int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50)][(int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50)] = ' ';
+								Random rdm = new Random();
+								int luck = rdm.nextInt(21);
+
+								if(luck == 0){
+									Powerup p = new PWBomb(mapa, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50), (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50));
+								}
+								else if(luck == 1){
+									Powerup p = new PWLife(mapa, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50), (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50));
+								}
+								else if(luck == 2){
+									Powerup p = new PWRange(mapa, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50), (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50));
+								}
+								else if(luck == 3){
+									Powerup p = new PWSpeed(mapa, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50), (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50));
+								}
+								else if(luck == 4){
+									Powerup p = new PWVest(mapa, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50), (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50));
+								}
+								else if(luck == 5){
+									Powerup p = new PWWall(mapa, (int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50), (int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50));
+								}
+								else
+									mapa[(int)(craft.getBombs().get(i).getBombRect().get(j).getY()/50)][(int)(craft.getBombs().get(i).getBombRect().get(j).getX()/50)] = ' ';
 							}
 						}
 					}
 				}
-				
+
 				if(craft.getBombs().get(i).isExplode()== false){
 					g2d.drawImage(bomb_a[drawBomb], (craft.getBombs().get(i).getX()/50)*50,(craft.getBombs().get(i).getY()/50)*50,this);
 					drawBomb++;
@@ -288,75 +334,75 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		for(int i=0;i < game.getMonstrinhos().size();i++){
 			g2d.drawImage(monster_a[drawMonster], game.getMonstrinhos().get(i).getX(), game.getMonstrinhos().get(i).getY(),this);
-			
+
 		}
 		drawMonster++;
 		if(drawMonster == 4)
-		drawMonster=0;
-		
+			drawMonster=0;
+
 		g2d.drawImage(statebar, 0,550,this);
 		AttributedString attributedString = new AttributedString(""+craft.getLives());
-        attributedString.addAttribute(TextAttribute.FOREGROUND, Color.RED, 0, 1/*stringlenght*/);
-        attributedString.addAttribute(TextAttribute.SIZE, 30, 0, 1);
-        g2d.drawString(attributedString.getIterator(), 125, 603);
-       
-        if(time > 10000){
-        AttributedString attributedString2 = new AttributedString(""+time/1000);
-        attributedString2.addAttribute(TextAttribute.FOREGROUND, Color.YELLOW, 0, 2/*stringlenght*/);
-        attributedString2.addAttribute(TextAttribute.SIZE, 30, 0, 2);
-        g2d.drawString(attributedString2.getIterator(), 400, 603);
-        }
-		
-        if(time < 10000){
-            AttributedString attributedString2 = new AttributedString(""+time/1000);
-            attributedString2.addAttribute(TextAttribute.FOREGROUND, Color.YELLOW, 0, 1/*stringlenght*/);
-            attributedString2.addAttribute(TextAttribute.SIZE, 30, 0, 1);
-            g2d.drawString(attributedString2.getIterator(), 400, 603);
-            }
-        
-        if(game_over== true){
-        	g2d.drawImage(gameover, 100, 100, this);
-        	try {
+		attributedString.addAttribute(TextAttribute.FOREGROUND, Color.RED, 0, 1/*stringlenght*/);
+		attributedString.addAttribute(TextAttribute.SIZE, 30, 0, 1);
+		g2d.drawString(attributedString.getIterator(), 125, 603);
+
+		if(time > 10000){
+			AttributedString attributedString2 = new AttributedString(""+time/1000);
+			attributedString2.addAttribute(TextAttribute.FOREGROUND, Color.YELLOW, 0, 2/*stringlenght*/);
+			attributedString2.addAttribute(TextAttribute.SIZE, 30, 0, 2);
+			g2d.drawString(attributedString2.getIterator(), 400, 603);
+		}
+
+		if(time < 10000){
+			AttributedString attributedString2 = new AttributedString(""+time/1000);
+			attributedString2.addAttribute(TextAttribute.FOREGROUND, Color.YELLOW, 0, 1/*stringlenght*/);
+			attributedString2.addAttribute(TextAttribute.SIZE, 30, 0, 1);
+			g2d.drawString(attributedString2.getIterator(), 400, 603);
+		}
+
+		if(game_over== true){
+			g2d.drawImage(gameover, 100, 100, this);
+			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        }
-        	
+		}
+
 	}
 
 
 	boolean game_over = false;
-	
+
 	public void actionPerformed(ActionEvent e) {
 		craft.move(game);
-		
-		
+
+
 		for(int i =0; i< game.getMonstrinhos().size();i++)
 			game.getMonstrinhos().get(i).moveMonster(game);
 		//craft.setMoveBomberman(0);
-		
-//		if(time % 1000 == 0)
-//			System.out.println(time/1000);
+
+		//		if(time % 1000 == 0)
+		//			System.out.println(time/1000);
 		time -= 5;
 		if(time == 0){
 			craft.setLives(craft.getLives()-1);
 			time = 60000;
 		}
-		
+
 		if(craft.getLives() == 0)
 			game_over = true;
-		
+
 		if(craft.isAlive() == false){
 			craft.setAlive(true);
 			game.getZ().clearMap();
 			game.getZ().randomize();
-			
+
 			for(int i =0;i < game.getMonstrinhos().size();i++)
 				game.getMonstrinhos().get(i).randomizePositions(game.getZ().getMapa());
 		}
-		
+
 		repaint();
 	}
 
@@ -370,13 +416,13 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		public void keyPressed(KeyEvent e) {
 			craft.keyPressed(e, game);
-			
-			
-			
+
+
+
 		}
 	}
 
-	
+
 
 
 	void printmap() {
